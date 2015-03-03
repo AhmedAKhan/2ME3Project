@@ -11,13 +11,13 @@ import java.awt.event.MouseEvent;
  * Created by Created by Ahmed Khan, Saim Malik, Zayan Imtiaz, Aleem Ul Haq, Sergio Agraz.
  */
 public class ConnectFourController {
-    private ConnectFourView view;
+    private NewViewClass view;
     private ConnectFourModel model;
 
-    public ConnectFourController(ConnectFourView v, ConnectFourModel m){
+    public ConnectFourController(NewViewClass v, ConnectFourModel m){
         view = v;
         model = m;
-
+        
         Listener listener = new Listener(); // create a listener
         view.addCalculateListener(listener, listener); // add the listener to the view
     }//end constructor
@@ -28,7 +28,8 @@ public class ConnectFourController {
         //Purpose: when the user presses the main menu button it will call this function, and it will either go to the game stage or the custom game depending on what is clicked
         @Override
         public void actionPerformed(ActionEvent e) {
-            //will get called for the menu buttons stuff
+        	System.out.println("asdasd");
+        /*    //will get called for the menu buttons stuff
             
             //check what button is pressed
             Button buttonPressed = (Button)e.getSource();
@@ -63,12 +64,14 @@ public class ConnectFourController {
             view.switchScreen(model.getGameState());
             //update the view by called switchScreen
             view.repaint();
+            */
         }
 
         //Purpose: this function will be called when the user presses a button, it will be responsible for handling the outcome of the button press.
         @Override
         public void mouseClicked(MouseEvent e) {
-        	//if its in the main menu stop running the rest of the code
+        	System.out.println("asdasd");
+        /*	//if its in the main menu stop running the rest of the code
             if(model.getGameState() == ConnectFourModel.GameState.MainMenu) return;
 
             //get the mouse position of the click and then convert that to the board position where it will be in a different coordinate system
@@ -92,6 +95,7 @@ public class ConnectFourController {
             //update the view if it is possible,
             //if it is not possible then call configurationNotPossible on the view class
             view.repaint();
+            */
         }
         @Override
         public void mousePressed(MouseEvent e) {} //unused
