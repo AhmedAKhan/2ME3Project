@@ -1,6 +1,7 @@
 
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 
 import java.awt.Button;
 import java.awt.Point;
@@ -31,32 +32,42 @@ public class ConnectFourController {
         @Override
         public void actionPerformed(ActionEvent e) {
 
+
+
             //will get called for the menu buttons stuff
             
             //check what button is pressed
-            /*JButton buttonPressed = (JButton)e.getSource();
-
-
-            if(buttonPressed.getLabel().equals("New Game")){
+            String buttonPressedIconString = ((JButton)e.getSource()).getIcon().toString();
+            if(buttonPressedIconString.equals(ConnectFourView.mainPlayButtonImageName)){
+                //the play button in the main menu
                 model.setGameState(ConnectFourModel.GameState.Game);
                 model.resetConfiguration();
-            }else if(buttonPressed.getLabel().equals("Custom Game")){
+                view.switchScreen(ConnectFourModel.GameState.Game);
+
+            }else if(buttonPressedIconString.equals(ConnectFourView.mainCustomButtonImageName)){
+                // the custom game button in the main menu
                 model.setGameState(ConnectFourModel.GameState.CustomGame);
                 model.resetConfiguration();
-                //view.setTurn(model.getTurn());
-            }else if(buttonPressed.getLabel().equals("Main Menu")){
+                view.switchScreen(ConnectFourModel.GameState.CustomGame);
+
+            }else if(buttonPressedIconString.equals(ConnectFourView.gameMainMenuImageName)){
                 model.setGameState(ConnectFourModel.GameState.MainMenu);
-            }else if(buttonPressed.getLabel().equals("Reset")){                             //added Feb 26, 2015
+                view.switchScreen(ConnectFourModel.GameState.MainMenu);
+
+            }else if(buttonPressedIconString.equals(ConnectFourView.customGameResetImageName)){                             //added Feb 26, 2015
                 model.setGameState(ConnectFourModel.GameState.CustomGame);                  //added Feb 26, 2015
                 model.resetConfiguration();                                                 //added Feb 26, 2015
                 //view.setError("");
-            }else if(buttonPressed.getLabel().equals("RED")){
+
+            }else if(buttonPressedIconString.equals(ConnectFourView.gameRedButtonImageName)){
                 model.setTurn(ConnectFourModel.Slot.Red);
                 //view.setTurn(model.getTurn());
-            }else if(buttonPressed.getLabel().equals("BLUE")){
+
+            }else if(buttonPressedIconString.equals(ConnectFourView.gameBlueButtonImageName)){
                 model.setTurn(ConnectFourModel.Slot.Blue);
                 //view.setTurn(model.getTurn());
-            }else if(buttonPressed.getLabel().equals("Check State")){
+
+            }else if(buttonPressedIconString.equals(ConnectFourView.customGameCheckStateImageName)){
                 if(!model.checkBoardConfiguration()){
                 	//view.setError(model.getErrorMessage());
                 }else{
@@ -67,7 +78,6 @@ public class ConnectFourController {
             //view.switchScreen(model.getGameState());
             //update the view by called switchScreen
             view.repaint();
-            */
         }
 
         //Purpose: this function will be called when the user presses a button, it will be responsible for handling the outcome of the button press.

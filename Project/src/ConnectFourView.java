@@ -22,39 +22,93 @@ public class ConnectFourView extends JFrame {
 
     //buttons just in the game
 
+    //this is the board that is displayed on the screen
+    private Board board;
+
+    //the names of all the button images
+    public static final String mainCustomButtonImageName = "./src/images/customGameButton1.png";
+    public static final String mainPlayButtonImageName = "./src/images/playButton1.png";
+    public static final String gameMainMenuImageName = "./src/images/mainMenuButton1.png";
+    public static final String gameRedButtonImageName = "";
+    public static final String gameBlueButtonImageName = "";
+    public static final String customGameResetImageName = "";
+    public static final String customGameCheckStateImageName = "";
+
+    private static final int buttonWidth = 289;
+    private static final int buttonHeight = 100;
 
     //constructor
     public ConnectFourView(){ this(400,400); }
     public ConnectFourView(int width, int height){
         setupMainMenu(width, height);
+
+        game = new JPanel();
+        game.setSize(width, height);
+        game.setLocation(0,0);
+        game.setLayout(null);
+        this.add(game);
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//sets the default close operation
         this.setSize(width, height);//sets the size of the screen
     }//end constructor
-
 
     //sets up the main menu screen. It adds the corresponding components to the main menu panel
     private void setupMainMenu(int width, int height){
         //create the main menu panel
         mainMenu = new JPanel();
         mainMenu.setSize(width, height);
+        mainMenu.setLocation(0,0);
+        mainMenu.setLayout(null);
+        //make the background
 
         //create all the things that are going to be on the main menu
 
         this.setLayout(null);
         //create the two buttons
-        mainMenuCustom = createButton("customGameButton0001.png", 100, 100, 289, 100, mainMenu);
-        mainMenuPlay = createButton("button20001.png", 100, 200, 289, 100, mainMenu);
 
-        //add them into the main menu
-
+        mainMenuCustom = createButton(mainCustomButtonImageName, width/2-buttonWidth/2, height/3*2-buttonHeight/2, buttonWidth, buttonHeight, mainMenu);
+        mainMenuPlay = createButton(mainPlayButtonImageName, width/2-buttonWidth/2, height/3-buttonHeight/2, buttonWidth, buttonHeight, mainMenu);
 
         //add the main menu to the screen
         this.add(mainMenu);
     }//end setup board
+    private void setupCustomGame(){
+        mainMenu.setVisible(false);
+        game.setVisible(true);
 
-    // this class creates a button and posititions it at the location (x,y) with the width and height of the input. adds the button to the parent and sets its image to the filename equal to name in the images folder
+        gameMainMenu         = createButton(gameMainMenuImageName, 0,0, buttonWidth, buttonHeight, game);
+        gameRedButton        = createButton(gameRedButtonImageName, 0,0, buttonWidth, buttonHeight, game);
+        gameBlueButton       = createButton(gameBlueButtonImageName, 0,0, buttonWidth, buttonHeight, game);
+        customGameReset      = createButton(customGameResetImageName, 0,0, buttonWidth, buttonHeight, game);
+        customGameCheckState = createButton(customGameCheckStateImageName, 0,0, buttonWidth, buttonHeight, game);
+
+        board = new Board();
+        board.setLocation(this.getWidth()/2,this.getY()/2);
+    }
+    private void setupGame(){
+
+    }
+
+    public void switchScreen(ConnectFourModel.GameState gameState){
+        if(gameState == ConnectFourModel.GameState.MainMenu){
+            game.setVisible(false);
+            mainMenu.setVisible(true);
+            return;
+        }
+        mainMenu.setVisible(false);
+        game.setVisible(true);
+
+        if(ConnectFourModel.GameState.CustomGame == gameState)
+            setupCustomGame();
+        else if(ConnectFourModel.GameState.Game == gameState)
+            setupGame();
+
+    }//end function of the switch screen
+
+    // this class creates a button and positions it at the location (x,y) with the width and height of the input. adds the button to the parent and sets its image to the filename equal to name in the images folder
     public JButton createButton(String name, int x, int y, int width, int height, JPanel parent) {
-        ImageIcon img = new ImageIcon("./src/images/" + name);//gets the image of the button
+        //ImageIcon img = new ImageIcon("./src/images/" + name+"1.png");//gets the image of the button
+        ImageIcon img = new ImageIcon(name);
         JButton newButton = new JButton(img); // creates the button
 
         if (!name.equals("")){//if the name is blank just returns that the name is blank
@@ -73,34 +127,21 @@ public class ConnectFourView extends JFrame {
         return newButton;//returns the newly created button
     }
 
-    //setup the game panel based on the type. Could be either custom game, or game, or null
-    private void setupGame(ConnectFourModel.GameState gameState){
-        if(gameState == null) return;
-
-
-
-
-        if(gameState == ConnectFourModel.GameState.CustomGame){
-            //setup the custom game
-
-        }else if(gameState == ConnectFourModel.GameState.Game){
-            //setup the game
-
-        }
-        return;
-    }
-
-    //p
-    public void addCalculateListener(ActionListener listenForButton, MouseInputListener actionEventListener){
+    //this function assigns the listeners for the button and the screen.
+    public void addCalculateListener(ActionListener listenForButton, MouseInputListener mouseListener){
 
         //make the listener for the main menu buttons
         mainMenuCustom.addActionListener(listenForButton);
         mainMenuPlay.addActionListener(listenForButton);
 
         //make the listener for the game buttons
-
+        game.addMouseListener(mouseListener);
 
     }//end calculate listener
+
+    public void setBoard(ConnectFourModel.Slot[][] boardConfig){
+        board.setBoard(boardConfig);
+    }
 
 
 }//end class
@@ -122,10 +163,6 @@ import javax.swing.event.MouseInputListener;
 import java.awt.Point;
 
 public class ConnectFourView extends JFrame {
-    
-    //this JPanel holds all the data
-    private int diameterOfDisk = 30;			//represents the diameter of one disk
-    private int spaceBetweenSlots = 7;		    //represents the space between the disk
 
     //holds all the buttons
     private Button customGameButton;
@@ -355,66 +392,5 @@ public class ConnectFourView extends JFrame {
         newGameButton.setVisible(false);
         customGameButton.setVisible(false);
     }
-
-    //Purpose: calls the drawTileAtPosition in a nested loop to tell the drawTileAtPosition(); so all the tiles can be drawn if there is something to draw
-    private void drawTilesFromBoardConfiguration(Graphics g, ConnectFourModel.Slot[][] slotConfiguration){      
-        //when we draw stuff we put the bottom right position in the function
-        
-        int k = diameterOfDisk +spaceBetweenSlots;//k represents the distance between two slots
-        int numberOfRows = slotConfiguration[0].length;//this is the number of slots the board has  
-
-        //gets the width and height of the board
-        int widthOfBoard = getWidthOfBoard();
-        int heightOfBoard =  getHeightOfBoard();
-        g.setColor(Color.BLACK);//makes the color black
-        //draws the board itself, which is just a black rectangle and then we will place the blank disks on top of it
-        g.fillRect(getOriginOfBoard().x, getOriginOfBoard().y - (numberOfRows+1)*k, widthOfBoard , heightOfBoard);
-        
-        //call the drawTileAtPosition an n number of time if it is not empty
-        //draws all the disks on the board
-        for(int rowCounter = 0; rowCounter < slotConfiguration.length; rowCounter++){
-            for(int colCounter = 0; colCounter < slotConfiguration[0].length; colCounter++){
-                drawTileAtPosition(g, new Point(colCounter, rowCounter), slotConfiguration[rowCounter][colCounter], slotConfiguration.length);
-            }//end row counter loop
-        }//end col counter loop
-    }//end function
-    //PURPOSE: draws one tile at the specified location
-    private void drawTileAtPosition(Graphics g, Point pos, ConnectFourModel.Slot type, int numberOfRows){
-        //need to convert the old position to new position      
-        pos = new Point(pos.x, numberOfRows-1-pos.y);
-        pos = getGameCoordinate(pos, pos.y);
-        
-        //draw the tile depending on the type and position
-        Color c = new Color((type==ConnectFourModel.Slot.Blue)? 0:255,(type==ConnectFourModel.Slot.Empty)? 255:0,(type==ConnectFourModel.Slot.Red)? 0:255);
-        g.setColor(c);//sets the color of the slot
-        g.fillOval(pos.x, pos.y, diameterOfDisk, diameterOfDisk);       
-    }//end draw tile at position function
-    
-    //PURPOSE: gets the origin of the board meaning the bottom left coordinate of the board 
-    private Point getOriginOfBoard(){
-    	Dimension screenSize = this.getRootPane().getSize();//gets the screen size
-        //calculate the bottom left coordinate of the board and return that point
-        return new Point(screenSize.width/2 - getWidthOfBoard()/2 ,screenSize.height/2 + getHeightOfBoard()/2);
-    }
-    
-    //PURPOSE: converts the position with respect to the array to the position with respect to the game screen
-    public Point getGameCoordinate(Point slotPosition, int numberOfRows){
-        //this function will take in the position of the board and return the actual position on the screen
-        int sizeOfSlotPlusExtraSpace = diameterOfDisk + spaceBetweenSlots;
-        return new Point(slotPosition.x *sizeOfSlotPlusExtraSpace + getOriginOfBoard().x + spaceBetweenSlots, 
-                        getOriginOfBoard().y - (slotPosition.y+1)*sizeOfSlotPlusExtraSpace + spaceBetweenSlots);
-    }
-    //PURPOSE: converts the position to becoming with respect to the array instead of the game screen  
-    public Point getBoardCoordinateOfPoint(Point mousePosition){
-        //convert the point mousePosition into a tile position where the x represents the column and y represents the row
-        Point tilePosition = new Point((mousePosition.x- getOriginOfBoard().x)/(diameterOfDisk + spaceBetweenSlots),
-                (getOriginOfBoard().y - mousePosition.y)/(diameterOfDisk + spaceBetweenSlots));
-        //this is just making the tilePosition transition from different grids
-        return new Point(tilePosition.x, numberOfRows - 1 - tilePosition.y);
-    }
-
-    //these two private functions are to get the width and height of the board, they are used to draw the board
-    private int getWidthOfBoard(){  return (config[0].length)*(diameterOfDisk +spaceBetweenSlots) + spaceBetweenSlots;}
-    private int getHeightOfBoard(){return (numberOfRows)*(diameterOfDisk + spaceBetweenSlots) + spaceBetweenSlots; }
 }//end class
 */
