@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class ConnectFourView extends JFrame {
@@ -34,19 +35,17 @@ public class ConnectFourView extends JFrame {
     public static final String customGameResetImageName = "";
     public static final String customGameCheckStateImageName = "";
 
+    //this is the size of the buttons on the screen
     private static final int buttonWidth = 289;
     private static final int buttonHeight = 100;
 
+    private static final int initialScreenHeight = 400;
+    private static final int initialScreenWidth = 400;
     //constructor
     public ConnectFourView(){ this(400,400); }
     public ConnectFourView(int width, int height){
         setupMainMenu(width, height);
-
-        game = new JPanel();
-        game.setSize(width, height);
-        game.setLocation(0,0);
-        game.setLayout(null);
-        this.add(game);
+        setupGame(width, height);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//sets the default close operation
         this.setSize(width, height);//sets the size of the screen
@@ -72,38 +71,79 @@ public class ConnectFourView extends JFrame {
         //add the main menu to the screen
         this.add(mainMenu);
     }//end setup board
-    private void setupCustomGame(){
-        mainMenu.setVisible(false);
-        game.setVisible(true);
+    private void setupGame(int width, int height) {
+        game = new JPanel();
+        game.setSize(width, height);
+        game.setLocation(0,0);
+        game.setLayout(null);
 
+        //adding all the buttons that are in both the game and the game screen
         gameMainMenu         = createButton(gameMainMenuImageName, 0,0, buttonWidth, buttonHeight, game);
         gameRedButton        = createButton(gameRedButtonImageName, 0,0, buttonWidth, buttonHeight, game);
         gameBlueButton       = createButton(gameBlueButtonImageName, 0,0, buttonWidth, buttonHeight, game);
+
+        //buttons for the custom game
         customGameReset      = createButton(customGameResetImageName, 0,0, buttonWidth, buttonHeight, game);
         customGameCheckState = createButton(customGameCheckStateImageName, 0,0, buttonWidth, buttonHeight, game);
 
-        board = new Board();
-        board.setLocation(this.getWidth()/2,this.getY()/2);
-    }
-    private void setupGame(){
+        //buttons for the game
 
+
+        //create the board
+        board = new Board(6,7);
+        board.setLocation(this.getWidth()/2,this.getY()/2);
+        game.add(board);
+
+        //adds the game to the screen
+        this.add(game);
+        game.setVisible(false);
     }
 
     public void switchScreen(ConnectFourModel.GameState gameState){
+        System.out.println("gameState: " + gameState);
         if(gameState == ConnectFourModel.GameState.MainMenu){
             game.setVisible(false);
             mainMenu.setVisible(true);
             return;
         }
+
         mainMenu.setVisible(false);
         game.setVisible(true);
-
-        if(ConnectFourModel.GameState.CustomGame == gameState)
-            setupCustomGame();
-        else if(ConnectFourModel.GameState.Game == gameState)
-            setupGame();
-
     }//end function of the switch screen
+
+    @Override
+    public void paint(Graphics g){
+        super.paint(g);
+        //the board might have been moved or resized so we need to resize and reposition all the buttons
+        mainMenu.setSize(this.getSize());
+        game.setSize(this.getSize());
+        //THIS WONT WORK BECAUSE THE SIZE OF THE PICTURE DOESNT CHANGE
+        float scale = 1.0f; //Math.min(this.getWidth()/initialScreenWidth, this.getHeight()/initialScreenHeight);
+
+        mainMenuPlay.setSize((int)(buttonWidth*scale), (int)(buttonHeight*scale));
+        mainMenuCustom.setSize((int)(buttonWidth*scale), (int)(buttonHeight*scale));
+        gameMainMenu.setSize((int)(buttonWidth * scale), (int) (buttonHeight * scale));
+        customGameCheckState.setSize((int)(buttonWidth * scale), (int) (buttonHeight * scale));
+        scale = 0.7f;
+        gameRedButton.setSize((int) (buttonWidth * scale), (int) (buttonHeight * scale));
+        gameBlueButton.setSize((int)(buttonWidth * scale), (int) (buttonHeight * scale));
+        customGameReset.setSize((int) (buttonWidth * scale), (int) (buttonHeight * scale));
+        //done adjusting the buttons size
+
+        //adjust their position
+        mainMenuPlay.setLocation(this.getWidth() / 2 - mainMenuPlay.getWidth() / 2, this.getHeight() / 3 - mainMenuPlay.getHeight() / 2);//middle top
+        mainMenuCustom.setLocation(this.getWidth()/2 - mainMenuCustom.getWidth()/2, this.getHeight()/3*2 -mainMenuCustom.getHeight()/2);//middle bottom
+
+        gameMainMenu.setLocation(0, this.getHeight()-gameMainMenu.getHeight());//bottom left
+        gameRedButton.setLocation(0, 0);
+        gameBlueButton.setLocation(0, 0);
+        customGameReset.setLocation(this.getWidth()/2-customGameReset.getWidth()/2, this.getHeight()-customGameReset.getHeight());
+        customGameCheckState.setLocation(this.getWidth()-customGameCheckState.getWidth(), this.getHeight()-gameMainMenu.getHeight());
+        //done adjusting the buttons position
+
+    }
+
+
 
     // this class creates a button and positions it at the location (x,y) with the width and height of the input. adds the button to the parent and sets its image to the filename equal to name in the images folder
     public JButton createButton(String name, int x, int y, int width, int height, JPanel parent) {
@@ -117,7 +157,10 @@ public class ConnectFourView extends JFrame {
             newButton.setContentAreaFilled(false);
             newButton.setBorderPainted(false);
             newButton.setFocusPainted(false);
-        }else System.out.println("go an empty location for image picture, using the default button");
+        }else {
+            System.out.println("go an empty location for image picture, using the default button");
+            newButton.setText("place button label here");
+        }
 
         // this sets the buttons size and location on the screen
         newButton.setSize(width,height);
@@ -133,6 +176,7 @@ public class ConnectFourView extends JFrame {
         //make the listener for the main menu buttons
         mainMenuCustom.addActionListener(listenForButton);
         mainMenuPlay.addActionListener(listenForButton);
+        gameMainMenu.addActionListener(listenForButton);
 
         //make the listener for the game buttons
         game.addMouseListener(mouseListener);
