@@ -32,7 +32,6 @@ public class ConnectFourController {
         public void actionPerformed(ActionEvent e) {
 
             //will get called for the menu buttons stuff
-            System.out.println("action performed");
             //check what button is pressed
             String buttonPressedIconString = ((JButton)e.getSource()).getIcon().toString();
             if(buttonPressedIconString.equals(ConnectFourView.mainPlayButtonImageName)){

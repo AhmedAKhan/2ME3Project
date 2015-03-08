@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionListener;
 
 public class ConnectFourView extends JFrame {
@@ -29,15 +30,26 @@ public class ConnectFourView extends JFrame {
     private Board board;
 
     //the names of all the button images
+    //main menu buttons
     public static final String mainCustomButtonImageName = "./src/images/customGameButton1.png";
+    public static final String mainCustomButtonimageNamePressed = "";
     public static final String mainPlayButtonImageName = "./src/images/playButton1.png";
+    public static final String mainPlayButtonImageNamePressed = "";
     public static final String gameMainMenuImageName = "./src/images/mainMenuButton1.png";
+    public static final String gameMainMenuImageNamePressed ="";
+
+    //all the buttons that exist in both the games
     public static final String gameRedButtonImageName = "re";
-    public static final String gameBlueButtonImageName = "bl";
+    public static final String gameRedButtonImageNamePressed = "";
     public static final String gameRedButtonImageNameSelected = "--";
+    public static final String gameBlueButtonImageName = "bl";
+    public static final String gameBlueButtonImageNamePressed = "--";
     public static final String gameBlueButtonImageNameSelected= "--";
+
     public static final String customGameResetImageName = "gr";
+    public static final String customGameResetImageNamePressed = "--";
     public static final String customGameCheckStateImageName = "cs";
+    public static final String customGameCheckStateImageNamePressed = "--";
 
     //this is the size of the buttons on the screen
     private static final int buttonWidth = 289;
@@ -46,7 +58,7 @@ public class ConnectFourView extends JFrame {
     private static final int initialScreenHeight = 400;
     private static final int initialScreenWidth = 400;
     //constructor
-    public ConnectFourView(){ this(400,400); }
+    public ConnectFourView(){ this(initialScreenWidth, initialScreenHeight); }
     public ConnectFourView(int width, int height){ this(width, height, 6,7); }//end constructor
     public ConnectFourView(int width, int height, int boardRows, int boardCols){
         this.getContentPane().setLayout(null);
@@ -71,8 +83,8 @@ public class ConnectFourView extends JFrame {
         //make the background
 
         //create the two buttons
-        mainMenuCustom = createButton(mainCustomButtonImageName, width/2-buttonWidth/2, height/3*2-buttonHeight/2, buttonWidth, buttonHeight, mainMenu);
-        mainMenuPlay = createButton(mainPlayButtonImageName, width/2-buttonWidth/2, height/3-buttonHeight/2, buttonWidth, buttonHeight, mainMenu);
+        mainMenuCustom = createButton(mainCustomButtonImageName, width/2-buttonWidth/2, height/3*2-buttonHeight/2, buttonWidth, buttonHeight, mainMenu, mainCustomButtonimageNamePressed);
+        mainMenuPlay = createButton(mainPlayButtonImageName, width/2-buttonWidth/2, height/3-buttonHeight/2, buttonWidth, buttonHeight, mainMenu, mainPlayButtonImageNamePressed);
 
         //add the main menu to the screen
         this.add(mainMenu);
@@ -84,17 +96,17 @@ public class ConnectFourView extends JFrame {
         game.setLayout(null);
 
         //adding all the buttons that are in both the game and the game screen
-        gameMainMenu         = createButton(gameMainMenuImageName, 0,0, buttonWidth, buttonHeight, game);
-        gameRedButton        = createButton(gameRedButtonImageName, 0,0, buttonWidth, buttonHeight, game, gameRedButtonImageNameSelected);
-        gameBlueButton       = createButton(gameBlueButtonImageName, 0,0, buttonWidth, buttonHeight, game, gameBlueButtonImageNameSelected);
+        gameMainMenu         = createButton(gameMainMenuImageName, 0,0, buttonWidth, buttonHeight, game, gameMainMenuImageNamePressed);
+        gameRedButton        = createButton(gameRedButtonImageName, 0,0, buttonWidth, buttonHeight, game, gameRedButtonImageNamePressed);
+        gameBlueButton       = createButton(gameBlueButtonImageName, 0,0, buttonWidth, buttonHeight, game, gameBlueButtonImageNamePressed);
 
         ImageIcon x = new ImageIcon(mainPlayButtonImageName);
 
         //buttons for the custom game
-        customGameReset      = createButton(customGameResetImageName, 0,0, buttonWidth, buttonHeight, game);
-        customGameCheckState = createButton(customGameCheckStateImageName, 0,0, buttonWidth, buttonHeight, game);
+        customGameReset      = createButton(customGameResetImageName, 0,0, buttonWidth, buttonHeight, game, customGameResetImageNamePressed);
+        customGameCheckState = createButton(customGameCheckStateImageName, 0,0, buttonWidth, buttonHeight, game, customGameCheckStateImageNamePressed);
         //errorMessage         = new JTextArea("this is where the error message goes");
-        errorMessage = new JLabel("this is where the error message goes");
+        errorMessage = new JLabel("");
         errorMessage.setOpaque(false);
         errorMessage.setSize(width,100);
         errorMessage.setLocation(0,0);
@@ -171,17 +183,11 @@ public class ConnectFourView extends JFrame {
     }
 
     // this class creates a button and positions it at the location (x,y) with the width and height of the input. adds the button to the parent and sets its image to the filename equal to name in the images folder
-    public JButton createButton(String name, int x, int y, JPanel parent){ return createButton(name, x,y, buttonWidth, buttonHeight, parent); }
-    public JButton createButton(String name, int x, int y, int width, int height, JPanel parent){ return createButton(name, x, y, width, height, parent, null); }
-    public JButton createButton(String name, int x, int y, int width, int height, JPanel parent, String selectedImageName) {
-
+    public JButton createButton(String name, int x, int y, JPanel parent, String pressedName){ return createButton(name, x,y, buttonWidth, buttonHeight, parent, pressedName); }
+    public JButton createButton(String name, int x, int y, int width, int height, JPanel parent, String pressedName) {
         //ImageIcon img = new ImageIcon("./src/images/" + name+"1.png");//gets the image of the button
-
-        ImageIcon img = new ImageIcon(name);
-
-        JButton newButton = new JButton(img); // creates the button
-
-        //if(selectedImageName != null) newButton.setSelectedIcon(new ImageIcon(selectedImageName));
+        JButton newButton = new JButton(new ImageIcon(name)); // creates the button
+        newButton.setPressedIcon(new ImageIcon(pressedName));
 
         if(newButton.getIcon().toString().length() > 2){
             //removes the default button graphics
@@ -222,8 +228,6 @@ public class ConnectFourView extends JFrame {
     }//end calculate listener
 
     public void setTurn(ConnectFourModel.Slot currentTurn){
-        System.out.println("blue button icon: " + gameBlueButton.getIcon());
-        System.out.println("blue button selected icon: " + gameBlueButton.getSelectedIcon());
         if(currentTurn == ConnectFourModel.Slot.Blue){
             gameBlueButton.setIcon(new ImageIcon(gameBlueButtonImageNameSelected));
             gameRedButton.setIcon(new ImageIcon(gameRedButtonImageName));
