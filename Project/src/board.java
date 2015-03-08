@@ -13,18 +13,35 @@ public class Board extends JPanel {
     private int columns;
 
     public Board(int rows, int columns){
+        super(null, true);//calls the super constructor
+
+        //set its rows and columns
         this.rows = rows;
         this.columns = columns;
+
+        //make it not have a layout
+        setLayout(null);
+        setBackground(new Color(0,0,0));
+
+        repaint();//redraw the board
     }//end function
 
     public void setBoard(ConnectFourModel.Slot[][] slots){
+        System.out.println("inside the board game function");
+        //Graphics g = getGraphics();
+        //g.fillOval(100,100,100,100);
 
     }//end function
 
     @Override
     public void paintComponent(Graphics g){
-        System.out.println("painting the board");
+        super.paintComponent(g);
+        drawTilesFromBoardConfiguration(g, new ConnectFourModel.Slot[columns][rows]);
+        g.setColor(Color.BLACK);
+        //g.fillOval(this.getWidth()/2, this.getHeight()/2,50,50);
+        //g.fillRect(0,0, , );
     }//end function
+
 
     //Purpose: calls the drawTileAtPosition in a nested loop to tell the drawTileAtPosition(); so all the tiles can be drawn if there is something to draw
     private void drawTilesFromBoardConfiguration(Graphics g, ConnectFourModel.Slot[][] slotConfiguration){
@@ -64,9 +81,9 @@ public class Board extends JPanel {
     //PURPOSE: gets the origin of the board meaning the bottom left coordinate of the board
     private Point getOriginOfBoard(){
         //get the origin again because this is broken
-        Dimension screenSize = this.getRootPane().getSize();//gets the screen size
+        //Dimension screenSize = this.getRootPane().getSize();//gets the screen size
         //calculate the bottom left coordinate of the board and return that point
-        return new Point(screenSize.width/2 - getWidthOfBoard()/2 ,screenSize.height/2 + getHeightOfBoard()/2);
+        return new Point(0,0);//new Point(screenSize.width/2 - getWidthOfBoard()/2 ,screenSize.height/2 + getHeightOfBoard()/2);
     }
 
     //PURPOSE: converts the position with respect to the array to the position with respect to the game screen
@@ -86,6 +103,6 @@ public class Board extends JPanel {
     }
 
     //these two private functions are to get the width and height of the board, they are used to draw the board
-    private int getWidthOfBoard(){  return (columns)*(diameterOfDisk +spaceBetweenDisks) + spaceBetweenDisks;}
-    private int getHeightOfBoard(){return (rows)*(diameterOfDisk + spaceBetweenDisks) + spaceBetweenDisks; }
+    public int getWidthOfBoard(){  return (columns)*(diameterOfDisk +spaceBetweenDisks) + spaceBetweenDisks;}
+    public int getHeightOfBoard(){return (rows)*(diameterOfDisk + spaceBetweenDisks) + spaceBetweenDisks; }
 }//end class

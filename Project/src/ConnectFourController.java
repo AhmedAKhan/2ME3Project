@@ -32,8 +32,6 @@ public class ConnectFourController {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-
-
             //will get called for the menu buttons stuff
             
             //check what button is pressed
@@ -83,6 +81,7 @@ public class ConnectFourController {
         //Purpose: this function will be called when the user presses a button, it will be responsible for handling the outcome of the button press.
         @Override
         public void mouseClicked(MouseEvent e) {
+            System.out.println("e: " + e);
             /*
         	//if its in the main menu stop running the rest of the code
             if(model.getGameState() == ConnectFourModel.GameState.MainMenu) return;
