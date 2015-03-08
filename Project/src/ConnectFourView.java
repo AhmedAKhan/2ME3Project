@@ -20,7 +20,8 @@ public class ConnectFourView extends JFrame {
     //the buttons just in the custom game
     private JButton customGameReset; // this button resets the board and makes it blank
     private JButton customGameCheckState; // this button checks if the current state of the game is valid and then displays the error messages
-    private JTextArea errorMessage;
+    //private JTextArea errorMessage;
+    private JLabel errorMessage;
 
     //buttons just in the game
 
@@ -31,10 +32,10 @@ public class ConnectFourView extends JFrame {
     public static final String mainCustomButtonImageName = "./src/images/customGameButton1.png";
     public static final String mainPlayButtonImageName = "./src/images/playButton1.png";
     public static final String gameMainMenuImageName = "./src/images/mainMenuButton1.png";
-    public static final String gameRedButtonImageName = "";
-    public static final String gameBlueButtonImageName = "";
-    public static final String customGameResetImageName = "";
-    public static final String customGameCheckStateImageName = "";
+    public static final String gameRedButtonImageName = "re";
+    public static final String gameBlueButtonImageName = "bl";
+    public static final String customGameResetImageName = "gr";
+    public static final String customGameCheckStateImageName = "cs";
 
     //this is the size of the buttons on the screen
     private static final int buttonWidth = 289;
@@ -68,7 +69,6 @@ public class ConnectFourView extends JFrame {
         //make the background
 
         //create the two buttons
-
         mainMenuCustom = createButton(mainCustomButtonImageName, width/2-buttonWidth/2, height/3*2-buttonHeight/2, buttonWidth, buttonHeight, mainMenu);
         mainMenuPlay = createButton(mainPlayButtonImageName, width/2-buttonWidth/2, height/3-buttonHeight/2, buttonWidth, buttonHeight, mainMenu);
 
@@ -89,8 +89,12 @@ public class ConnectFourView extends JFrame {
         //buttons for the custom game
         customGameReset      = createButton(customGameResetImageName, 0,0, buttonWidth, buttonHeight, game);
         customGameCheckState = createButton(customGameCheckStateImageName, 0,0, buttonWidth, buttonHeight, game);
-
-
+        //errorMessage         = new JTextArea("this is where the error message goes");
+        errorMessage = new JLabel("this is where the error message goes");
+        errorMessage.setOpaque(false);
+        errorMessage.setSize(width,100);
+        errorMessage.setLocation(0,0);
+        errorMessage.setHorizontalAlignment(JTextField.CENTER);
         //buttons for the game
 
 
@@ -103,6 +107,7 @@ public class ConnectFourView extends JFrame {
                 board.getHeightOfBoard());
         board.validate();
         board.repaint();
+        game.add(errorMessage);
         game.add(board);
 
         //adds the game to the screen
@@ -111,7 +116,6 @@ public class ConnectFourView extends JFrame {
     }
 
     public void switchScreen(ConnectFourModel.GameState gameState){
-        System.out.println("gameState: " + gameState);
         if(gameState == ConnectFourModel.GameState.MainMenu){
             game.setVisible(false);
             mainMenu.setVisible(true);
@@ -160,30 +164,27 @@ public class ConnectFourView extends JFrame {
                 this.getHeight() / 2 - board.getHeightOfBoard()/2,
                 board.getWidthOfBoard(),
                 board.getHeightOfBoard());
-        board.repaint();
-
-
-        System.out.println("board: " + board);
-
-
+        //board.repaint();
     }
 
     // this class creates a button and positions it at the location (x,y) with the width and height of the input. adds the button to the parent and sets its image to the filename equal to name in the images folder
     public JButton createButton(String name, int x, int y, int width, int height, JPanel parent) {
         //ImageIcon img = new ImageIcon("./src/images/" + name+"1.png");//gets the image of the button
+        JButton newButton;
         ImageIcon img = new ImageIcon(name);
-        JButton newButton = new JButton(img); // creates the button
+        newButton = new JButton(img); // creates the button
 
-        if (!name.equals("")){//if the name is blank just returns that the name is blank
+        if(newButton.getIcon().toString().length() > 2){
             //removes the default button graphics
             newButton.setOpaque(false);
             newButton.setContentAreaFilled(false);
             newButton.setBorderPainted(false);
             newButton.setFocusPainted(false);
-        }else {
+        }else{
             System.out.println("go an empty location for image picture, using the default button");
             newButton.setText("place button label here");
         }
+
 
         // this sets the buttons size and location on the screen
         newButton.setSize(width,height);
@@ -198,14 +199,18 @@ public class ConnectFourView extends JFrame {
         //make the listener for the main menu buttons
         mainMenuCustom.addActionListener(listenForButton);
         mainMenuPlay.addActionListener(listenForButton);
+
         gameMainMenu.addActionListener(listenForButton);
+        customGameReset.addActionListener(listenForButton);
+        gameBlueButton.addActionListener(listenForButton);
+        gameRedButton.addActionListener(listenForButton);
+
+        customGameCheckState.addActionListener(listenForButton);
 
         //make the listener for the game buttons
         board.addMouseListener(mouseListener);
 
     }//end calculate listener
-
-    public void setBoard(ConnectFourModel.Slot[][] boardConfig){ board.setBoard(boardConfig); }
 
     public void setTurn(ConnectFourModel.Slot currentTurn){
         if(currentTurn == ConnectFourModel.Slot.Blue){
@@ -221,9 +226,13 @@ public class ConnectFourView extends JFrame {
         System.out.println("You are trying make the current turn become EMPTY's, next time set it to blue or red");
         return;
     }
+    public void setBoard(ConnectFourModel.Slot[][] boardConfig){ board.setBoard(boardConfig); }
+    public void adjustBoard(ConnectFourModel.Slot[][] newBoardConfiguration){ board.setBoard(newBoardConfiguration); }
 
     //PURPOSE: displays and message on the screen of the text errorMessage that will be passed in as a parameter
     public void displayErrorMessage(String errorMessage){ JOptionPane.showMessageDialog(this, errorMessage); }
+
+    public Point getBoardCoordinateOfPoint(Point point){ return board.getBoardCoordinateOfPoint(point); }
 
     public void setError(String error) { errorMessage.setText(error); }
 }//end class

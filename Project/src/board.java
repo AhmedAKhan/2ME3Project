@@ -21,31 +21,25 @@ public class Board extends JPanel {
 
         //make it not have a layout
         setLayout(null);
-        setBackground(new Color(0,0,0));
-
-        repaint();//redraw the board
     }//end function
 
     public void setBoard(ConnectFourModel.Slot[][] slots){
-        System.out.println("inside the board game function");
-        //Graphics g = getGraphics();
-        //g.fillOval(100,100,100,100);
-
+        Graphics g = getGraphics();
+        g.fillOval(0,0,100,100);
+        drawTilesFromBoardConfiguration(getGraphics(), slots);
     }//end function
 
     @Override
     public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        drawTilesFromBoardConfiguration(g, new ConnectFourModel.Slot[columns][rows]);
-        g.setColor(Color.BLACK);
-        //g.fillOval(this.getWidth()/2, this.getHeight()/2,50,50);
-        //g.fillRect(0,0, , );
+        System.out.println("in the paint component");
+
     }//end function
 
 
     //Purpose: calls the drawTileAtPosition in a nested loop to tell the drawTileAtPosition(); so all the tiles can be drawn if there is something to draw
     private void drawTilesFromBoardConfiguration(Graphics g, ConnectFourModel.Slot[][] slotConfiguration){
         //when we draw stuff we put the bottom right position in the function
+        //super.paintComponent(g);
 
         int spaceBetweenSlots = diameterOfDisk + spaceBetweenDisks;//k represents the distance between two slots
         int numberOfRows = slotConfiguration[0].length;//this is the number of slots the board has
@@ -53,10 +47,12 @@ public class Board extends JPanel {
         //gets the width and height of the board
         int widthOfBoard = getWidthOfBoard();
         int heightOfBoard =  getHeightOfBoard();
+        System.out.println("widthOfBoard: " + widthOfBoard + " heightOfBoard: " + heightOfBoard);
         g.setColor(Color.BLACK);//makes the color black
         //draws the board itself, which is just a black rectangle and then we will place the blank disks on top of it
         //TODO make it so it draws the picture of the empty board
-        g.fillRect(getOriginOfBoard().x, getOriginOfBoard().y - (numberOfRows+1)*spaceBetweenSlots, widthOfBoard , heightOfBoard);
+        //g.fillRect(getOriginOfBoard().x, getOriginOfBoard().y - (numberOfRows+1)*spaceBetweenSlots, widthOfBoard , heightOfBoard);
+        g.fillRect(0,0, widthOfBoard, heightOfBoard);
 
         //call the drawTileAtPosition an n number of time if it is not empty
         //draws all the disks on the board
@@ -73,7 +69,15 @@ public class Board extends JPanel {
 
         //TODO make it so it draws the tile at this position with a picture instead of graphics
         //draw the tile depending on the type and position
-        Color c = new Color((type==ConnectFourModel.Slot.Blue)? 0:255,(type==ConnectFourModel.Slot.Empty)? 255:0,(type==ConnectFourModel.Slot.Red)? 0:255);
+        Color c;
+        switch (type){
+            case Blue :c = new Color(17, 45, 255);         break;
+            case Red:   c = new Color(255, 2, 7);           break;
+            case Empty:
+            default:
+                c = new Color(220, 220, 220);
+                break;
+        }
         g.setColor(c);//sets the color of the slot
         g.fillOval(pos.x, pos.y, diameterOfDisk, diameterOfDisk);
     }//end draw tile at position function
@@ -90,16 +94,17 @@ public class Board extends JPanel {
     public Point getGameCoordinate(Point slotPosition, int numberOfRows){
         //this function will take in the position of the board and return the actual position on the screen
         int sizeOfSlotPlusExtraSpace = diameterOfDisk + spaceBetweenDisks;
-        return new Point(slotPosition.x *sizeOfSlotPlusExtraSpace + getOriginOfBoard().x + spaceBetweenDisks,
-                getOriginOfBoard().y - (slotPosition.y+1)*sizeOfSlotPlusExtraSpace + spaceBetweenDisks);
+        return new Point(
+                getOriginOfBoard().x + slotPosition.x*sizeOfSlotPlusExtraSpace + spaceBetweenDisks,
+                getOriginOfBoard().y + (slotPosition.y)*sizeOfSlotPlusExtraSpace + spaceBetweenDisks);
     }
     //PURPOSE: converts the position to becoming with respect to the array instead of the game screen
     public Point getBoardCoordinateOfPoint(Point mousePosition){
         //convert the point mousePosition into a tile position where the x represents the column and y represents the row
         Point tilePosition = new Point((mousePosition.x- getOriginOfBoard().x)/(diameterOfDisk + spaceBetweenDisks),
-                (getOriginOfBoard().y - mousePosition.y)/(diameterOfDisk + spaceBetweenDisks));
+                (mousePosition.y-getOriginOfBoard().y)/(diameterOfDisk + spaceBetweenDisks));
         //this is just making the tilePosition transition from different grids
-        return new Point(tilePosition.x, rows - 1 - tilePosition.y);
+        return tilePosition;
     }
 
     //these two private functions are to get the width and height of the board, they are used to draw the board

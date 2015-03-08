@@ -48,7 +48,7 @@ public class ConnectFourModel {
     
 //    public boolean checkBoardConfiguration(){ return checkBoardConfiguration(boardConfiguration); }
     public boolean checkBoardConfiguration(){    	
-    	this.errorMessage = "";
+    	this.errorMessage = "<html>";
     	/* Checking the parameter for errors */
     	if (boardConfiguration.length != boardConfiguration.length) {
     		System.out.println("Invalid number of rows!");
@@ -59,10 +59,10 @@ public class ConnectFourModel {
     	
     	/* Check if there's too many of either discs */
     	if (this.getBlueDiscsCount() > this.getRedDiscsCount() + 1) {
-    		this.errorMessage += "ERROR: Too many blue dics on the board\n";
+    		this.errorMessage += "ERROR: Too many blue dics on the board<br>";//"ERROR: Too many blue dics on the board\n";
     		System.out.println("Too many blue");
     	} else if (this.getBlueDiscsCount() + 1 < this.getRedDiscsCount()) {
-    		this.errorMessage += "ERROR: Too many red dics on the board\n";
+    		this.errorMessage += "ERROR: Too many red dics on the board<br>";//"ERROR: Too many red dics on the board\n";
     		System.out.println("Too many red");
     		//return false;
     	}
@@ -76,10 +76,10 @@ public class ConnectFourModel {
 						
 						if (boardConfiguration[i][j].equals(Slot.Red)) {
 							this.errorMessage += "ERROR: Red floating disc detected "
-									+ "at row: " + i + " column: " + j + "\n";
+									+ "at row: " + i + " column: " + j + "<br>";
 						} else if (boardConfiguration[i][j].equals(Slot.Blue)) {
 							this.errorMessage += "ERROR: Blue floating disc detected "
-									+ "at row: " + i + " column: " + j + "\n";
+									+ "at row: " + i + " column: " + j + "<br>";
 						}
 						
 						System.out.println("Floating");
@@ -92,11 +92,11 @@ public class ConnectFourModel {
     	/* Check if there are four discs in a row of the same color */
     	if (this.getWinState()) {
     		this.errorMessage += "ERROR: Four " + currentTurn.toString() + " discs "
-    				+ "are together\n";
+    				+ "are together<br>";
     		System.out.println("Four discs");
     	}
-    
-    	if(!this.errorMessage.equals(""))
+        errorMessage += "</html>";
+    	if(!this.errorMessage.equals("<html></html>"))
     		return false;
     	
 		/* Switch turns after a valid move is made */

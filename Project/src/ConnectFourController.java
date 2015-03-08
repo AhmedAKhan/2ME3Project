@@ -27,13 +27,12 @@ public class ConnectFourController {
     class Listener implements ActionListener, MouseInputListener {
         public Listener(){}//empty constructor
 
-
         //Purpose: when the user presses the main menu button it will call this function, and it will either go to the game stage or the custom game depending on what is clicked
         @Override
         public void actionPerformed(ActionEvent e) {
 
             //will get called for the menu buttons stuff
-            
+            System.out.println("action performed");
             //check what button is pressed
             String buttonPressedIconString = ((JButton)e.getSource()).getIcon().toString();
             if(buttonPressedIconString.equals(ConnectFourView.mainPlayButtonImageName)){
@@ -55,59 +54,56 @@ public class ConnectFourController {
             }else if(buttonPressedIconString.equals(ConnectFourView.customGameResetImageName)){                             //added Feb 26, 2015
                 model.setGameState(ConnectFourModel.GameState.CustomGame);                  //added Feb 26, 2015
                 model.resetConfiguration();                                                 //added Feb 26, 2015
-                //view.setError("");
+                view.setBoard(model.getBoardConfiguration());
+                view.setError("");
 
             }else if(buttonPressedIconString.equals(ConnectFourView.gameRedButtonImageName)){
                 model.setTurn(ConnectFourModel.Slot.Red);
-                //view.setTurn(model.getTurn());
+                view.setTurn(model.getTurn());
 
             }else if(buttonPressedIconString.equals(ConnectFourView.gameBlueButtonImageName)){
                 model.setTurn(ConnectFourModel.Slot.Blue);
-                //view.setTurn(model.getTurn());
+                view.setTurn(model.getTurn());
 
             }else if(buttonPressedIconString.equals(ConnectFourView.customGameCheckStateImageName)){
                 if(!model.checkBoardConfiguration()){
-                	//view.setError(model.getErrorMessage());
+                    view.setError(model.getErrorMessage());
                 }else{
-                	//view.setError("Yay! No errors :D");
+                	view.setError("Yay! No errors :D");
                 }
             	
-            }
-            //view.switchScreen(model.getGameState());
-            //update the view by called switchScreen
-            view.repaint();
-        }
+            }//end of the if else block
+        }//end function
 
         //Purpose: this function will be called when the user presses a button, it will be responsible for handling the outcome of the button press.
         @Override
         public void mouseClicked(MouseEvent e) {
-            System.out.println("e: " + e);
-            /*
+
         	//if its in the main menu stop running the rest of the code
             if(model.getGameState() == ConnectFourModel.GameState.MainMenu) return;
 
             //get the mouse position of the click and then convert that to the board position where it will be in a different coordinate system
             Point mousePosition = new Point(e.getX(), e.getY());
             Point tilePosition = view.getBoardCoordinateOfPoint(mousePosition);
-            
+
             //if the click is outside the board just end the function
             if(tilePosition.x >= model.getBoardConfiguration()[0].length || tilePosition.x < 0) return;
             if(tilePosition.y >= model.getBoardConfiguration().length || tilePosition.y < 0) return;    
             //x corresponds to the rows in the array and y corresponds to the columns
-                        
+
             //check if this configuration is possible by calling the model
             ConnectFourModel.Slot[][] newBoardConfiguration = model.getBoardConfiguration();
+
             //make that tile of type the players turn, but if that tile is already there then remove it
-            if(newBoardConfiguration[tilePosition.y][tilePosition.x] == model.getTurn()) newBoardConfiguration[tilePosition.y][tilePosition.x] = ConnectFourModel.Slot.Empty;
+            if(newBoardConfiguration[tilePosition.y][tilePosition.x] == model.getTurn())newBoardConfiguration[tilePosition.y][tilePosition.x] = ConnectFourModel.Slot.Empty;
             else newBoardConfiguration[tilePosition.y][tilePosition.x] = model.getTurn();
-            
-            //adjust the game and update the switchScren
+
+            //adjust the game and update the switchScreen
             view.adjustBoard(newBoardConfiguration);
             view.switchScreen(model.getGameState());
             //update the view if it is possible,
             //if it is not possible then call configurationNotPossible on the view class
-            view.repaint();
-            */
+            //view.repaint();
         }
         @Override
         public void mousePressed(MouseEvent e) {} //unused
