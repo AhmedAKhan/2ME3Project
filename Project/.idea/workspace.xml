@@ -39,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConnectFourModel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ConnectFourModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ConnectFourModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.8531469" vertical-offset="630" max-vertical-offset="3810">
-              <caret line="95" column="45" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2931" max-vertical-offset="3810">
+              <caret line="210" column="59" selection-start-line="210" selection-start-column="59" selection-end-line="210" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -52,24 +52,23 @@
       <file leaf-file-name="ConnectFourController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ConnectFourController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1101" max-vertical-offset="1800">
-              <caret line="59" column="77" selection-start-line="59" selection-start-column="77" selection-end-line="59" selection-end-column="77" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="457" max-vertical-offset="1800">
+              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConnectFourView.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ConnectFourView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ConnectFourView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2346" max-vertical-offset="2775">
-              <caret line="237" column="12" selection-start-line="237" selection-start-column="12" selection-end-line="237" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.28671327" vertical-offset="882" max-vertical-offset="3300">
+              <caret line="92" column="37" selection-start-line="92" selection-start-column="37" selection-end-line="92" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#ConnectFourView#2;class#ConnectFourView#0" expanded="false" />
                 <element signature="method#setupMainMenu#0;class#ConnectFourView#0" expanded="false" />
                 <element signature="method#switchScreen#0;class#ConnectFourView#0" expanded="false" />
-                <element signature="method#createButton#0;class#ConnectFourView#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -95,9 +94,9 @@
         <option value="$PROJECT_DIR$/src/Game.java" />
         <option value="$PROJECT_DIR$/src/ConnectFourMain.java" />
         <option value="$PROJECT_DIR$/src/Board.java" />
-        <option value="$PROJECT_DIR$/src/ConnectFourView.java" />
-        <option value="$PROJECT_DIR$/src/ConnectFourController.java" />
         <option value="$PROJECT_DIR$/src/ConnectFourModel.java" />
+        <option value="$PROJECT_DIR$/src/ConnectFourController.java" />
+        <option value="$PROJECT_DIR$/src/ConnectFourView.java" />
       </list>
     </option>
   </component>
@@ -541,12 +540,12 @@
       <created>1425674849069</created>
       <option name="number" value="Default" />
       <updated>1425674849069</updated>
-      <workItem from="1425674850688" duration="33261000" />
+      <workItem from="1425674850688" duration="35363000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33261000" />
+    <option name="totallyTimeSpent" value="35363000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="8" y="23" width="1280" height="773" extended-state="6" />
@@ -628,7 +627,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="25" />
+      <option name="time" value="26" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -664,6 +663,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ConnectFourModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2931" max-vertical-offset="3810">
+          <caret line="210" column="59" selection-start-line="210" selection-start-column="59" selection-end-line="210" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Board.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1785">
@@ -674,33 +681,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ConnectFourController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="457" max-vertical-offset="1800">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ConnectFourView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2346" max-vertical-offset="2775">
-          <caret line="237" column="12" selection-start-line="237" selection-start-column="12" selection-end-line="237" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.28671327" vertical-offset="882" max-vertical-offset="3300">
+          <caret line="92" column="37" selection-start-line="92" selection-start-column="37" selection-end-line="92" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#ConnectFourView#2;class#ConnectFourView#0" expanded="false" />
             <element signature="method#setupMainMenu#0;class#ConnectFourView#0" expanded="false" />
             <element signature="method#switchScreen#0;class#ConnectFourView#0" expanded="false" />
-            <element signature="method#createButton#0;class#ConnectFourView#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ConnectFourController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1101" max-vertical-offset="1800">
-          <caret line="59" column="77" selection-start-line="59" selection-start-column="77" selection-end-line="59" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ConnectFourModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.8531469" vertical-offset="630" max-vertical-offset="3810">
-          <caret line="95" column="45" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>

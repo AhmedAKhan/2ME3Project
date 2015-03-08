@@ -34,6 +34,8 @@ public class ConnectFourView extends JFrame {
     public static final String gameMainMenuImageName = "./src/images/mainMenuButton1.png";
     public static final String gameRedButtonImageName = "re";
     public static final String gameBlueButtonImageName = "bl";
+    public static final String gameRedButtonImageNameSelected = "--";
+    public static final String gameBlueButtonImageNameSelected= "--";
     public static final String customGameResetImageName = "gr";
     public static final String customGameCheckStateImageName = "cs";
 
@@ -83,8 +85,10 @@ public class ConnectFourView extends JFrame {
 
         //adding all the buttons that are in both the game and the game screen
         gameMainMenu         = createButton(gameMainMenuImageName, 0,0, buttonWidth, buttonHeight, game);
-        gameRedButton        = createButton(gameRedButtonImageName, 0,0, buttonWidth, buttonHeight, game);
-        gameBlueButton       = createButton(gameBlueButtonImageName, 0,0, buttonWidth, buttonHeight, game);
+        gameRedButton        = createButton(gameRedButtonImageName, 0,0, buttonWidth, buttonHeight, game, gameRedButtonImageNameSelected);
+        gameBlueButton       = createButton(gameBlueButtonImageName, 0,0, buttonWidth, buttonHeight, game, gameBlueButtonImageNameSelected);
+
+        ImageIcon x = new ImageIcon(mainPlayButtonImageName);
 
         //buttons for the custom game
         customGameReset      = createButton(customGameResetImageName, 0,0, buttonWidth, buttonHeight, game);
@@ -96,7 +100,6 @@ public class ConnectFourView extends JFrame {
         errorMessage.setLocation(0,0);
         errorMessage.setHorizontalAlignment(JTextField.CENTER);
         //buttons for the game
-
 
         //create the board
         board = new Board(boardCols, boardRows);
@@ -168,11 +171,17 @@ public class ConnectFourView extends JFrame {
     }
 
     // this class creates a button and positions it at the location (x,y) with the width and height of the input. adds the button to the parent and sets its image to the filename equal to name in the images folder
-    public JButton createButton(String name, int x, int y, int width, int height, JPanel parent) {
+    public JButton createButton(String name, int x, int y, JPanel parent){ return createButton(name, x,y, buttonWidth, buttonHeight, parent); }
+    public JButton createButton(String name, int x, int y, int width, int height, JPanel parent){ return createButton(name, x, y, width, height, parent, null); }
+    public JButton createButton(String name, int x, int y, int width, int height, JPanel parent, String selectedImageName) {
+
         //ImageIcon img = new ImageIcon("./src/images/" + name+"1.png");//gets the image of the button
-        JButton newButton;
+
         ImageIcon img = new ImageIcon(name);
-        newButton = new JButton(img); // creates the button
+
+        JButton newButton = new JButton(img); // creates the button
+
+        //if(selectedImageName != null) newButton.setSelectedIcon(new ImageIcon(selectedImageName));
 
         if(newButton.getIcon().toString().length() > 2){
             //removes the default button graphics
@@ -213,13 +222,15 @@ public class ConnectFourView extends JFrame {
     }//end calculate listener
 
     public void setTurn(ConnectFourModel.Slot currentTurn){
+        System.out.println("blue button icon: " + gameBlueButton.getIcon());
+        System.out.println("blue button selected icon: " + gameBlueButton.getSelectedIcon());
         if(currentTurn == ConnectFourModel.Slot.Blue){
-            //gameBlueButton.setIcon();
-            //gameRedButton.setIcon();
+            gameBlueButton.setIcon(new ImageIcon(gameBlueButtonImageNameSelected));
+            gameRedButton.setIcon(new ImageIcon(gameRedButtonImageName));
             return;
         }else if(currentTurn == ConnectFourModel.Slot.Red){
-            //gameBlueButton.setIcon();
-            //gameRedButton.setIcon();
+            gameBlueButton.setIcon(new ImageIcon(gameBlueButtonImageName));
+            gameRedButton.setIcon(new ImageIcon(gameRedButtonImageNameSelected));
             return;
         }
         //in case if we are using this function wrong, inform the client
