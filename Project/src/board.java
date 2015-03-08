@@ -9,8 +9,9 @@ public class Board extends JPanel {
     //this JPanel holds all the data
     private int diameterOfDisk = 30;			//represents the diameter of one disk
     private int spaceBetweenDisks = 7;		    //represents the space between the disk
-    private int rows;
-    private int columns;
+    private int rows;                           //represents the number of rows in the board
+    private int columns;                        //represents the number of columns in the board
+    private ConnectFourController controller;
 
     public Board(int rows, int columns){
         super(null, true);//calls the super constructor
@@ -25,16 +26,17 @@ public class Board extends JPanel {
 
     public void setBoard(ConnectFourModel.Slot[][] slots){
         Graphics g = getGraphics();
-        g.fillOval(0,0,100,100);
         drawTilesFromBoardConfiguration(getGraphics(), slots);
     }//end function
 
     @Override
     public void paintComponent(Graphics g){
-        System.out.println("in the paint component");
-
+        super.paintComponent(g);
+        if(controller != null)
+            drawTilesFromBoardConfiguration(g, controller.getConfiguration());
     }//end function
 
+    public void setController(ConnectFourController c){ controller = c;}
 
     //Purpose: calls the drawTileAtPosition in a nested loop to tell the drawTileAtPosition(); so all the tiles can be drawn if there is something to draw
     private void drawTilesFromBoardConfiguration(Graphics g, ConnectFourModel.Slot[][] slotConfiguration){
@@ -47,7 +49,7 @@ public class Board extends JPanel {
         //gets the width and height of the board
         int widthOfBoard = getWidthOfBoard();
         int heightOfBoard =  getHeightOfBoard();
-        System.out.println("widthOfBoard: " + widthOfBoard + " heightOfBoard: " + heightOfBoard);
+
         g.setColor(Color.BLACK);//makes the color black
         //draws the board itself, which is just a black rectangle and then we will place the blank disks on top of it
         //TODO make it so it draws the picture of the empty board

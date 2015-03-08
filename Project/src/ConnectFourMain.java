@@ -12,7 +12,9 @@ public class ConnectFourMain {
                 ConnectFourModel theModel = new ConnectFourModel(7,6);
                 ConnectFourView theView = new ConnectFourView(500,600);//, theModel.getBoardConfiguration(), theModel.getGameState());
                 ConnectFourController theController = new ConnectFourController(theView,theModel);
+                theView.setController(theController);
                 theView.setVisible(true);
+                theView.repaint();
             }
         });
     }//end main function

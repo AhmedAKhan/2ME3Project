@@ -24,6 +24,7 @@ public class ConnectFourController {
         view.addCalculateListener(listener, listener); // add the listener to the view
     }//end constructor
 
+    public ConnectFourModel.Slot[][] getConfiguration(){ return model.getBoardConfiguration(); }
     class Listener implements ActionListener, MouseInputListener {
         public Listener(){}//empty constructor
 

@@ -73,6 +73,7 @@ public class ConnectFourView extends JFrame {
         this.setSize(width, height);//sets the size of the screen
     }
 
+    public void setController(ConnectFourController c){ board.setController(c); }
     //sets up the main menu screen. It adds the corresponding components to the main menu panel
     private void setupMainMenu(int width, int height){
         //create the main menu panel
@@ -179,7 +180,8 @@ public class ConnectFourView extends JFrame {
                 this.getHeight() / 2 - board.getHeightOfBoard()/2,
                 board.getWidthOfBoard(),
                 board.getHeightOfBoard());
-        //board.repaint();
+
+        board.repaint();
     }
 
     // this class creates a button and positions it at the location (x,y) with the width and height of the input. adds the button to the parent and sets its image to the filename equal to name in the images folder
@@ -199,7 +201,6 @@ public class ConnectFourView extends JFrame {
             System.out.println("go an empty location for image picture, using the default button");
             newButton.setText("place button label here");
         }
-
 
         // this sets the buttons size and location on the screen
         newButton.setSize(width,height);
