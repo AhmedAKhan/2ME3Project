@@ -37,6 +37,10 @@ public class ConnectFourView extends JFrame {
     public static final String mainPlayButtonImageNamePressed = "./src/images/playButton3.png";
     public static final String gameMainMenuImageName = "./src/images/mainMenuButton1.png";
     public static final String gameMainMenuImageNamePressed ="./src/images/mainMenuButton3.png";
+    
+    //Game buttons
+    public static final String redColumnSelect = "./src/images/redColumnSelect.png";
+    public static final String blueColumnSelect = "./src/images/blueColumnSelect.png";
 
     //all the buttons that exist in both the games
     public static final String gameRedButtonImageName = "./src/images/red3.png";
@@ -45,17 +49,20 @@ public class ConnectFourView extends JFrame {
     public static final String gameBlueButtonImageName = "./src/images/blue3.png";
     public static final String gameBlueButtonImageNamePressed = "./src/images/blue2.png";
     public static final String gameBlueButtonImageNameSelected= "./src/images/blue1.png";
-
     public static final String customGameResetImageName = "./src/images/reset1.png";
     public static final String customGameResetImageNamePressed = "./src/images/reset2.png";
+    
+    //Custom game only
     public static final String customGameCheckStateImageName = "./src/images/checkstate1.png";
     public static final String customGameCheckStateImageNamePressed = "./src/images/checkstate2.png";
 
     //this is the size of the buttons on the screen
     private static final int buttonWidth = 289;
     private static final int buttonHeight = 74*2;
-    
-    private static final int smallbutton = 100;
+    //Size for blue, red and reset buttons
+    private static final int smallButton = 100;	
+    //Size for arrows
+    private static final int arrowButton = 30;
 
     private static final int initialScreenHeight = 400;
     private static final int initialScreenWidth = 400;
@@ -100,13 +107,13 @@ public class ConnectFourView extends JFrame {
 
         //adding all the buttons that are in both the game and the game screen
         gameMainMenu         = createButton(gameMainMenuImageName, 0,0, buttonWidth, buttonHeight, game, gameMainMenuImageNamePressed);
-        gameRedButton        = createButton(gameRedButtonImageName, 0,0, smallbutton, smallbutton, game, gameRedButtonImageNamePressed);
-        gameBlueButton       = createButton(gameBlueButtonImageName, 0,0, smallbutton, smallbutton, game, gameBlueButtonImageNamePressed);
+        gameRedButton        = createButton(gameRedButtonImageName, 0,0, smallButton, smallButton, game, gameRedButtonImageNamePressed);
+        gameBlueButton       = createButton(gameBlueButtonImageName, 0,0, smallButton, smallButton, game, gameBlueButtonImageNamePressed);
 
         ImageIcon x = new ImageIcon(mainPlayButtonImageName);
 
         //buttons for the custom game
-        customGameReset      = createButton(customGameResetImageName, 0,0, smallbutton, smallbutton, game, customGameResetImageNamePressed);
+        customGameReset      = createButton(customGameResetImageName, 0,0, smallButton, smallButton, game, customGameResetImageNamePressed);
         customGameCheckState = createButton(customGameCheckStateImageName, 0,0, buttonWidth, buttonHeight, game, customGameCheckStateImageNamePressed);
         //errorMessage         = new JTextArea("this is where the error message goes");
         errorMessage = new JLabel("");
@@ -159,9 +166,9 @@ public class ConnectFourView extends JFrame {
         gameMainMenu.setSize((int)(buttonWidth * scale), (int) (buttonHeight * scale));
         customGameCheckState.setSize((int)(buttonWidth * scale), (int) (buttonHeight * scale));
         scale = 0.7f;
-        gameRedButton.setSize((int) (smallbutton * scale), (int) (smallbutton * scale));
-        gameBlueButton.setSize((int)(smallbutton * scale), (int) (smallbutton * scale));
-        customGameReset.setSize((int) (smallbutton * scale), (int) (smallbutton * scale));
+        gameRedButton.setSize((int) (smallButton * scale), (int) (smallButton * scale));
+        gameBlueButton.setSize((int)(smallButton * scale), (int) (smallButton * scale));
+        customGameReset.setSize((int) (smallButton * scale), (int) (smallButton * scale));
         //done adjusting the buttons size
 
         //adjust their position

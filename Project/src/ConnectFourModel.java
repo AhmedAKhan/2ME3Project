@@ -30,21 +30,29 @@ public class ConnectFourModel {
     private int turnCount = 1;
     private Slot currentTurn;
     private String errorMessage = "";
+    
+    private int rowSize;
 
     public ConnectFourModel(int rows, int columns) {
-        if (rows < 4 || columns < 4) {
+        
+    	if (rows < 4 || columns < 4) {
             System.out.println("Game board must be at least be of size 4x4. Board "
                     + " created with default values.");
             rows = 4;
             columns = 4;
         }
+    	rowSize = columns;
         gameState = GameState.MainMenu;
         Random rand = new Random();
         currentTurn = (rand.nextFloat() < 0.5) ? Slot.Red : Slot.Blue;
         this.boardConfiguration = new Slot[rows][columns];
         this.resetConfiguration();
     }//end constructor
-
+    
+    //Determines how many columns there are (the length of a row = # of columns)
+    public int getRowSize() {
+    	return rowSize;
+    }
     
 //    public boolean checkBoardConfiguration(){ return checkBoardConfiguration(boardConfiguration); }
     public boolean checkBoardConfiguration(){    	
