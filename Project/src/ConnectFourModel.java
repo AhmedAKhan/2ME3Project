@@ -156,7 +156,7 @@ public class ConnectFourModel {
 					diagRLD = checkRed(i+1,j-1) 
 							&& checkRed(i+2,j-2)
 							&& checkRed(i+3,j-3);
-					
+					if (horizontal || vertical || diagLRD || diagRLD) return true;//"Blue wins";
 				} else if (boardConfiguration[i][j].equals(Slot.Blue)) {
 					vertical = checkBlue(i+1,j) 
 							&& checkBlue(i+2,j)
@@ -170,12 +170,15 @@ public class ConnectFourModel {
 					diagRLD = checkBlue(i+1,j-1) 
 							&& checkBlue(i+2,j-2)
 							&& checkBlue(i+3,j-3);
+					if (horizontal || vertical || diagLRD || diagRLD) return true;// "Red wins";
+					
+					
 				}
 				
-				if (horizontal || vertical || diagLRD || diagRLD) return true;
+				
 			}
 		}
-    	return false;
+    	return false;//"";
     }
     
     /** PRIVATE: Check if certain slot has red disc **/
@@ -206,6 +209,10 @@ public class ConnectFourModel {
 //    public boolean getWinState() {
 //    	return getWinState(this.boardConfiguration);
 //    }
+    
+    public ConnectFourModel.Slot switchTurn(){
+    	return ConnectFourModel.Slot.Blue;
+    }
     
     /** Returns whose turn it is as a String (i.e. "red" or "blue") **/
     public Slot getTurn(){ return currentTurn; }
