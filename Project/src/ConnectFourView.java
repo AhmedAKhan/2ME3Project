@@ -1,7 +1,6 @@
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionListener;
 
 public class ConnectFourView extends JFrame {
@@ -14,10 +13,12 @@ public class ConnectFourView extends JFrame {
     private JButton mainMenuCustom;// this button is located in the main button and takes you to the custom game
 
     //all buttons in the custom game and the game
-    private JButton gameMainMenu;   // this button is located in both the game and the custom game and will take you back to the main menu
-    private JButton gameRedButton;  // this button is located in both the game and the custom game and will make the next players turn red
-    private JButton gameBlueButton; // this button is located in both the game and the custom game and will make the next players turn blue
+    private JButton gameMainMenu;   //  this button is located in both the game and the custom game and will take you back to the main menu
+    private JButton gameRedButton;  //  this button is located in both the game and the custom game and will make the next players turn red
+    private JButton gameBlueButton; //  this button is located in both the game and the custom game and will make the next players turn blue
+    private JButton gameSaveStateButton; //  this button saves the state of the game
     private JButton customGameReset; // this button resets the board and makes it blank
+
     //the buttons just in the custom game
     
     private JButton customGameCheckState; // this button checks if the current state of the game is valid and then displays the error messages
@@ -37,7 +38,7 @@ public class ConnectFourView extends JFrame {
     public static final String mainPlayButtonImageNamePressed = "./src/images/playButton3.png";
     public static final String gameMainMenuImageName = "./src/images/mainMenuButton1.png";
     public static final String gameMainMenuImageNamePressed ="./src/images/mainMenuButton3.png";
-    
+
     //Game buttons - includes Save State button
     //public static final String redColumnSelect = "./src/images/redColumnSelect.png";
     //public static final String blueColumnSelect = "./src/images/blueColumnSelect.png";
@@ -45,22 +46,25 @@ public class ConnectFourView extends JFrame {
     public static final String saveStateImagePressed = "./src/images/savestate2.png";
 
     //all the buttons that exist in both the games
-    public static final String gameRedButtonImageName = "./src/images/red3.png";
-    public static final String gameRedButtonImageNamePressed = "./src/images/red2.png";
-    public static final String gameRedButtonImageNameSelected = "./src/images/red1.png";
-    public static final String gameBlueButtonImageName = "./src/images/blue3.png";
-    public static final String gameBlueButtonImageNamePressed = "./src/images/blue2.png";
-    public static final String gameBlueButtonImageNameSelected= "./src/images/blue1.png";
+    public static final String gameRedButtonImageName           = "./src/images/red3.png";
+    public static final String gameRedButtonImageNamePressed    = "./src/images/red2.png";
+    public static final String gameRedButtonImageNameSelected   = "./src/images/red1.png";
+    public static final String gameBlueButtonImageName          = "./src/images/blue3.png";
+    public static final String gameBlueButtonImageNamePressed   = "./src/images/blue2.png";
+    public static final String gameBlueButtonImageNameSelected  = "./src/images/blue1.png";
+    public static final String gameSaveButtonImageName          = "./src/images/savestate1.png";
+    public static final String gameSaveButtonImageNamePressed   = "./src/images/savestate2.png";
+
     public static final String customGameResetImageName = "./src/images/reset1.png";
     public static final String customGameResetImageNamePressed = "./src/images/reset2.png";
-    
+
     //Custom game only
     public static final String customGameCheckStateImageName = "./src/images/checkstate1.png";
     public static final String customGameCheckStateImageNamePressed = "./src/images/checkstate2.png";
 
     //this is the size of the buttons on the screen
     private static final int buttonWidth = 289;
-    private static final int buttonHeight = 74*2;
+    private static final int buttonHeight = 118;//74*2;
     //Size for blue, red and reset buttons
     private static final int smallButton = 100;	
     //Size for arrows
@@ -111,8 +115,7 @@ public class ConnectFourView extends JFrame {
         gameMainMenu         = createButton(gameMainMenuImageName, 0,0, buttonWidth, buttonHeight, game, gameMainMenuImageNamePressed);
         gameRedButton        = createButton(gameRedButtonImageName, 0,0, smallButton, smallButton, game, gameRedButtonImageNamePressed);
         gameBlueButton       = createButton(gameBlueButtonImageName, 0,0, smallButton, smallButton, game, gameBlueButtonImageNamePressed);
-
-        ImageIcon x = new ImageIcon(mainPlayButtonImageName);
+        gameSaveStateButton  = createButton(gameSaveButtonImageName, 0,0, buttonWidth, smallButton, game, gameSaveButtonImageNamePressed);
 
         //buttons for the custom game
         customGameReset      = createButton(customGameResetImageName, 0,0, smallButton, smallButton, game, customGameResetImageNamePressed);
@@ -120,8 +123,8 @@ public class ConnectFourView extends JFrame {
         //errorMessage         = new JTextArea("this is where the error message goes");
         errorMessage = new JLabel("");
         errorMessage.setOpaque(false);
-        errorMessage.setSize(width,100);
-        errorMessage.setLocation(0,0);
+        errorMessage.setSize(width- gameSaveStateButton.getWidth(),100);
+        errorMessage.setLocation((width-gameSaveStateButton.getWidth())/2,0);
         errorMessage.setHorizontalAlignment(JTextField.CENTER);
         //buttons for the game
 
@@ -148,9 +151,13 @@ public class ConnectFourView extends JFrame {
             mainMenu.setVisible(true);
             return;
         }
-
+        System.out.println("gameState: " + gameState);
         mainMenu.setVisible(false);
         game.setVisible(true);
+
+
+        customGameCheckState.setVisible(gameState.equals(ConnectFourModel.GameState.Game)? false:true);
+
     }//end function of the switch screen
 
     @Override
@@ -160,13 +167,12 @@ public class ConnectFourView extends JFrame {
         //the board might have been moved or resized so we need to resize and reposition all the buttons
         mainMenu.setSize(this.getSize());
         game.setSize(this.getSize());
-        //THIS WONT WORK BECAUSE THE SIZE OF THE PICTURE DOESNT CHANGE
-        float scale = 1.0f; //Math.min(this.getWidth()/initialScreenWidth, this.getHeight()/initialScreenHeight);
-
-        mainMenuPlay.setSize((int)(buttonWidth*scale), (int)(buttonHeight*scale));
+        float scale = 1.0f;//Math.min(((float)this.getWidth())/initialScreenWidth, ((float)this.getHeight())/initialScreenHeight);
+        mainMenuPlay.setSize((int) (buttonWidth * scale), (int) (buttonHeight * scale));
         mainMenuCustom.setSize((int)(buttonWidth*scale), (int)(buttonHeight*scale));
         gameMainMenu.setSize((int)(buttonWidth * scale), (int) (buttonHeight * scale));
-        customGameCheckState.setSize((int)(buttonWidth * scale), (int) (buttonHeight * scale));
+        customGameCheckState.setSize((int)(buttonWidth * scale), (int)(74*scale));
+        gameSaveStateButton.setSize((int)((buttonWidth)* scale), (int)(buttonHeight*scale));
         scale = 0.7f;
         gameRedButton.setSize((int) (smallButton * scale), (int) (smallButton * scale));
         gameBlueButton.setSize((int)(smallButton * scale), (int) (smallButton * scale));
@@ -174,15 +180,17 @@ public class ConnectFourView extends JFrame {
         //done adjusting the buttons size
 
         //adjust their position
+        int boundary = 10;
         mainMenuPlay.setLocation(this.getWidth() / 2 - mainMenuPlay.getWidth() / 2, this.getHeight() / 3 - mainMenuPlay.getHeight() / 2);//middle top
         mainMenuCustom.setLocation(this.getWidth()/2 - mainMenuCustom.getWidth()/2, this.getHeight()/3*2 -mainMenuCustom.getHeight()/2);//middle bottom
 
-        gameMainMenu.setLocation(0, this.getHeight()-gameMainMenu.getHeight()-1);//bottom left
+        gameMainMenu.setLocation(0+boundary, this.getHeight()-gameMainMenu.getHeight()-boundary);//bottom left
+        gameSaveStateButton.setLocation(this.getWidth() - gameSaveStateButton.getWidth() - boundary, this.getHeight() - gameSaveStateButton.getHeight() - boundary);
         int freeSpaceSides  = this.getWidth()/2 - board.getWidth();//this variable represents the amount of free space between the board and the end of the screen
         gameRedButton.setLocation(freeSpaceSides/2 - gameRedButton.getWidth()/2, getHeight()/2-gameBlueButton.getHeight()/2);
         gameBlueButton.setLocation(this.getWidth()-freeSpaceSides/2-gameBlueButton.getWidth()/2, getHeight()/2-gameBlueButton.getHeight()/2);
         customGameReset.setLocation(this.getWidth() / 2 - customGameReset.getWidth() / 2, this.getHeight() - customGameReset.getHeight()-45);
-        customGameCheckState.setLocation(this.getWidth()-customGameCheckState.getWidth()-16, this.getHeight()-customGameCheckState.getHeight()-1);
+        customGameCheckState.setLocation(boundary,boundary);
         //done adjusting the buttons position
 
         board.setVisible(true);
@@ -257,7 +265,7 @@ public class ConnectFourView extends JFrame {
     public void adjustBoard(ConnectFourModel.Slot[][] newBoardConfiguration){ board.setBoard(newBoardConfiguration); }
 
     //PURPOSE: displays and message on the screen of the text errorMessage that will be passed in as a parameter
-    public void displayErrorMessage(String errorMessage){ JOptionPane.showMessageDialog(this, errorMessage); }
+    public void displayMessage(String errorMessage){ JOptionPane.showMessageDialog(this, errorMessage); }
 
     public Point getBoardCoordinateOfPoint(Point point){ return board.getBoardCoordinateOfPoint(point); }
 
