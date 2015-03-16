@@ -1,6 +1,6 @@
 
 import java.util.Random;
-
+import java.awt.Point;
 /**
  * Created by Created by Ahmed Khan, Saim Malik, Zayan Imtiaz, Aleem Ul Haq, Sergio Agraz.
  */
@@ -237,6 +237,21 @@ public class ConnectFourModel {
 			}
 			System.out.printf("\n");
 		}
+    }
+    
+    //the user clicks somewhere.  That somewhere will give us a point.  The point has (x,y) coordinates.
+    public Point insertDisk(Point p) {
+    	int counter = boardConfiguration.length;
+    	Point insertHere = new Point(p.x, counter);
+    	while (counter >= 0) {
+    		Slot currentSlot = boardConfiguration[p.x][counter];//Point(x,counter);
+    		if ( currentSlot== Slot.Red || currentSlot == Slot.Blue) { //if the slot is full;
+    			counter--;
+    		}else{
+    			return insertHere; //from bottom-to-top, it will return the first EMPTY slot.
+    		}
+    	}
+	    return null; //This part is only reachable if all slots in this column are full.
     }
     
 //    public static void main(String[] args) {
