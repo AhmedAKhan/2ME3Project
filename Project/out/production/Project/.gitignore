@@ -1,4 +1,3 @@
-/images/
 /Board.class
 /ConnectFourController$Listener.class
 /ConnectFourController.class
@@ -9,3 +8,4 @@
 /ConnectFourModel.class
 /ConnectFourView.class
 /Game.class
+/images/

@@ -38,9 +38,11 @@ public class ConnectFourView extends JFrame {
     public static final String gameMainMenuImageName = "./src/images/mainMenuButton1.png";
     public static final String gameMainMenuImageNamePressed ="./src/images/mainMenuButton3.png";
     
-    //Game buttons
-    public static final String redColumnSelect = "./src/images/redColumnSelect.png";
-    public static final String blueColumnSelect = "./src/images/blueColumnSelect.png";
+    //Game buttons - includes Save State button
+    //public static final String redColumnSelect = "./src/images/redColumnSelect.png";
+    //public static final String blueColumnSelect = "./src/images/blueColumnSelect.png";
+    public static final String saveStateImage = "./src/images/savestate1.png";
+    public static final String saveStateImagePressed = "./src/images/savestate2.png";
 
     //all the buttons that exist in both the games
     public static final String gameRedButtonImageName = "./src/images/red3.png";
@@ -62,7 +64,7 @@ public class ConnectFourView extends JFrame {
     //Size for blue, red and reset buttons
     private static final int smallButton = 100;	
     //Size for arrows
-    private static final int arrowButton = 30;
+    //private static final int arrowButton = 30;
 
     private static final int initialScreenHeight = 400;
     private static final int initialScreenWidth = 400;

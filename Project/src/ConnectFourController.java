@@ -64,6 +64,9 @@ public class ConnectFourController {
             }else if(buttonPressedIconString.equals(ConnectFourView.gameBlueButtonImageName)){
                 model.setTurn(ConnectFourModel.Slot.Blue);
                 view.setTurn(model.getTurn());
+                
+            }else if (buttonPressedIconString.equals(ConnectFourView.saveStateImage)) {
+            	//Save progress.  If a previous data save exists, ask to overwrite... or don't; it doesn't matter.
 
             }else if(buttonPressedIconString.equals(ConnectFourView.customGameCheckStateImageName)){
                 if(!model.checkBoardConfiguration()){
