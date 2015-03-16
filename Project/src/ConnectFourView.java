@@ -155,7 +155,6 @@ public class ConnectFourView extends JFrame {
         mainMenu.setVisible(false);
         game.setVisible(true);
 
-
         customGameCheckState.setVisible(gameState.equals(ConnectFourModel.GameState.Game)? false:true);
 
     }//end function of the switch screen
@@ -270,4 +269,6 @@ public class ConnectFourView extends JFrame {
     public Point getBoardCoordinateOfPoint(Point point){ return board.getBoardCoordinateOfPoint(point); }
 
     public void setError(String error) { errorMessage.setText(error); }
+
+    public void animateDisc(Point point){ board.insertDisc(point); }
 }//end class

@@ -39,7 +39,7 @@
       <file leaf-file-name="ConnectFourModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ConnectFourModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3165" max-vertical-offset="3900">
+            <state vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="3900">
               <caret line="213" column="53" selection-start-line="213" selection-start-column="53" selection-end-line="213" selection-end-column="53" />
               <folding />
             </state>
@@ -49,8 +49,8 @@
       <file leaf-file-name="ConnectFourController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ConnectFourController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1440">
-              <caret line="41" column="65" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="65" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1560">
+              <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
               <folding>
                 <element signature="method#mouseClicked#0;class#Listener#0;class#ConnectFourController#0" expanded="false" />
               </folding>
@@ -58,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConnectFourView.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ConnectFourView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ConnectFourView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27039626" vertical-offset="1309" max-vertical-offset="2445">
-              <caret line="120" column="44" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1807" max-vertical-offset="2460">
+              <caret line="272" column="48" selection-start-line="272" selection-start-column="48" selection-end-line="272" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#ConnectFourView#2;class#ConnectFourView#0" expanded="false" />
@@ -76,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Board.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Board.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.1958042" vertical-offset="546" max-vertical-offset="975">
+              <caret line="86" column="75" selection-start-line="86" selection-start-column="75" selection-end-line="86" selection-end-column="75" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#setBoard#0;class#Board#0" expanded="false" />
@@ -103,13 +103,16 @@
         <option value="$PROJECT_DIR$/src/ConnectFourModel.java" />
         <option value="$PROJECT_DIR$/src/ConnectFourController.java" />
         <option value="$PROJECT_DIR$/src/ConnectFourMain.java" />
-        <option value="$PROJECT_DIR$/src/Board.java" />
         <option value="$PROJECT_DIR$/src/ConnectFourView.java" />
+        <option value="$PROJECT_DIR$/src/Board.java" />
       </list>
     </option>
   </component>
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState />
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
@@ -536,12 +539,12 @@
       <option name="number" value="Default" />
       <updated>1425674849069</updated>
       <workItem from="1425674850688" duration="37830000" />
-      <workItem from="1426532713355" duration="4787000" />
+      <workItem from="1426532713355" duration="8287000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42617000" />
+    <option name="totallyTimeSpent" value="46117000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -556,7 +559,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32892805" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -725,37 +728,11 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#setBoard#0;class#Board#0" expanded="false" />
-            <element signature="method#drawTilesFromBoardConfiguration#0;class#Board#0" expanded="false" />
-            <element signature="method#drawTileAtPosition#0;class#Board#0" expanded="false" />
-            <element signature="method#getOriginOfBoard#0;class#Board#0" expanded="false" />
-            <element signature="method#getGameCoordinate#0;class#Board#0" expanded="false" />
-            <element signature="method#getBoardCoordinateOfPoint#0;class#Board#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ConnectFourMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
           <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ConnectFourController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1440">
-          <caret line="41" column="65" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="65" />
-          <folding>
-            <element signature="method#mouseClicked#0;class#Listener#0;class#ConnectFourController#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -767,10 +744,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ConnectFourController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1560">
+          <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
+          <folding>
+            <element signature="method#mouseClicked#0;class#Listener#0;class#ConnectFourController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ConnectFourView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27039626" vertical-offset="1309" max-vertical-offset="2445">
-          <caret line="120" column="44" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1807" max-vertical-offset="2460">
+          <caret line="272" column="48" selection-start-line="272" selection-start-column="48" selection-end-line="272" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#ConnectFourView#2;class#ConnectFourView#0" expanded="false" />
@@ -779,6 +766,22 @@
             <element signature="method#createButton#1;class#ConnectFourView#0" expanded="false" />
             <element signature="method#addCalculateListener#0;class#ConnectFourView#0" expanded="false" />
             <element signature="method#setTurn#0;class#ConnectFourView#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1958042" vertical-offset="546" max-vertical-offset="975">
+          <caret line="86" column="75" selection-start-line="86" selection-start-column="75" selection-end-line="86" selection-end-column="75" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setBoard#0;class#Board#0" expanded="false" />
+            <element signature="method#drawTilesFromBoardConfiguration#0;class#Board#0" expanded="false" />
+            <element signature="method#drawTileAtPosition#0;class#Board#0" expanded="false" />
+            <element signature="method#getOriginOfBoard#0;class#Board#0" expanded="false" />
+            <element signature="method#getGameCoordinate#0;class#Board#0" expanded="false" />
+            <element signature="method#getBoardCoordinateOfPoint#0;class#Board#0" expanded="false" />
           </folding>
         </state>
       </provider>

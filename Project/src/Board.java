@@ -112,4 +112,9 @@ public class Board extends JPanel {
     //these two private functions are to get the width and height of the board, they are used to draw the board
     public int getWidthOfBoard(){  return (columns)*(diameterOfDisk +spaceBetweenDisks) + spaceBetweenDisks;}
     public int getHeightOfBoard(){return (rows)*(diameterOfDisk + spaceBetweenDisks) + spaceBetweenDisks; }
+
+    public void insertDisc(Point point){
+
+    }
+
 }//end class
