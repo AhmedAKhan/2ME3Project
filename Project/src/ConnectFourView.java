@@ -5,27 +5,22 @@ import java.awt.event.ActionListener;
 
 public class ConnectFourView extends JFrame {
 
-    private JPanel mainMenu; // this is the panel that will be displayed while the game is in the main menu
-    private JPanel game; // this is the panel that will be displayed while the game is in either the actual game or the custom game
+    private JPanel mainMenu;                // this is the panel that will be displayed while the game is in the main menu
+    private JPanel game;                    // this is the panel that will be displayed while the game is in either the actual game or the custom game
 
     //all the main menu buttons
-    private JButton mainMenuPlay; // this button is located in the main menu and takes you to the connect four
-    private JButton mainMenuCustom;// this button is located in the main button and takes you to the custom game
+    private JButton mainMenuPlay;           // this button is located in the main menu and takes you to the connect four
+    private JButton mainMenuCustom;         // this button is located in the main button and takes you to the custom game
     private JButton mainMenuLoad;
     //all buttons in the custom game and the game
-    private JButton gameMainMenu;   //  this button is located in both the game and the custom game and will take you back to the main menu
-    private JButton gameRedButton;  //  this button is located in both the game and the custom game and will make the next players turn red
-    private JButton gameBlueButton; //  this button is located in both the game and the custom game and will make the next players turn blue
-    private JButton gameSaveStateButton; //  this button saves the state of the game
-    private JButton customGameReset; // this button resets the board and makes it blank
-
+    private JButton gameMainMenu;           //  this button is located in both the game and the custom game and will take you back to the main menu
+    private JButton gameRedButton;          //  this button is located in both the game and the custom game and will make the next players turn red
+    private JButton gameBlueButton;         //  this button is located in both the game and the custom game and will make the next players turn blue
+    private JButton gameSaveStateButton;    //  this button saves the state of the game
+    private JButton customGameReset;        // this button resets the board and makes it blank
     //the buttons just in the custom game
-    
-    private JButton customGameCheckState; // this button checks if the current state of the game is valid and then displays the error messages
-    //private JTextArea errorMessage;
-    private JLabel errorMessage;
-
-    //buttons just in the game
+    private JButton customGameCheckState;   // this button checks if the current state of the game is valid and then displays the error messages
+    private JLabel errorMessage;            // this is the label that will display the error message in the custom game
 
     //this is the board that is displayed on the screen
     private Board board;
@@ -40,14 +35,10 @@ public class ConnectFourView extends JFrame {
     public static final String gameMainMenuImageNamePressed ="./src/images/mainMenuButton3.png";
     public static final String loadSavedState = "./src/images/loadstate1.png";
     public static final String loadSavedStatePressed = "./src/images/loadstate2.png";
-
-    //Game buttons - includes Save State button
-    //public static final String redColumnSelect = "./src/images/redColumnSelect.png";
-    //public static final String blueColumnSelect = "./src/images/blueColumnSelect.png";
+    //Game buttons
     public static final String saveStateImage = "./src/images/savestate1.png";
     public static final String saveStateImagePressed = "./src/images/savestate2.png";
-
-    //all the buttons that exist in both the games
+    //all the names of buttons that exist in both the games
     public static final String gameRedButtonImageName           = "./src/images/red3.png";
     public static final String gameRedButtonImageNamePressed    = "./src/images/red2.png";
     public static final String gameRedButtonImageNameSelected   = "./src/images/red1.png";
@@ -56,35 +47,33 @@ public class ConnectFourView extends JFrame {
     public static final String gameBlueButtonImageNameSelected  = "./src/images/blue1.png";
     public static final String gameSaveButtonImageName          = "./src/images/savestate1.png";
     public static final String gameSaveButtonImageNamePressed   = "./src/images/savestate2.png";
-
     public static final String customGameResetImageName = "./src/images/reset1.png";
     public static final String customGameResetImageNamePressed = "./src/images/reset2.png";
-
     //Custom game only
     public static final String customGameCheckStateImageName = "./src/images/checkstate1.png";
     public static final String customGameCheckStateImageNamePressed = "./src/images/checkstate2.png";
 
     //this is the size of the buttons on the screen
-    private static final int buttonWidth = 289;
-    private static final int buttonHeight = 74;
+    private static final int buttonWidth = 289;     //stores the width of all the buttons
+    private static final int buttonHeight = 74;     //stores the height of all the buttons
     //Size for blue, red and reset buttons
-    private static final int smallButton = 100;	
-    //Size for arrows
-    //private static final int arrowButton = 30;
+    private static final int smallButton = 100;     //stores the size of the small buttons
+    private static final int initialScreenHeight = 400; // these two constants store the dimensions of the screen
+    private static final int initialScreenWidth  = 400; // if the client does not specify a value for the screen
 
-    private static final int initialScreenHeight = 400;
-    private static final int initialScreenWidth = 400;
-    //constructor
+    //constructors
     public ConnectFourView(){ this(initialScreenWidth, initialScreenHeight); }
     public ConnectFourView(int width, int height){ this(width, height, 6,7); }//end constructor
     public ConnectFourView(int width, int height, int boardRows, int boardCols){
+        //gets rid of java's default positioning system so we have more control and can manually position everything using absolute positioning
         this.getContentPane().setLayout(null);
         this.setLayout(null);
 
-        setupMainMenu(width, height);
-        setupGame(width, height, boardRows, boardCols);
-        game.setVisible(false);
-        mainMenu.setVisible(true);
+        setupMainMenu(width, height);                   //sets up the main menu panel
+        setupGame(width, height, boardRows, boardCols); //sets up the game panel
+
+        game.setVisible(false);     // makes the game invisible
+        mainMenu.setVisible(true);  // shows the main menu
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//sets the default close operation
         this.setSize(width, height);//sets the size of the screen
@@ -94,24 +83,25 @@ public class ConnectFourView extends JFrame {
     //sets up the main menu screen. It adds the corresponding components to the main menu panel
     private void setupMainMenu(int width, int height){
         //create the main menu panel
-        mainMenu = new JPanel();
-        mainMenu.setSize(width, height);
-        mainMenu.setLocation(0,0);
-        mainMenu.setLayout(null);
-        //make the background
+        mainMenu = new JPanel();            // creates an empty panel
+        mainMenu.setSize(width, height);    // sets its size equal to the size and height of the screen
+        mainMenu.setLocation(0,0);          // sets the location of the panel
+        mainMenu.setLayout(null);           // removes the default layout manager, allowing us to position everything manually and giving us more control
+
 
         //create the two buttons
         mainMenuCustom = createButton(mainCustomButtonImageName, width/2-buttonWidth/2, height/4*2-buttonHeight/2, buttonWidth, buttonHeight, mainMenu, mainCustomButtonimageNamePressed);
         mainMenuPlay = createButton(mainPlayButtonImageName, width/2-buttonWidth/2, height/4-buttonHeight/2, buttonWidth, buttonHeight, mainMenu, mainPlayButtonImageNamePressed);
         mainMenuLoad = createButton(loadSavedState, width/2-buttonWidth/2, height/4*3-buttonHeight/2, buttonWidth, buttonHeight, mainMenu, loadSavedStatePressed);
+
         //add the main menu to the screen
         this.add(mainMenu);
     }//end setup board
     private void setupGame(int width, int height, int boardRows, int boardCols) {
-        game = new JPanel();
-        game.setSize(width, height);
-        game.setLocation(0,0);
-        game.setLayout(null);
+        game = new JPanel();            // makes an empty panel
+        game.setSize(width, height);    // sets the size of the game
+        game.setLocation(0,0);          // sets the location of the panel
+        game.setLayout(null);           // removes the default layout
 
         //adding all the buttons that are in both the game and the game screen
         gameMainMenu         = createButton(gameMainMenuImageName, 0,0, buttonWidth, buttonHeight, game, gameMainMenuImageNamePressed);
@@ -122,7 +112,6 @@ public class ConnectFourView extends JFrame {
         //buttons for the custom game
         customGameReset      = createButton(customGameResetImageName, 0,0, smallButton, smallButton, game, customGameResetImageNamePressed);
         customGameCheckState = createButton(customGameCheckStateImageName, 0,0, buttonWidth, buttonHeight, game, customGameCheckStateImageNamePressed);
-        //errorMessage         = new JTextArea("this is where the error message goes");
         errorMessage = new JLabel("");
         errorMessage.setOpaque(false);
         errorMessage.setSize(width- gameSaveStateButton.getWidth(),100);
@@ -130,8 +119,7 @@ public class ConnectFourView extends JFrame {
         errorMessage.setHorizontalAlignment(JTextField.CENTER);
         //buttons for the game
 
-        //create the board
-        board = new Board(boardCols, boardRows);
+        board = new Board(boardCols, boardRows); //create the board
         board.setBounds(
                 this.getWidth() / 2 - board.getWidthOfBoard() / 2,
                 this.getHeight() / 2 - board.getHeightOfBoard()/2,
