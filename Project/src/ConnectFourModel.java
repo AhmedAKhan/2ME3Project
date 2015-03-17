@@ -1,5 +1,6 @@
 
 import java.util.Arrays;
+import java.util.Formatter;
 import java.util.Random;
 import java.awt.Point;
 import java.io.File;
@@ -43,6 +44,9 @@ public class ConnectFourModel {
     private String errorMessage = "";
     private boolean blueWins = false, redWins = false;
     private int rowSize;
+    private Scanner input;
+    private Formatter output;
+    final String PATHTOSAVEDGAME = "data/savedGame.txt";
 
     public ConnectFourModel(int rows, int columns) {
     	if (rows < 4 || columns < 4) {
@@ -216,22 +220,70 @@ public class ConnectFourModel {
 //    public boolean getWinState() {
 //    	return getWinState(this.boardConfiguration);
 //    }
-    public void saveState () {
-        PrintStream out;  //this will make all console output be placed in output.txt instead 
-    	
-		try {				//required exception in case the file is not found (will make it) 
-			out = new PrintStream(new FileOutputStream("data/saveStateData.txt"));
-			System.setOut(out);
-		} catch (FileNotFoundException e1) {
-			
-			e1.printStackTrace();
+    
+    /**
+	 * Initialize the input file scanner
+	 * @param name - Name/Path of the input file
+	 */
+	private void openInputFile(String name) {
+		try {
+			input = new Scanner(new File(name));
+		} catch (Exception e) {
+			System.out.println("File not found!");
 		}
+	}
+
+	/**
+	 * Close the input file scanner
+	 */
+	private void closeInputFile() { input.close(); }
+	
+	// Opens the output file if it exists
+	private void openOutputFile(String file) {
+		try {
+			output = new Formatter(file);
+		} catch (Exception e) {
+			System.out.println("An error occurred");
+		}
+	}
 		
-		
-	    System.out.println(Arrays.deepToString(boardConfiguration)); //Prints out the 2D array in the given output file
+	private void closeOutputFile() { output.close(); }
+    
+	/** Saves the current state of the game into a text file **/
+    public void saveState () {
+    	openOutputFile(PATHTOSAVEDGAME);
+    	
+    	for (int i = 0; i < this.getRows(); i++) {
+			for (int j = 0; j < this.getColumns(); j++) {
+				output.format(boardConfiguration[i][j].toString());
+				if (j < this.getColumns()-1) output.format(" ");
+			}
+			if (i < this.getRows()-1) output.format("\n");
+		}
+    	
+    	closeOutputFile();
     }
 
-    /** Returns current state of the Game **/
+    /** Loads the saved state of the game from the text file **/
+    public void loadState() {
+    	openInputFile(PATHTOSAVEDGAME);
+    	
+    	int rowNum = 0, colNum = 0;
+    	
+    	while (input.hasNext()) {
+    		String[] currentRow = input.nextLine().split(" ");
+    		
+    		for (int i = 0; i < currentRow.length; i++) {				
+    			boardConfiguration[rowNum][colNum++] = Slot.valueOf(currentRow[i]);
+			}
+    		rowNum++;
+    		colNum = 0;
+    	}
+    	
+    	closeInputFile();
+    }
+	
+	/** Returns current state of the Game **/
     public GameProgress getGameProgess() {
     	if (this.getWinState()) {
     		if (this.getTurn() == Slot.Blue) return GameProgress.blueWon;
@@ -244,74 +296,10 @@ public class ConnectFourModel {
     		return GameProgress.inProgress;
     	}
     }
-
-    //this method loads the state of the boardConfiguration from the save state file 
-	public  void loadState () {
-		try {
-
-			Scanner input = new Scanner(new File("data/saveStateData.txt")); // initialize
-																				// scanner
-			String line = ""; // initialize empty string
-
-			int x = 0; // counters used to help parse the string
-			int y = 0;
-			int z = 0;
-			int i = 0; // counters used to loop through all indexes from 0-41, i
-						// = rows, j = columns
-			int j = 0;
-			for (int k = 0; k < 42; k++) {
-				z++; // increment counters every time the loop is run
-				y++;
-				x++;
-
-				line = input.next();
-				if ((z == 1)) {
-					line = line.substring(1, line.length()); // used to parse
-																// first
-																// character in
-																// the 2D array
-																// string (since
-																// we have [[
-																// brackets)
-
-				}
-
-				if ((y - 1) % 6 == 0) { // used to parse starter brackets before
-										// every group of 6 elements
-					line = line.substring(1, line.length());
-				}
-				if (x % 6 == 0) { // used to parse end brackets after every
-									// group of 6 elements
-					line = line.substring(0, line.length() - 1);
-				}
-				line = line.substring(0, line.length() - 1);
-
-				boardConfiguration[i][j] = Slot.valueOf(line); // update board
-																// configuration
-				j++;
-				if (j == 6) { // increment row counter to next value if column
-								// has reached 6 and reset column
-					i++;
-					j = 0;
-				}
-
-				if (i == 7) { // rest row counter to 0 if row has reached 7
-					i = 0;
-				}
-
-			}
-		 
-		// Sets the turn to the color with lower number of discs when the game is loaded		  
-		if (this.getRedDiscsCount() < this.getBlueDiscsCount()) this.setTurn(Slot.Red);
-		else this.setTurn(Slot.Red);
-		
-		}catch(Exception e){ System.out.println("caught error: " + e); }
 	
-
-	}
-    public ConnectFourModel.Slot switchTurn(){
-    	return ConnectFourModel.Slot.Blue;
-    }
+//    public ConnectFourModel.Slot switchTurn(){
+//    	return ConnectFourModel.Slot.Blue;
+//    }
     
     /** Returns whose turn it is as a String (i.e. "red" or "blue") **/
     public Slot getTurn(){ return currentTurn; }
