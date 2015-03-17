@@ -66,14 +66,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Board.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Board.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="1620">
-              <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+            <state vertical-scroll-proportion="-0.36363637" vertical-offset="651" max-vertical-offset="1080">
+              <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
               <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#Board#0;class#Board#0" expanded="false" />
                 <element signature="method#setBoard#0;class#Board#0" expanded="false" />
                 <element signature="method#paintComponent#0;class#Board#0" expanded="false" />
+                <element signature="method#drawTilesFromBoardConfiguration#0;class#Board#0" expanded="false" />
                 <element signature="method#getOriginOfBoard#0;class#Board#0" expanded="false" />
                 <element signature="method#getGameCoordinate#0;class#Board#0" expanded="false" />
                 <element signature="method#getBoardCoordinateOfPoint#0;class#Board#0" expanded="false" />
@@ -84,11 +87,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConnectFourView.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ConnectFourView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ConnectFourView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="4.7202797" vertical-offset="0" max-vertical-offset="2340">
-              <caret line="264" column="5" selection-start-line="264" selection-start-column="5" selection-end-line="264" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2340">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#ConnectFourView#2;class#ConnectFourView#0" expanded="false" />
@@ -111,9 +114,9 @@
         <option value="$PROJECT_DIR$/src/Game.java" />
         <option value="$PROJECT_DIR$/src/ConnectFourMain.java" />
         <option value="$PROJECT_DIR$/src/ConnectFourModel.java" />
-        <option value="$PROJECT_DIR$/src/Board.java" />
         <option value="$PROJECT_DIR$/src/ConnectFourController.java" />
         <option value="$PROJECT_DIR$/src/ConnectFourView.java" />
+        <option value="$PROJECT_DIR$/src/Board.java" />
       </list>
     </option>
   </component>
@@ -574,12 +577,12 @@
       <workItem from="1426599396710" duration="751000" />
       <workItem from="1426600201109" duration="2472000" />
       <workItem from="1426602902853" duration="41000" />
-      <workItem from="1426603545563" duration="3730000" />
+      <workItem from="1426603545563" duration="4118000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62873000" />
+    <option name="totallyTimeSpent" value="63261000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="46" y="23" width="1234" height="773" extended-state="0" />
@@ -661,7 +664,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="33" />
+      <option name="time" value="34" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -683,8 +686,11 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1521" max-vertical-offset="1995">
           <caret line="142" column="30" selection-start-line="142" selection-start-column="30" selection-end-line="142" selection-end-column="30" />
           <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Board#0;class#Board#0" expanded="false" />
             <element signature="method#setBoard#0;class#Board#0" expanded="false" />
             <element signature="method#paintComponent#0;class#Board#0" expanded="false" />
+            <element signature="method#drawTilesFromBoardConfiguration#0;class#Board#0" expanded="false" />
             <element signature="method#getOriginOfBoard#0;class#Board#0" expanded="false" />
             <element signature="method#getGameCoordinate#0;class#Board#0" expanded="false" />
             <element signature="method#getBoardCoordinateOfPoint#0;class#Board#0" expanded="false" />
@@ -744,8 +750,11 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1521" max-vertical-offset="1995">
           <caret line="142" column="30" selection-start-line="142" selection-start-column="30" selection-end-line="142" selection-end-column="30" />
           <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Board#0;class#Board#0" expanded="false" />
             <element signature="method#setBoard#0;class#Board#0" expanded="false" />
             <element signature="method#paintComponent#0;class#Board#0" expanded="false" />
+            <element signature="method#drawTilesFromBoardConfiguration#0;class#Board#0" expanded="false" />
             <element signature="method#getOriginOfBoard#0;class#Board#0" expanded="false" />
             <element signature="method#getGameCoordinate#0;class#Board#0" expanded="false" />
             <element signature="method#getBoardCoordinateOfPoint#0;class#Board#0" expanded="false" />
@@ -805,8 +814,11 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1335">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Board#0;class#Board#0" expanded="false" />
             <element signature="method#setBoard#0;class#Board#0" expanded="false" />
             <element signature="method#paintComponent#0;class#Board#0" expanded="false" />
+            <element signature="method#drawTilesFromBoardConfiguration#0;class#Board#0" expanded="false" />
             <element signature="method#getOriginOfBoard#0;class#Board#0" expanded="false" />
             <element signature="method#getGameCoordinate#0;class#Board#0" expanded="false" />
             <element signature="method#getBoardCoordinateOfPoint#0;class#Board#0" expanded="false" />
@@ -873,8 +885,11 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="937" max-vertical-offset="1590">
           <caret line="119" column="12" selection-start-line="119" selection-start-column="12" selection-end-line="119" selection-end-column="12" />
           <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Board#0;class#Board#0" expanded="false" />
             <element signature="method#setBoard#0;class#Board#0" expanded="false" />
             <element signature="method#paintComponent#0;class#Board#0" expanded="false" />
+            <element signature="method#drawTilesFromBoardConfiguration#0;class#Board#0" expanded="false" />
             <element signature="method#getOriginOfBoard#0;class#Board#0" expanded="false" />
             <element signature="method#getGameCoordinate#0;class#Board#0" expanded="false" />
             <element signature="method#getBoardCoordinateOfPoint#0;class#Board#0" expanded="false" />
@@ -970,8 +985,11 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1590">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Board#0;class#Board#0" expanded="false" />
             <element signature="method#setBoard#0;class#Board#0" expanded="false" />
             <element signature="method#paintComponent#0;class#Board#0" expanded="false" />
+            <element signature="method#drawTilesFromBoardConfiguration#0;class#Board#0" expanded="false" />
             <element signature="method#getOriginOfBoard#0;class#Board#0" expanded="false" />
             <element signature="method#getGameCoordinate#0;class#Board#0" expanded="false" />
             <element signature="method#getBoardCoordinateOfPoint#0;class#Board#0" expanded="false" />
@@ -1031,8 +1049,11 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="975">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Board#0;class#Board#0" expanded="false" />
             <element signature="method#setBoard#0;class#Board#0" expanded="false" />
             <element signature="method#paintComponent#0;class#Board#0" expanded="false" />
+            <element signature="method#drawTilesFromBoardConfiguration#0;class#Board#0" expanded="false" />
             <element signature="method#getOriginOfBoard#0;class#Board#0" expanded="false" />
             <element signature="method#getGameCoordinate#0;class#Board#0" expanded="false" />
             <element signature="method#getBoardCoordinateOfPoint#0;class#Board#0" expanded="false" />
@@ -1092,8 +1113,11 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Board#0;class#Board#0" expanded="false" />
             <element signature="method#setBoard#0;class#Board#0" expanded="false" />
             <element signature="method#paintComponent#0;class#Board#0" expanded="false" />
+            <element signature="method#drawTilesFromBoardConfiguration#0;class#Board#0" expanded="false" />
             <element signature="method#getOriginOfBoard#0;class#Board#0" expanded="false" />
             <element signature="method#getGameCoordinate#0;class#Board#0" expanded="false" />
             <element signature="method#getBoardCoordinateOfPoint#0;class#Board#0" expanded="false" />
@@ -1186,22 +1210,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1620">
-          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-          <folding>
-            <element signature="method#setBoard#0;class#Board#0" expanded="false" />
-            <element signature="method#paintComponent#0;class#Board#0" expanded="false" />
-            <element signature="method#getOriginOfBoard#0;class#Board#0" expanded="false" />
-            <element signature="method#getGameCoordinate#0;class#Board#0" expanded="false" />
-            <element signature="method#getBoardCoordinateOfPoint#0;class#Board#0" expanded="false" />
-            <element signature="method#insertDisc#0;class#Board#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#Board#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/src.zip!/java/awt/Container.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.19347319" vertical-offset="22927" max-vertical-offset="73350">
@@ -1212,8 +1220,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ConnectFourView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.7202797" vertical-offset="0" max-vertical-offset="2340">
-          <caret line="264" column="5" selection-start-line="264" selection-start-column="5" selection-end-line="264" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2340">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#ConnectFourView#2;class#ConnectFourView#0" expanded="false" />
@@ -1223,6 +1231,25 @@
             <element signature="method#createButton#1;class#ConnectFourView#0" expanded="false" />
             <element signature="method#addCalculateListener#0;class#ConnectFourView#0" expanded="false" />
             <element signature="method#setTurn#0;class#ConnectFourView#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.36363637" vertical-offset="651" max-vertical-offset="1080">
+          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Board#0;class#Board#0" expanded="false" />
+            <element signature="method#setBoard#0;class#Board#0" expanded="false" />
+            <element signature="method#paintComponent#0;class#Board#0" expanded="false" />
+            <element signature="method#drawTilesFromBoardConfiguration#0;class#Board#0" expanded="false" />
+            <element signature="method#getOriginOfBoard#0;class#Board#0" expanded="false" />
+            <element signature="method#getGameCoordinate#0;class#Board#0" expanded="false" />
+            <element signature="method#getBoardCoordinateOfPoint#0;class#Board#0" expanded="false" />
+            <element signature="method#insertDisc#0;class#Board#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#Board#0" expanded="false" />
           </folding>
         </state>
       </provider>

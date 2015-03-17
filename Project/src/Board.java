@@ -2,11 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
-/**
- * Created by ahmed on 3/6/15.
- */
 public class Board extends JPanel implements ActionListener {
 
     //this JPanel holds all the data
@@ -14,11 +10,12 @@ public class Board extends JPanel implements ActionListener {
     private int spaceBetweenDisks = 7;		    //represents the space between the disk
     private int rows;                           //represents the number of rows in the board
     private int columns;                        //represents the number of columns in the board
-    private ConnectFourController controller;
+    private ConnectFourController controller;   // represents the controller
 
-    private Point animatingPoint;
-    private ConnectFourModel.Slot animatingSlot;
-    private Point stopAnimationPoint;
+    // these three variable are used to animate the piece
+    private Point animatingPoint;               // represents the position that the animation is currently on
+    private ConnectFourModel.Slot animatingSlot;// represents the color of the slot, if the current animating piece is red or blue
+    private Point stopAnimationPoint;           // the point at which the animation needs to reach when it stops animating
 
     public Board(int rows, int columns){
         super(null, true);//calls the super constructor
@@ -26,6 +23,8 @@ public class Board extends JPanel implements ActionListener {
         //set its rows and columns
         this.rows = rows;
         this.columns = columns;
+
+        //gives the animation variable default values
         animatingPoint = new Point(-1,-1);
         animatingSlot = ConnectFourModel.Slot.Empty;
         stopAnimationPoint = new Point(-1,-1);
@@ -35,24 +34,21 @@ public class Board extends JPanel implements ActionListener {
     }//end function
 
     public void setBoard(ConnectFourModel.Slot[][] slots){
-        Graphics g = getGraphics();
-        drawTilesFromBoardConfiguration(getGraphics(), slots);
+        Graphics g = getGraphics();     //gets the graphics component
+        drawTilesFromBoardConfiguration(getGraphics(), slots); //draws the board using that graphics component
     }//end function
 
     @Override
     public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        if(controller != null)
+        super.paintComponent(g); // clears the board
+
+        if(controller != null) // if the controller exists draw the board
             drawTilesFromBoardConfiguration(g, controller.getConfiguration());
     }//end function
-
-    public void setController(ConnectFourController c){ controller = c;}
+    public void setController(ConnectFourController c){ controller = c;} // sets the controller
 
     //Purpose: calls the drawTileAtPosition in a nested loop to tell the drawTileAtPosition(); so all the tiles can be drawn if there is something to draw
     private void drawTilesFromBoardConfiguration(Graphics g, ConnectFourModel.Slot[][] slotConfiguration){
-        //when we draw stuff we put the bottom right position in the function
-        //super.paintComponent(g);
-
         //gets the width and height of the board
         int widthOfBoard = getWidthOfBoard();
         int heightOfBoard =  getHeightOfBoard();
@@ -86,7 +82,7 @@ public class Board extends JPanel implements ActionListener {
                 break;
         }
         g.setColor(c);//sets the color of the slot
-        g.fillOval(pos.x, pos.y, diameterOfDisk, diameterOfDisk);
+        g.fillOval(pos.x, pos.y, diameterOfDisk, diameterOfDisk); // draws the disc
     }//end draw tile at position function
 
     //PURPOSE: gets the origin of the board meaning the bottom left coordinate of the board
