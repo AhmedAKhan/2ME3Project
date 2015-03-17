@@ -32,7 +32,7 @@ public class ConnectFourModel {
     enum GameState {
         MainMenu, CustomGame, Game
     }
-    
+
     enum GameProgress {
     	tieGame, blueWon, redWon, inProgress;
     }
@@ -270,7 +270,6 @@ public class ConnectFourModel {
     		rowNum++;
     		colNum = 0;
     	}
-    	
     	closeInputFile();
     }
 	
@@ -287,11 +286,7 @@ public class ConnectFourModel {
     		return GameProgress.inProgress;
     	}
     }
-	
-//    public ConnectFourModel.Slot switchTurn(){
-//    	return ConnectFourModel.Slot.Blue;
-//    }
-    
+
     /** Returns whose turn it is as a String (i.e. "red" or "blue") **/
     public Slot getTurn(){ return currentTurn; }
     public void setTurn(Slot newTurn){ if(currentTurn!=Slot.Empty) currentTurn = newTurn;}
