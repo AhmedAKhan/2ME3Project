@@ -40,7 +40,6 @@ public class ConnectFourModel {
     private int rowSize;
 
     public ConnectFourModel(int rows, int columns) {
-        
     	if (rows < 4 || columns < 4) {
             System.out.println("Game board must be at least be of size 4x4. Board "
                     + " created with default values.");

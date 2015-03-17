@@ -23,7 +23,7 @@ public class ConnectFourController {
 
     public void showWinner(){
         if (model.getGameProgess() == (ConnectFourModel.GameProgress.blueWon))      view.displayMessage("Blue Won");
-        if (model.getGameProgess() == (ConnectFourModel.GameProgress.redWon)) view.displayMessage("Red Won");
+        if (model.getGameProgess() == (ConnectFourModel.GameProgress.redWon))       view.displayMessage("Red Won");
         else if (model.getGameProgess() == (ConnectFourModel.GameProgress.tieGame)) view.displayMessage("You both lose");
     }
     public void switchTurn(){
@@ -46,7 +46,6 @@ public class ConnectFourController {
         	
 //        	 if(buttonPressedIconString.equals(ConnectFourView.gameSaveButtonImageName)) model.saveState();
 //        	 if(buttonPressedIconString.equals(ConnectFourView.gameLoadButtonImageName)) model.loadState();
-
 
             //will get called for the menu buttons stuff
             //check what button is pressed
@@ -141,9 +140,7 @@ public class ConnectFourController {
             //get the mouse position of the click and t
            //Then convert that to the board position where it will be in a different coordinate system
 
-       
             //make that tile of type the players turn, but if that tile is already there then remove it
-
             if (model.getGameProgess() != (ConnectFourModel.GameProgress.inProgess)) return;
 
             //adjust the game and update the switchScreen
