@@ -53,17 +53,12 @@ public class Board extends JPanel implements ActionListener {
         //when we draw stuff we put the bottom right position in the function
         //super.paintComponent(g);
 
-        int spaceBetweenSlots = diameterOfDisk + spaceBetweenDisks;//k represents the distance between two slots
-        int numberOfRows = slotConfiguration[0].length;//this is the number of slots the board has
-
         //gets the width and height of the board
         int widthOfBoard = getWidthOfBoard();
         int heightOfBoard =  getHeightOfBoard();
 
         g.setColor(Color.BLACK);//makes the color black
         //draws the board itself, which is just a black rectangle and then we will place the blank disks on top of it
-        //TODO make it so it draws the picture of the empty board
-        //g.fillRect(getOriginOfBoard().x, getOriginOfBoard().y - (numberOfRows+1)*spaceBetweenSlots, widthOfBoard , heightOfBoard);
         g.fillRect(0,0, widthOfBoard, heightOfBoard);
 
         //call the drawTileAtPosition an n number of time if it is not empty
@@ -80,7 +75,6 @@ public class Board extends JPanel implements ActionListener {
         //need to convert the old position to new position
         pos = getGameCoordinate(pos, pos.y);
 
-        //TODO make it so it draws the tile at this position with a picture instead of graphics
         //draw the tile depending on the type and position
         Color c;
         switch (type){

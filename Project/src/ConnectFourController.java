@@ -61,36 +61,35 @@ public class ConnectFourController {
                 model.setGameState(ConnectFourModel.GameState.CustomGame);
                 model.resetConfiguration();
                 view.switchScreen(ConnectFourModel.GameState.CustomGame);
-
             }else if(buttonPressedIconString.equals(ConnectFourView.gameMainMenuImageName)){
                 model.setGameState(ConnectFourModel.GameState.MainMenu);
                 view.switchScreen(ConnectFourModel.GameState.MainMenu);
 
             }else if(buttonPressedIconString.equals(ConnectFourView.customGameResetImageName)){                             //added Feb 26, 2015
-                model.setGameState(ConnectFourModel.GameState.CustomGame);                  //added Feb 26, 2015
+                //if(model.getGameState()== ConnectFourModel.GameState.Game) { model.resetConfiguration(); return; }
+                //model.setGameState(ConnectFourModel.GameState.CustomGame);                  //added Feb 26, 2015
                 model.resetConfiguration();                                                 //added Feb 26, 2015
                 view.setBoard(model.getBoardConfiguration());
                 view.setError("");
 
-            }else if(buttonPressedIconString.equals(ConnectFourView.gameRedButtonImageName)){
-                model.setTurn(ConnectFourModel.Slot.Red);
-                view.setTurn(model.getTurn());
-
-            }else if(buttonPressedIconString.equals(ConnectFourView.gameBlueButtonImageName)){
-                model.setTurn(ConnectFourModel.Slot.Blue);
-                view.setTurn(model.getTurn());
-                
+            }else if(model.getGameState() == ConnectFourModel.GameState.CustomGame){
+                if(buttonPressedIconString.equals(ConnectFourView.gameRedButtonImageName)){
+                    model.setTurn(ConnectFourModel.Slot.Red);
+                    view.setTurn(model.getTurn());
+                }else if(buttonPressedIconString.equals(ConnectFourView.gameBlueButtonImageName)) {
+                    model.setTurn(ConnectFourModel.Slot.Blue);
+                    view.setTurn(model.getTurn());
+                }else if(buttonPressedIconString.equals(ConnectFourView.customGameCheckStateImageName)){
+                    if(!model.checkBoardConfiguration()){
+                        view.setError(model.getErrorMessage());
+                    }else{
+                        view.setError("Yay! No errors :D");
+                    }
+                }//end of the if else block
             }else if (buttonPressedIconString.equals(ConnectFourView.saveStateImage)) {
             	//Save progress.  If a previous data save exists, ask to overwrite... or don't; it doesn't matter.
 
-            }else if(buttonPressedIconString.equals(ConnectFourView.customGameCheckStateImageName)){
-                if(!model.checkBoardConfiguration()){
-                    view.setError(model.getErrorMessage());
-                }else{
-                	view.setError("Yay! No errors :D");
-                }
-            	
-            }//end of the if else block
+            }
         }//end function
         
         public void handleCustomGameState(MouseEvent e){
@@ -108,7 +107,6 @@ public class ConnectFourController {
 
             //check if this configuration is possible by calling the model
             ConnectFourModel.Slot[][] newBoardConfiguration = model.getBoardConfiguration();
-            
        
             //make that tile of type the players turn, but if that tile is already there then remove it
             if(newBoardConfiguration[tilePosition.y][tilePosition.x] == model.getTurn())newBoardConfiguration[tilePosition.y][tilePosition.x] = ConnectFourModel.Slot.Empty;
@@ -119,7 +117,6 @@ public class ConnectFourController {
             view.switchScreen(model.getGameState());
             //update the view if it is possible,
             //if it is not possible then call configurationNotPossible on the view class
-            //view.repaint();
         }
 
         //Purpose: this function will be called when the user presses a button, it will be responsible for handling the outcome of the button press.
