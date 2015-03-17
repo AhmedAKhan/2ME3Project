@@ -120,90 +120,96 @@ public class ConnectFourView extends JFrame {
         //buttons for the game
 
         board = new Board(boardCols, boardRows); //create the board
-        board.setBounds(
-                this.getWidth() / 2 - board.getWidthOfBoard() / 2,
-                this.getHeight() / 2 - board.getHeightOfBoard()/2,
-                board.getWidthOfBoard(),
-                board.getHeightOfBoard());
-        board.validate();
-        board.repaint();
-        game.add(errorMessage);
-        game.add(board);
 
-        //adds the game to the screen
-        this.add(game);
-        game.setVisible(false);
+        board.setBounds( //sets the bounds of the board, meaning the area it can be located
+                this.getWidth() / 2 - board.getWidthOfBoard() / 2,  //x value
+                this.getHeight() / 2 - board.getHeightOfBoard()/2,  // y value
+                board.getWidthOfBoard(),                            // width
+                board.getHeightOfBoard());                          // height
+        board.validate();       // make sure the board's state is valid
+        board.repaint();        // draw the board on the screen
+        game.add(errorMessage); // add the error message textfield
+        game.add(board);        // add the board to the game
+
+        this.add(game);         //adds the game to the screen
+        game.setVisible(false); // makes the game panel invisible so that we can not see it when the game starts up
     }
 
     public void switchScreen(ConnectFourModel.GameState gameState){
         if(gameState == ConnectFourModel.GameState.MainMenu){
-            game.setVisible(false);
-            mainMenu.setVisible(true);
-            return;
+            game.setVisible(false);     // make the game panel invisible
+            mainMenu.setVisible(true);  // make the main menu invisible
+            return;                     // end the function
         }
-        System.out.println("gameState: " + gameState);
-        mainMenu.setVisible(false);
-        game.setVisible(true);
 
+        mainMenu.setVisible(false); // make the main menu invisible
+        game.setVisible(true);      // show the game screen
+
+        //show this button if the current state is custom game
         customGameCheckState.setVisible(gameState.equals(ConnectFourModel.GameState.Game)? false:true);
 
     }//end function of the switch screen
 
     @Override
     public void paint(Graphics g){
-        super.paint(g);
+        //this method will be called when the board is resized and when the screen loads
+        super.paint(g); // repaint the screen
 
+        //since this function gets called when the screen is resized we need to adjust the position and size of all the panels or else resizing would not work
         //the board might have been moved or resized so we need to resize and reposition all the buttons
-        mainMenu.setSize(this.getSize());
-        game.setSize(this.getSize());
-        float scale = 1.0f;//Math.min(((float)this.getWidth())/initialScreenWidth, ((float)this.getHeight())/initialScreenHeight);
+        mainMenu.setSize(this.getSize());   //updates thes size of the game
+        game.setSize(this.getSize());       //updates the size of the game
+        //all the buttons are with respect to the scale variable. what this does is that it allows
+        // each component to resize depending on this size variable, And if we make this variable adjust
+        // its size based on the screen size the entire screen should scale accordingly, But currently the image on the buttons
+        // does not scale so it does not look visually so we kept it 1.0
+        float scale = 1.0f;
+        //position all the values
         mainMenuPlay.setSize((int) (buttonWidth * scale), (int) (buttonHeight * scale));
         mainMenuCustom.setSize((int)(buttonWidth*scale), (int)(buttonHeight*scale));
         mainMenuLoad.setSize((int)(buttonWidth * scale), (int) (buttonHeight * scale));
         gameMainMenu.setSize((int)(buttonWidth * scale), (int) (buttonHeight * scale));
-        customGameCheckState.setSize((int)(buttonWidth * scale), (int) (buttonHeight * scale));//customGameCheckState.setSize((int)(buttonWidth * scale), (int)(74*scale));
+        customGameCheckState.setSize((int)(buttonWidth * scale), (int) (buttonHeight * scale));
         gameSaveStateButton.setSize((int)((buttonWidth)* scale), (int)(buttonHeight*scale));
         customGameCheckState.setSize((int)(buttonWidth * scale), (int) (buttonHeight * scale));
-
         scale = 0.7f;
         gameRedButton.setSize((int) (smallButton * scale), (int) (smallButton * scale));
         gameBlueButton.setSize((int)(smallButton * scale), (int) (smallButton * scale));
         customGameReset.setSize((int) (smallButton * scale), (int) (smallButton * scale));
-        //done adjusting the buttons size
 
-        //adjust their position
+        //the boundary represents the distance from the edge of the screen to the components on the screen,
+        //by changing this variable we can increase or decrease the distance for all the buttons from the edge
         int boundary = 10;
+        //adjust all the button's position
         mainMenuPlay.setLocation(this.getWidth() / 2 - mainMenuPlay.getWidth() / 2, this.getHeight() / 4 - mainMenuPlay.getHeight() / 2);//middle top
         mainMenuCustom.setLocation(this.getWidth()/2 - mainMenuCustom.getWidth()/2, this.getHeight()/4*2 -mainMenuCustom.getHeight()/2);//middle bottom
         mainMenuLoad.setLocation(this.getWidth()/2 - mainMenuCustom.getWidth()/2, this.getHeight()/4*3 -mainMenuCustom.getHeight()/2);
-
         gameMainMenu.setLocation(boundary, this.getHeight()-gameMainMenu.getHeight()-20 - boundary);//bottom left
         gameSaveStateButton.setLocation(this.getWidth() - gameSaveStateButton.getWidth() - boundary, this.getHeight() - gameSaveStateButton.getHeight() - 20 - boundary);
-
         int freeSpaceSides  = this.getWidth()/2 - board.getWidth();//this variable represents the amount of free space between the board and the end of the screen
         gameRedButton.setLocation(freeSpaceSides/2 - gameRedButton.getWidth()/2, getHeight()/2-gameBlueButton.getHeight()/2);
         gameBlueButton.setLocation(this.getWidth()-freeSpaceSides/2-gameBlueButton.getWidth()/2, getHeight()/2-gameBlueButton.getHeight()/2);
         customGameReset.setLocation(this.getWidth() / 2 - customGameReset.getWidth() / 2, this.getHeight() - customGameReset.getHeight()-40);
         customGameCheckState.setLocation(boundary,boundary);
-        //done adjusting the buttons position
 
-        board.setVisible(true);
-        board.setBounds(
+        board.setVisible(true);//make the board visible
+        board.setBounds( // set the bounds of the screen
                 this.getWidth() / 2 - board.getWidthOfBoard() / 2,
                 this.getHeight() / 2 - board.getHeightOfBoard()/2,
                 board.getWidthOfBoard(),
                 board.getHeightOfBoard());
 
-        board.repaint();
+        board.repaint();// repaints the board
     }
 
     // this class creates a button and positions it at the location (x,y) with the width and height of the input. adds the button to the parent and sets its image to the filename equal to name in the images folder
     public JButton createButton(String name, int x, int y, JPanel parent, String pressedName){ return createButton(name, x,y, buttonWidth, buttonHeight, parent, pressedName); }
     public JButton createButton(String name, int x, int y, int width, int height, JPanel parent, String pressedName) {
-        //ImageIcon img = new ImageIcon("./src/images/" + name+"1.png");//gets the image of the button
-        JButton newButton = new JButton(new ImageIcon(name)); // creates the button
-        newButton.setPressedIcon(new ImageIcon(pressedName));
+        JButton newButton = new JButton(new ImageIcon(name)); // creates the button, with the image name that is given
+        newButton.setPressedIcon(new ImageIcon(pressedName)); // makes a new button
 
+        //if the image name that you have given does not exist then use the default image,
+        // if the image given exists then remove the default button graphics
         if(newButton.getIcon().toString().length() > 2){
             //removes the default button graphics
             newButton.setOpaque(false);
@@ -211,6 +217,7 @@ public class ConnectFourView extends JFrame {
             newButton.setBorderPainted(false);
             newButton.setFocusPainted(false);
         }else{
+            //inform the user that the image can not be found
             System.out.println("go an empty location for image picture, using the default button");
             newButton.setText("place button label here");
         }
@@ -241,30 +248,33 @@ public class ConnectFourView extends JFrame {
 
     }//end calculate listener
 
+    // this function adjusts the images of the buttons so they change to their correct version to show the current button highlighted
     public void setTurn(ConnectFourModel.Slot currentTurn){
+        //this function gets called to set the turn
         if(currentTurn == ConnectFourModel.Slot.Blue){
+            //update button images
             gameBlueButton.setIcon(new ImageIcon(gameBlueButtonImageNameSelected));
             gameRedButton.setIcon(new ImageIcon(gameRedButtonImageName));
-            return;
         }else if(currentTurn == ConnectFourModel.Slot.Red){
+            //update button images
             gameBlueButton.setIcon(new ImageIcon(gameBlueButtonImageName));
             gameRedButton.setIcon(new ImageIcon(gameRedButtonImageNameSelected));
-            return;
         }
         //in case if we are using this function wrong, inform the client
         System.out.println("You are trying make the current turn become EMPTY's, next time set it to blue or red");
-        return;
     }
-    public void setBoard(ConnectFourModel.Slot[][] boardConfig){ board.setBoard(boardConfig); }
-    public void adjustBoard(ConnectFourModel.Slot[][] newBoardConfiguration){ board.setBoard(newBoardConfiguration); }
 
     //PURPOSE: displays and message on the screen of the text errorMessage that will be passed in as a parameter
     public void displayMessage(String errorMessage){ JOptionPane.showMessageDialog(this, errorMessage); }
-
-    public Point getBoardCoordinateOfPoint(Point point){ return board.getBoardCoordinateOfPoint(point); }
-
+    //this function displays the following error in the error message text field
     public void setError(String error) { errorMessage.setText(error); }
 
+    //all these funtions get passed to the board
+    //the reason the controller did not directly call the method from the board is that by doing so would remove the abstraction of the view class
+    //the controller should not need to know how the view class works to work with it
+    public Point getBoardCoordinateOfPoint(Point point){ return board.getBoardCoordinateOfPoint(point); }
     public void insertDisc(Point point, ConnectFourModel.Slot type){ board.insertDisc(point, type); }
     public boolean isAnimating(){ return board.isAnimating(); }
+    public void setBoard(ConnectFourModel.Slot[][] boardConfig){ board.setBoard(boardConfig); } //sets the board configuration
+    public void adjustBoard(ConnectFourModel.Slot[][] newBoardConfiguration){ board.setBoard(newBoardConfiguration); } // se
 }//end class
