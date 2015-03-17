@@ -182,12 +182,12 @@ public class ConnectFourView extends JFrame {
         mainMenuCustom.setLocation(this.getWidth()/2 - mainMenuCustom.getWidth()/2, this.getHeight()/4*2 -mainMenuCustom.getHeight()/2);//middle bottom
         mainMenuLoad.setLocation(this.getWidth()/2 - mainMenuCustom.getWidth()/2, this.getHeight()/4*3 -mainMenuCustom.getHeight()/2);
         
-        gameMainMenu.setLocation(0, this.getHeight()-gameMainMenu.getHeight()-1);//bottom left
+        gameMainMenu.setLocation(0, this.getHeight()-gameMainMenu.getHeight()-38);//bottom left
         int freeSpaceSides  = this.getWidth()/2 - board.getWidth();//this variable represents the amount of free space between the board and the end of the screen
         gameRedButton.setLocation(freeSpaceSides/2 - gameRedButton.getWidth()/2, getHeight()/2-gameBlueButton.getHeight()/2);
         gameBlueButton.setLocation(this.getWidth()-freeSpaceSides/2-gameBlueButton.getWidth()/2, getHeight()/2-gameBlueButton.getHeight()/2);
         customGameReset.setLocation(this.getWidth() / 2 - customGameReset.getWidth() / 2, this.getHeight() - customGameReset.getHeight()-45);
-        customGameCheckState.setLocation(this.getWidth()-customGameCheckState.getWidth()-16, this.getHeight()-customGameCheckState.getHeight()-1);
+        customGameCheckState.setLocation(this.getWidth()-customGameCheckState.getWidth()-16, this.getHeight()-customGameCheckState.getHeight()-38);
         //done adjusting the buttons position
 
         board.setVisible(true);
