@@ -3,5 +3,5 @@ Empty Empty Empty Empty Empty Empty
 Empty Empty Empty Empty Empty Empty
 Empty Empty Empty Empty Empty Empty
 Empty Empty Empty Empty Empty Empty
-Empty Empty Empty Empty Empty Empty
-Empty Empty Blue Red Empty Empty
+Empty Empty Red Empty Empty Empty
+Empty Empty Red Blue Empty Empty

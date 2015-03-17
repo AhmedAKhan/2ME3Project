@@ -45,12 +45,10 @@
       <file leaf-file-name="ConnectFourModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ConnectFourModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3560" max-vertical-offset="5355">
-              <caret line="240" column="12" selection-start-line="240" selection-start-column="8" selection-end-line="240" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="4881" max-vertical-offset="5340">
+              <caret line="355" column="46" selection-start-line="355" selection-start-column="46" selection-end-line="355" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2024#2025#0" expanded="true" />
-                <element signature="e#2051#2052#0" expanded="true" />
                 <element signature="method#getRandomTurn#0;class#ConnectFourModel#0" expanded="false" />
                 <element signature="method#resetConfiguration#0;class#ConnectFourModel#0" expanded="false" />
               </folding>
@@ -61,8 +59,8 @@
       <file leaf-file-name="ConnectFourController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ConnectFourController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.4825175" vertical-offset="0" max-vertical-offset="2475">
-              <caret line="71" column="45" selection-start-line="71" selection-start-column="45" selection-end-line="71" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.61538464" vertical-offset="1821" max-vertical-offset="2415">
+              <caret line="139" column="0" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -73,8 +71,8 @@
       <file leaf-file-name="Board.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="1095">
-              <caret line="139" column="56" selection-start-line="139" selection-start-column="56" selection-end-line="139" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="666" max-vertical-offset="1095">
+              <caret line="141" column="56" selection-start-line="141" selection-start-column="56" selection-end-line="141" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Board#0;class#Board#0" expanded="false" />
@@ -94,8 +92,8 @@
       <file leaf-file-name="ConnectFourView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ConnectFourView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="3780">
-              <caret line="150" column="45" selection-start-line="150" selection-start-column="45" selection-end-line="150" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3366" max-vertical-offset="3795">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#ConnectFourView#2;class#ConnectFourView#0" expanded="false" />
@@ -115,9 +113,9 @@
         <option value="$PROJECT_DIR$/src/Game.java" />
         <option value="$PROJECT_DIR$/src/ConnectFourMain.java" />
         <option value="$PROJECT_DIR$/src/Board.java" />
-        <option value="$PROJECT_DIR$/src/ConnectFourController.java" />
         <option value="$PROJECT_DIR$/src/ConnectFourModel.java" />
         <option value="$PROJECT_DIR$/src/ConnectFourView.java" />
+        <option value="$PROJECT_DIR$/src/ConnectFourController.java" />
       </list>
     </option>
   </component>
@@ -582,12 +580,12 @@
       <workItem from="1426612609305" duration="3224000" />
       <workItem from="1426620673296" duration="35000" />
       <workItem from="1426623757908" duration="721000" />
-      <workItem from="1426625303789" duration="580000" />
+      <workItem from="1426625303789" duration="1213000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70072000" />
+    <option name="totallyTimeSpent" value="70705000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -716,8 +714,6 @@
           <caret line="229" column="40" selection-start-line="229" selection-start-column="40" selection-end-line="229" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2024#2025#0" expanded="true" />
-            <element signature="e#2051#2052#0" expanded="true" />
             <element signature="method#getRandomTurn#0;class#ConnectFourModel#0" expanded="false" />
             <element signature="method#resetConfiguration#0;class#ConnectFourModel#0" expanded="false" />
           </folding>
@@ -781,8 +777,6 @@
           <caret line="279" column="30" selection-start-line="279" selection-start-column="30" selection-end-line="279" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2024#2025#0" expanded="true" />
-            <element signature="e#2051#2052#0" expanded="true" />
             <element signature="method#getRandomTurn#0;class#ConnectFourModel#0" expanded="false" />
             <element signature="method#resetConfiguration#0;class#ConnectFourModel#0" expanded="false" />
           </folding>
@@ -853,8 +847,6 @@
           <caret line="180" column="21" selection-start-line="180" selection-start-column="21" selection-end-line="180" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2024#2025#0" expanded="true" />
-            <element signature="e#2051#2052#0" expanded="true" />
             <element signature="method#getRandomTurn#0;class#ConnectFourModel#0" expanded="false" />
             <element signature="method#resetConfiguration#0;class#ConnectFourModel#0" expanded="false" />
           </folding>
@@ -918,8 +910,6 @@
           <caret line="213" column="42" selection-start-line="213" selection-start-column="42" selection-end-line="213" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2024#2025#0" expanded="true" />
-            <element signature="e#2051#2052#0" expanded="true" />
             <element signature="method#getRandomTurn#0;class#ConnectFourModel#0" expanded="false" />
             <element signature="method#resetConfiguration#0;class#ConnectFourModel#0" expanded="false" />
           </folding>
@@ -990,8 +980,6 @@
           <caret line="213" column="53" selection-start-line="213" selection-start-column="53" selection-end-line="213" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2024#2025#0" expanded="true" />
-            <element signature="e#2051#2052#0" expanded="true" />
             <element signature="method#getRandomTurn#0;class#ConnectFourModel#0" expanded="false" />
             <element signature="method#resetConfiguration#0;class#ConnectFourModel#0" expanded="false" />
           </folding>
@@ -1055,8 +1043,6 @@
           <caret line="213" column="53" selection-start-line="213" selection-start-column="53" selection-end-line="213" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2024#2025#0" expanded="true" />
-            <element signature="e#2051#2052#0" expanded="true" />
             <element signature="method#getRandomTurn#0;class#ConnectFourModel#0" expanded="false" />
             <element signature="method#resetConfiguration#0;class#ConnectFourModel#0" expanded="false" />
           </folding>
@@ -1191,10 +1177,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ConnectFourModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4881" max-vertical-offset="5340">
+          <caret line="355" column="46" selection-start-line="355" selection-start-column="46" selection-end-line="355" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getRandomTurn#0;class#ConnectFourModel#0" expanded="false" />
+            <element signature="method#resetConfiguration#0;class#ConnectFourModel#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ConnectFourView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3366" max-vertical-offset="3795">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#ConnectFourView#2;class#ConnectFourView#0" expanded="false" />
+            <element signature="method#setupMainMenu#0;class#ConnectFourView#0" expanded="false" />
+            <element signature="method#addCalculateListener#0;class#ConnectFourView#0" expanded="false" />
+            <element signature="method#setTurn#0;class#ConnectFourView#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Board.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="1095">
-          <caret line="139" column="56" selection-start-line="139" selection-start-column="56" selection-end-line="139" selection-end-column="56" />
+          <caret line="141" column="56" selection-start-line="141" selection-start-column="56" selection-end-line="141" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#Board#0;class#Board#0" expanded="false" />
@@ -1210,38 +1222,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ConnectFourModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3560" max-vertical-offset="5355">
-          <caret line="240" column="12" selection-start-line="240" selection-start-column="8" selection-end-line="240" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2024#2025#0" expanded="true" />
-            <element signature="e#2051#2052#0" expanded="true" />
-            <element signature="method#getRandomTurn#0;class#ConnectFourModel#0" expanded="false" />
-            <element signature="method#resetConfiguration#0;class#ConnectFourModel#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ConnectFourView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="3780">
-          <caret line="150" column="45" selection-start-line="150" selection-start-column="45" selection-end-line="150" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#ConnectFourView#2;class#ConnectFourView#0" expanded="false" />
-            <element signature="method#setupMainMenu#0;class#ConnectFourView#0" expanded="false" />
-            <element signature="method#addCalculateListener#0;class#ConnectFourView#0" expanded="false" />
-            <element signature="method#setTurn#0;class#ConnectFourView#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ConnectFourController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.4825175" vertical-offset="0" max-vertical-offset="2475">
-          <caret line="71" column="45" selection-start-line="71" selection-start-column="45" selection-end-line="71" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.61538464" vertical-offset="1821" max-vertical-offset="2430">
+          <caret line="139" column="0" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

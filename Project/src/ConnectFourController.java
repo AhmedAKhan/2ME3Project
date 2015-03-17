@@ -52,6 +52,7 @@ public class ConnectFourController {
                 model.resetConfiguration();
                 view.switchScreen(ConnectFourModel.GameState.Game);
                 view.setTurn(model.getRandomTurn());
+                view.setMessageText("Game Is In Progress");
             }else if(buttonPressedIconString.equals(ConnectFourView.mainCustomButtonImageName)){
                 // the custom game button in the main menu
                 model.setGameState(ConnectFourModel.GameState.CustomGame);
@@ -136,16 +137,11 @@ public class ConnectFourController {
             if(tilePosition.y >= model.getBoardConfiguration().length || tilePosition.y < 0) return;
             //x corresponds to the rows in the array and y corresponds to the columns
 
-            //get the mouse position of the click
-           //Then convert that to the board position where it will be in a different coordinate system
-
             //make that tile of type the players turn, but if that tile is already there then remove it
             if (model.getGameProgess() != (ConnectFourModel.GameProgress.inProgress)) return;
             //adjust the game and update the switchScreen
-            view.insertDisc(model.insertDisk(tilePosition), model.getTurn());
-            view.setMessageText("In Progress");
-            //update the view if it is possible,
-            //if it is not possible then call configurationNotPossible on the view class
+            view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
+            view.setMessageText("Game Is In Progress...");
         }
 
         @Override public void mouseReleased(MouseEvent e) {}//unused

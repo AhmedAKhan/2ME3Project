@@ -119,7 +119,9 @@ public class Board extends JPanel implements ActionListener {
 
     //PURPOSE: this function inserts the disc at the specified location
     public void insertDisc(Point point, ConnectFourModel.Slot type){
-        Timer t = new Timer(100, this);//creates a new timer this
+    	if(point == null) {
+    		return;}
+    	Timer t = new Timer(100, this);//creates a new timer this
 
         //setup the animation variables
         animatingPoint = new Point(point.x, 0); //start it at the highest row but in the same column as the destination
