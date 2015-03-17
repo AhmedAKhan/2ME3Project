@@ -21,10 +21,20 @@ public class ConnectFourController {
         view.addCalculateListener(listener, listener); // add the listener to the view
     }//end constructor
 
-    public void showWinner(ConnectFourModel.Slot slot){
-//        if (model.getGameProgess() == (ConnectFourModel.GameProgress.blueWon))      view.displayMessage("Blue Won");
-        if (model.getGameProgess() == (ConnectFourModel.GameProgress.redWon) || model.getGameProgess() == (ConnectFourModel.GameProgress.blueWon)) view.displayMessage(slot.toString() + " won"); //view.displayMessage("Red Won");
+    public void showWinner(){
+        if (model.getGameProgess() == (ConnectFourModel.GameProgress.blueWon))      view.displayMessage("Blue Won");
+        if (model.getGameProgess() == (ConnectFourModel.GameProgress.redWon)) view.displayMessage("Red Won");
         else if (model.getGameProgess() == (ConnectFourModel.GameProgress.tieGame)) view.displayMessage("You both lose");
+    }
+    public void switchTurn(){
+        if (model.getTurn() == ConnectFourModel.Slot.Blue) {
+            model.setTurn(ConnectFourModel.Slot.Red);
+            view.setTurn(ConnectFourModel.Slot.Red);
+        }
+        else if (model.getTurn() == ConnectFourModel.Slot.Red) {
+            model.setTurn(ConnectFourModel.Slot.Blue);
+            view.setTurn(ConnectFourModel.Slot.Blue);
+        }
     }
     public ConnectFourModel.Slot[][] getConfiguration(){ return model.getBoardConfiguration(); }
     class Listener implements ActionListener, MouseInputListener {
@@ -140,17 +150,6 @@ public class ConnectFourController {
             view.insertDisc(model.insertDisk(tilePosition), model.getTurn());
             //update the view if it is possible,
             //if it is not possible then call configurationNotPossible on the view class
-            System.out.println(model.getTurn() + " " + (model.getTurn() == ConnectFourModel.Slot.Blue));
-            if (model.getTurn() == ConnectFourModel.Slot.Blue) {
-            	System.out.println("model.getTurn: " + model.getTurn());
-            	model.setTurn(ConnectFourModel.Slot.Red);
-            	view.setTurn(ConnectFourModel.Slot.Red); 
-            	System.out.println("model.getTurn: " + model.getTurn());
-            }
-            else if (model.getTurn() == ConnectFourModel.Slot.Red) {
-                model.setTurn(ConnectFourModel.Slot.Blue);
-            	view.setTurn(ConnectFourModel.Slot.Blue);
-            }
         }
 
         @Override

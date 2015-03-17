@@ -220,17 +220,14 @@ public class ConnectFourModel {
     
     /** Returns current state of the Game **/
     public GameProgress getGameProgess() {
-//    	System.out.println("Current turn: " + this.getTurn().toString());
     	if (this.getWinState()) {
     		if (this.getTurn() == Slot.Blue) return GameProgress.blueWon;
     		else return GameProgress.redWon;
     	}
     	else if ((this.getBlueDiscsCount() + this.getRedDiscsCount()) == (this.getRows() * this.getColumns())) {
-//    		System.out.println("Tie Game");
     		return GameProgress.tieGame;
     	}
     	else {
-//    		System.out.println("In progress");
     		return GameProgress.inProgess;
     	}
     }

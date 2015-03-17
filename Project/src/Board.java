@@ -140,11 +140,12 @@ public class Board extends JPanel implements ActionListener {
         if(animatingPoint.x == stopAnimationPoint.x && animatingPoint.y == stopAnimationPoint.y){
             ConnectFourModel.Slot[][] config = controller.getConfiguration();
             config[stopAnimationPoint.y][stopAnimationPoint.x] = animatingSlot;
-            controller.showWinner(animatingSlot);
+            controller.showWinner();
             animatingSlot = ConnectFourModel.Slot.Empty;
             animatingPoint = new Point(-1,-1);
             stopAnimationPoint = animatingPoint;
             t.stop();//stop calling this function
+            controller.switchTurn();
         }else animatingPoint.y++; // make animating point go down
         repaint();//repaint the entire screen
     }
