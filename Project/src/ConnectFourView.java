@@ -269,9 +269,9 @@ public class ConnectFourView extends JFrame {
     }//end the function
 
     //PURPOSE: displays and message on the screen of the text errorMessage that will be passed in as a parameter
-    public void displayMessage(String errorMessage){ JOptionPane.showMessageDialog(this, errorMessage); }
+    public void displayMessageAsPopup(String errorMessage){ JOptionPane.showMessageDialog(this, errorMessage); }
     //this function displays the following error in the error message text field
-    public void setError(String error) { errorMessage.setText(error); }
+    public void setMessageText(String error) { errorMessage.setText(error); }
 
     //all these functions get passed to the board
     //the reason the controller did not directly call the method from the board is that by doing so would remove the abstraction of the view class
