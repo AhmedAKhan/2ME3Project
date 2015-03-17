@@ -118,13 +118,13 @@ public class ConnectFourModel {
     		return false;
     	
 		/* Switch turns after a valid move is made */
-        switchTurns();
+//        switchTurns();
 
         return true;
     }
     
     /** PRIVATE: Switch turns **/
-    private void switchTurns() { this.turnCount = 3 - this.turnCount; }
+//    private void switchTurns() { this.turnCount = 3 - this.turnCount; }
     
     /** PRIVATE: Count the number of blue discs inside the configuration **/
     private int getBlueDiscsCount() {
@@ -166,10 +166,7 @@ public class ConnectFourModel {
 					diagRLD = checkRed(i+1,j-1) 
 							&& checkRed(i+2,j-2)
 							&& checkRed(i+3,j-3);
-					if (horizontal || vertical || diagLRD || diagRLD) {
-						redWins = true;
-						return true;//"Blue wins";
-					}
+					
 				} else if (boardConfiguration[i][j].equals(Slot.Blue)) {
 					vertical = checkBlue(i+1,j) 
 							&& checkBlue(i+2,j)
@@ -182,12 +179,10 @@ public class ConnectFourModel {
 							&& checkBlue(i+3,j+3);
 					diagRLD = checkBlue(i+1,j-1) 
 							&& checkBlue(i+2,j-2)
-							&& checkBlue(i+3,j-3);
-					if (horizontal || vertical || diagLRD || diagRLD) {
-						blueWins = true;
-						return true;// "Red wins";
-					}
+							&& checkBlue(i+3,j-3);					
 				}
+				
+				if (horizontal || vertical || diagLRD || diagRLD) return true; // Someone won
 			}
 		}
     	return false;//"";
@@ -253,60 +248,67 @@ public class ConnectFourModel {
     //this method loads the state of the boardConfiguration from the save state file 
 	public  void loadState () {
 		try {
-		
-		
-		 Scanner input	=	new Scanner(new File("data/saveStateData.txt")); //initialize scanner
-		 String line = ""; 	// initialize empty string 
+
+			Scanner input = new Scanner(new File("data/saveStateData.txt")); // initialize
+																				// scanner
+			String line = ""; // initialize empty string
+
+			int x = 0; // counters used to help parse the string
+			int y = 0;
+			int z = 0;
+			int i = 0; // counters used to loop through all indexes from 0-41, i
+						// = rows, j = columns
+			int j = 0;
+			for (int k = 0; k < 42; k++) {
+				z++; // increment counters every time the loop is run
+				y++;
+				x++;
+
+				line = input.next();
+				if ((z == 1)) {
+					line = line.substring(1, line.length()); // used to parse
+																// first
+																// character in
+																// the 2D array
+																// string (since
+																// we have [[
+																// brackets)
+
+				}
+
+				if ((y - 1) % 6 == 0) { // used to parse starter brackets before
+										// every group of 6 elements
+					line = line.substring(1, line.length());
+				}
+				if (x % 6 == 0) { // used to parse end brackets after every
+									// group of 6 elements
+					line = line.substring(0, line.length() - 1);
+				}
+				line = line.substring(0, line.length() - 1);
+
+				boardConfiguration[i][j] = Slot.valueOf(line); // update board
+																// configuration
+				j++;
+				if (j == 6) { // increment row counter to next value if column
+								// has reached 6 and reset column
+					i++;
+					j = 0;
+				}
+
+				if (i == 7) { // rest row counter to 0 if row has reached 7
+					i = 0;
+				}
+
+			}
 		 
-		 
-				 int x = 0;  //counters used to help parse the string 
-				 int y = 0;
-				 int z = 0;
-				 int i = 0;  //counters used to loop through all indexes from 0-41, i = rows, j = columns 
-				 int j = 0;
-				 	for (int k = 0; k<42; k++){
-				 		z++;		//increment counters every time the loop is run
-				 		y++;
-				 		x++;
-			 
-			 
-				 		line = input.next();
-				 		if ((z==1)) {
-				 			line =line.substring(1, line.length()); //used to parse first character in the 2D array string (since we have [[ brackets)
-				 
-				 			}
-			 
-			 
-				 		if ((y-1)%6==0){		//used to parse starter brackets before every group of 6 elements  
-				 			line =line.substring(1, line.length());
-				 		}
-				 		if (x%6==0){		//used to parse end brackets after every group of 6 elements
-				 			line =line.substring(0, line.length()-1);}
-				 		line =line.substring(0, line.length()-1);
-			 
-			 
-				 		boardConfiguration [i][j] = Slot.valueOf(line); //update board configuration 
-				 		j++;
-				 		if (j==6) {  //increment row counter to next value if column has reached 6 and reset column
-				 			i++;
-				 			j=0; }
-				 		
-				 		if (i==7)  {  //rest row counter to 0 if row has reached 7
-				 			i=0; }
-				 		
-				 		
-				 		}
-		 
-				  
-				  
-		      
+		// Sets the turn to the color with lower number of discs when the game is loaded		  
+		if (this.getRedDiscsCount() < this.getBlueDiscsCount()) this.setTurn(Slot.Red);
+		else this.setTurn(Slot.Red);
 		
-	}catch(Exception e){ System.out.println("caught error: " + e); }
+		}catch(Exception e){ System.out.println("caught error: " + e); }
 	
 
-
-	
-}
+	}
     public ConnectFourModel.Slot switchTurn(){
     	return ConnectFourModel.Slot.Blue;
     }
@@ -314,6 +316,21 @@ public class ConnectFourModel {
     /** Returns whose turn it is as a String (i.e. "red" or "blue") **/
     public Slot getTurn(){ return currentTurn; }
     public void setTurn(Slot newTurn){ if(currentTurn!=Slot.Empty) currentTurn = newTurn;}
+    
+    /** Sets the turn to either Red or Blue randomly and returns it **/
+    public Slot getRandomTurn() {
+    	Random r = new Random();
+		int randomNum = r.nextInt(3-1) + 1; // Generate random number that is [1,3)
+		
+		if (randomNum == 1) {
+			this.setTurn(Slot.Blue);
+			return Slot.Blue;
+		}
+		else {
+			this.setTurn(Slot.Red);
+			return Slot.Red;
+		}
+    }
     
     /** Returns the String with the error message **/
     public String getErrorMessage() { return this.errorMessage; }

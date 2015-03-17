@@ -51,6 +51,7 @@ public class ConnectFourController {
                 model.setGameState(ConnectFourModel.GameState.Game);
                 model.resetConfiguration();
                 view.switchScreen(ConnectFourModel.GameState.Game);
+                view.setTurn(model.getRandomTurn());
             }else if(buttonPressedIconString.equals(ConnectFourView.mainCustomButtonImageName)){
                 // the custom game button in the main menu
                 model.setGameState(ConnectFourModel.GameState.CustomGame);
@@ -64,6 +65,7 @@ public class ConnectFourController {
                 model.loadState();
                 model.setGameState(ConnectFourModel.GameState.Game);
                 view.switchScreen(ConnectFourModel.GameState.Game);
+                view.setTurn(model.getTurn());
             }else if(buttonPressedIconString.equals(ConnectFourView.gameMainMenuImageName)){
                 model.setGameState(ConnectFourModel.GameState.MainMenu);
                 view.switchScreen(ConnectFourModel.GameState.MainMenu);
