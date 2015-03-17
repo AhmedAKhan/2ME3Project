@@ -118,28 +118,16 @@ public class ConnectFourController {
         public void mouseClicked(MouseEvent e) {
         	//if its in the main menu stop running the rest of the code
             if(model.getGameState() == ConnectFourModel.GameState.MainMenu) return;
-
-            if (model.getGameState() == ConnectFourModel.GameState.CustomGame) {
-            	handleCustomGameState (e); return;
-            }
+            if (model.getGameState() == ConnectFourModel.GameState.CustomGame) { handleCustomGameState (e); return;}
             if(view.isAnimating()) return;
-            //if (model.getWinState()==true)
-//            ConnectFourModel.Slot[][] newBoardConfiguration = model.getBoardConfiguration();
+
             Point mousePosition = new Point(e.getX(), e.getY());
             Point tilePosition = view.getBoardCoordinateOfPoint(mousePosition);
-
             //if the click is outside the board just end the function
             if(tilePosition.x >= model.getBoardConfiguration()[0].length || tilePosition.x < 0) return;
             if(tilePosition.y >= model.getBoardConfiguration().length || tilePosition.y < 0) return;
             //x corresponds to the rows in the array and y corresponds to the columns
 
-            //check if this configuration is possible by calling the model
-            //ConnectFourModel.Slot[][] newBoardConfiguration = model.getBoardConfiguration();
-           // ConnectFourModel.Slot.Red) 
-            	//model.setTurn(ConnectFourModel.Slot.Blue);
-            
-            
-            
             //get the mouse position of the click and t
            //Then convert that to the board position where it will be in a different coordinate system
 
@@ -148,16 +136,10 @@ public class ConnectFourController {
 
             if (model.getGameProgess() != (ConnectFourModel.GameProgress.inProgess)) return;
 
-//            if(newBoardConfiguration[tilePosition.y][tilePosition.x] == model.getTurn())newBoardConfiguration[tilePosition.y][tilePosition.x] = ConnectFourModel.Slot.Empty;
-//            else newBoardConfiguration[tilePosition.y][tilePosition.x] = model.getTurn();
-
             //adjust the game and update the switchScreen
-//            view.adjustBoard(newBoardConfiguration);
             view.insertDisc(model.insertDisk(tilePosition), model.getTurn());
-           // view.switchScreen(model.getGameState());
             //update the view if it is possible,
             //if it is not possible then call configurationNotPossible on the view class
-            //view.repaint();
             System.out.println(model.getTurn() + " " + (model.getTurn() == ConnectFourModel.Slot.Blue));
             if (model.getTurn() == ConnectFourModel.Slot.Blue) {
             	System.out.println("model.getTurn: " + model.getTurn());
@@ -165,10 +147,10 @@ public class ConnectFourController {
             	view.setTurn(ConnectFourModel.Slot.Red); 
             	System.out.println("model.getTurn: " + model.getTurn());
             }
-            else if (model.getTurn() == ConnectFourModel.Slot.Red) 
-            	{model.setTurn(ConnectFourModel.Slot.Blue);
-            	view.setTurn(ConnectFourModel.Slot.Blue);}
-            
+            else if (model.getTurn() == ConnectFourModel.Slot.Red) {
+                model.setTurn(ConnectFourModel.Slot.Blue);
+            	view.setTurn(ConnectFourModel.Slot.Blue);
+            }
         }
 
         @Override
