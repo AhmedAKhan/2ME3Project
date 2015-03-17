@@ -22,9 +22,9 @@ public class ConnectFourController {
     }//end constructor
 
     public void showWinner(){
-        if (model.getGameProgess() == (ConnectFourModel.GameProgress.blueWon))      view.displayMessage("Blue Won");
-        if (model.getGameProgess() == (ConnectFourModel.GameProgress.redWon))       view.displayMessage("Red Won");
-        else if (model.getGameProgess() == (ConnectFourModel.GameProgress.tieGame)) view.displayMessage("You both lose");
+        if (model.getGameProgess() == (ConnectFourModel.GameProgress.blueWon)){      view.setMessageText("Blue Won");       view.displayMessageAsPopup("Blue Won");      }
+        if (model.getGameProgess() == (ConnectFourModel.GameProgress.redWon)){       view.setMessageText("Red Won");        view.displayMessageAsPopup("Red Won");       }
+        else if (model.getGameProgess() == (ConnectFourModel.GameProgress.tieGame)){ view.setMessageText("You Both Lose");  view.displayMessageAsPopup("You both lose"); }
     }
     public void switchTurn(){
         if (model.getTurn() == ConnectFourModel.Slot.Blue) {
@@ -59,8 +59,8 @@ public class ConnectFourController {
                 view.switchScreen(ConnectFourModel.GameState.CustomGame);
             }else if (buttonPressedIconString.equals(ConnectFourView.saveStateImage)) {
                 //Save progress.  If a previous data save exists, ask to overwrite... or don't; it doesn't matter.
-                if(model.checkBoardConfiguration()) model.saveState();
-                else view.displayMessage("Can not save the current state, the current state is not valid");
+                if(model.checkBoardConfiguration()) { model.saveState(); view.displayMessageAsPopup("The game has been saved");}
+                else view.displayMessageAsPopup("Can not save the current state, the current state is not valid");
             }else if(buttonPressedIconString.equals(ConnectFourView.mainLoadSavedStateImageName)){
                 model.loadState();
                 model.setGameState(ConnectFourModel.GameState.Game);
@@ -69,13 +69,13 @@ public class ConnectFourController {
             }else if(buttonPressedIconString.equals(ConnectFourView.gameMainMenuImageName)){
                 model.setGameState(ConnectFourModel.GameState.MainMenu);
                 view.switchScreen(ConnectFourModel.GameState.MainMenu);
-
+                view.setMessageText("");
             }else if(buttonPressedIconString.equals(ConnectFourView.customGameResetImageName)){                             //added Feb 26, 2015
                 //if(model.getGameState()== ConnectFourModel.GameState.Game) { model.resetConfiguration(); return; }
                 //model.setGameState(ConnectFourModel.GameState.CustomGame);                  //added Feb 26, 2015
                 model.resetConfiguration();                                                 //added Feb 26, 2015
                 view.setBoard(model.getBoardConfiguration());
-                view.setError("");
+                view.setMessageText("");
             }else if(model.getGameState() == ConnectFourModel.GameState.CustomGame){
                 if(buttonPressedIconString.equals(ConnectFourView.gameRedButtonImageName)){
                     model.setTurn(ConnectFourModel.Slot.Red);
@@ -85,9 +85,9 @@ public class ConnectFourController {
                     view.setTurn(model.getTurn());
                 }else if(buttonPressedIconString.equals(ConnectFourView.customGameCheckStateImageName)){
                     if(!model.checkBoardConfiguration()){
-                        view.setError(model.getErrorMessage());
+                        view.setMessageText(model.getErrorMessage());
                     }else{
-                        view.setError("Yay! No errors :D");
+                        view.setMessageText("Yay! No errors :D");
                     }
                 }//end of the if else block
             }
@@ -143,9 +143,9 @@ public class ConnectFourController {
 
             //make that tile of type the players turn, but if that tile is already there then remove it
             if (model.getGameProgess() != (ConnectFourModel.GameProgress.inProgress)) return;
-
             //adjust the game and update the switchScreen
             view.insertDisc(model.insertDisk(tilePosition), model.getTurn());
+            view.setMessageText("In Progress");
             //update the view if it is possible,
             //if it is not possible then call configurationNotPossible on the view class
         }
