@@ -1,5 +1,11 @@
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Created by Created by Ahmed Khan, Saim Malik, Zayan Imtiaz, Aleem Ul Haq, Sergio Agraz.
@@ -30,7 +36,8 @@ public class ConnectFourModel {
     private int turnCount = 1;
     private Slot currentTurn;
     private String errorMessage = "";
-
+    
+    
     public ConnectFourModel(int rows, int columns) {
         if (rows < 4 || columns < 4) {
             System.out.println("Game board must be at least be of size 4x4. Board "
@@ -201,7 +208,77 @@ public class ConnectFourModel {
 //    public boolean getWinState() {
 //    	return getWinState(this.boardConfiguration);
 //    }
+    public void saveState () {
+        PrintStream out;  //this will make all console output be placed in output.txt instead 
+    	
+		try {				//required exception in case the file is not found (will make it) 
+			out = new PrintStream(new FileOutputStream("data/saveStateData.txt"));
+			System.setOut(out);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+	    System.out.println(Arrays.deepToString(boardConfiguration));
+    }
     
+	public  void loadState () {
+		try {
+		
+		
+		 Scanner input	=	new Scanner(new File("data/saveStateData.txt"));
+		 String line = "";
+		 
+		 
+				 int x = 0;
+				 int y = 0;
+				 int z = 0;
+				 int i = 0;
+				 int j = 0;
+				 	for (int k = 0; k<42; k++){
+				 		z++;
+				 		y++;
+				 		x++;
+			 
+			 
+				 		line = input.next();
+				 		if ((z==1)) {
+				 			line =line.substring(1, line.length());
+				 
+				 			}
+			 
+			 
+				 		if ((y-1)%6==0){
+				 			line =line.substring(1, line.length());
+				 		}
+				 		if (x%6==0){
+				 			line =line.substring(0, line.length()-1);}
+				 		line =line.substring(0, line.length()-1);
+			 
+			 
+				 		boardConfiguration [i][j] = Slot.valueOf(line);
+				 		j++;
+				 		if (j==6) {
+				 			i++;
+				 			j=0; }
+				 		
+				 		if (i==7)  {
+				 			i=0; }
+				 		
+				 		
+				 		}
+		 
+				  
+				  
+		      
+		
+	}catch(Exception e){}
+	
+
+
+	
+}
     public ConnectFourModel.Slot switchTurn(){
     	return ConnectFourModel.Slot.Blue;
     }
