@@ -215,55 +215,56 @@ public class ConnectFourModel {
 			out = new PrintStream(new FileOutputStream("data/saveStateData.txt"));
 			System.setOut(out);
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 		
 		
-	    System.out.println(Arrays.deepToString(boardConfiguration));
+	    System.out.println(Arrays.deepToString(boardConfiguration)); //Prints out the 2D array in the given output file
     }
     
+    //this method loads the state of the boardConfiguration from the save state file 
 	public  void loadState () {
 		try {
 		
 		
-		 Scanner input	=	new Scanner(new File("data/saveStateData.txt"));
-		 String line = "";
+		 Scanner input	=	new Scanner(new File("data/saveStateData.txt")); //initialize scanner
+		 String line = ""; 	// initialize empty string 
 		 
 		 
-				 int x = 0;
+				 int x = 0;  //counters used to help parse the string 
 				 int y = 0;
 				 int z = 0;
-				 int i = 0;
+				 int i = 0;  //counters used to loop through all indexes from 0-41, i = rows, j = columns 
 				 int j = 0;
 				 	for (int k = 0; k<42; k++){
-				 		z++;
+				 		z++;		//increment counters every time the loop is run
 				 		y++;
 				 		x++;
 			 
 			 
 				 		line = input.next();
 				 		if ((z==1)) {
-				 			line =line.substring(1, line.length());
+				 			line =line.substring(1, line.length()); //used to parse first character in the 2D array string (since we have [[ brackets)
 				 
 				 			}
 			 
 			 
-				 		if ((y-1)%6==0){
+				 		if ((y-1)%6==0){		//used to parse starter brackets before every group of 6 elements  
 				 			line =line.substring(1, line.length());
 				 		}
-				 		if (x%6==0){
+				 		if (x%6==0){		//used to parse end brackets after every group of 6 elements
 				 			line =line.substring(0, line.length()-1);}
 				 		line =line.substring(0, line.length()-1);
 			 
 			 
-				 		boardConfiguration [i][j] = Slot.valueOf(line);
+				 		boardConfiguration [i][j] = Slot.valueOf(line); //update board configuration 
 				 		j++;
-				 		if (j==6) {
+				 		if (j==6) {  //increment row counter to next value if column has reached 6 and reset column
 				 			i++;
 				 			j=0; }
 				 		
-				 		if (i==7)  {
+				 		if (i==7)  {  //rest row counter to 0 if row has reached 7
 				 			i=0; }
 				 		
 				 		
