@@ -203,7 +203,7 @@ public class ConnectFourView extends JFrame {
 
         //the boundary represents the distance from the edge of the screen to the components on the screen,
         //by changing this variable we can increase or decrease the distance for all the buttons from the edge
-        int boundary = 10;
+        int boundary = 20;
         //adjust all the button's position
         mainMenuPlay.setLocation(this.getWidth() / 2 - mainMenuPlay.getWidth() / 2, this.getHeight() / 4 - mainMenuPlay.getHeight() / 2);//middle top
         mainMenuCustom.setLocation(this.getWidth()/2 - mainMenuCustom.getWidth()/2, this.getHeight()/4*2 -mainMenuCustom.getHeight()/2);//middle bottom

@@ -249,6 +249,8 @@ public class ConnectFourModel {
 			}
 			if (i < this.getRows()-1) output.format("\n");
 		}
+
+        output.format("");
     	
     	closeOutputFile();
     }
