@@ -91,16 +91,11 @@ public class ConnectFourController {
                     }
                 }//end of the if else block
             }
-
-//        	 if(buttonPressedIconString.equals(ConnectFourView.gameSaveButtonImageName)) model.saveState();
-//        	 if(buttonPressedIconString.equals(ConnectFourView.gameLoadButtonImageName)) model.loadState();
         }//end function
         
         public void handleCustomGameState(MouseEvent e){
 //get the mouse position of the click and then convert that to the board position where it will be in a different coordinate system
-            
-//            if (model.getWinState()==true)
-            
+
             Point mousePosition = new Point(e.getX(), e.getY());
             Point tilePosition = view.getBoardCoordinateOfPoint(mousePosition);
 
@@ -138,7 +133,7 @@ public class ConnectFourController {
             if(tilePosition.y >= model.getBoardConfiguration().length || tilePosition.y < 0) return;
             //x corresponds to the rows in the array and y corresponds to the columns
 
-            //get the mouse position of the click and t
+            //get the mouse position of the click
            //Then convert that to the board position where it will be in a different coordinate system
 
             //make that tile of type the players turn, but if that tile is already there then remove it

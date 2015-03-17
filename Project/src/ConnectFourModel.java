@@ -117,15 +117,9 @@ public class ConnectFourModel {
     	if(!this.errorMessage.equals("<html></html>"))
     		return false;
     	
-		/* Switch turns after a valid move is made */
-//        switchTurns();
-
         return true;
     }
-    
-    /** PRIVATE: Switch turns **/
-//    private void switchTurns() { this.turnCount = 3 - this.turnCount; }
-    
+
     /** PRIVATE: Count the number of blue discs inside the configuration **/
     private int getBlueDiscsCount() {
     	int blue = 0;
@@ -212,10 +206,6 @@ public class ConnectFourModel {
     /** PRIVATE: Return number of columns **/
     private int getColumns() { return boardConfiguration[0].length; }
     
-    /** Check if the game is in a winning state **/
-//    public boolean getWinState() {
-//    	return getWinState(this.boardConfiguration);
-//    }
     public void saveState () {
         PrintStream out;  //this will make all console output be placed in output.txt instead 
     	
@@ -305,7 +295,7 @@ public class ConnectFourModel {
 		if (this.getRedDiscsCount() < this.getBlueDiscsCount()) this.setTurn(Slot.Red);
 		else this.setTurn(Slot.Red);
 		
-		}catch(Exception e){ System.out.println("caught error: " + e); }
+		}catch(Exception e){ }
 	
 
 	}
