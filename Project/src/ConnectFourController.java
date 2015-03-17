@@ -58,7 +58,7 @@ public class ConnectFourController {
                 view.switchScreen(ConnectFourModel.GameState.CustomGame);
             }else if (buttonPressedIconString.equals(ConnectFourView.saveStateImage)) {
                 //Save progress.  If a previous data save exists, ask to overwrite... or don't; it doesn't matter.
-                if(model.checkBoardConfiguration()) model.saveState();
+                if(model.checkBoardConfiguration()) { model.saveState(); view.displayMessage("The game has been saved");}
                 else view.displayMessage("Can not save the current state, the current state is not valid");
             }else if(buttonPressedIconString.equals(ConnectFourView.mainLoadSavedStateImageName)){
                 model.loadState();
