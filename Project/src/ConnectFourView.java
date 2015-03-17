@@ -159,15 +159,13 @@ public class ConnectFourView extends JFrame {
             // Find out how much the font can grow in width.
             double widthRatio = (double)componentWidth / (double)stringWidth;
             int newFontSize = (int)(labelFont.getSize() * widthRatio);
-            int componentHeight = textField.getHeight();
             // Pick a new font size so it will not be larger than the height of label.
-            int fontSizeToUse = Math.min(newFontSize, componentHeight);
+            int fontSizeToUse = Math.min(newFontSize, (int)(textField.getHeight()*0.85));
             // Set the label's font size to the newly determined size.
             textField.setFont(new Font(labelFont.getName(), Font.PLAIN, fontSizeToUse));
-
-
             customGameCheckState.setVisible(false);
         }else{
+            textField.setFont(new Font(textField.getFont().getName(), Font.PLAIN, 15));
             textField.setSize(getWidth() - gameSaveStateButton.getWidth(), 110);
             textField.setLocation((getWidth() - gameSaveStateButton.getWidth()) / 2, 0);
             customGameCheckState.setVisible(true);
