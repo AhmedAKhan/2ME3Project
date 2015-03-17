@@ -111,21 +111,27 @@ public class Board extends JPanel implements ActionListener {
     }
 
     //these two private functions are to get the width and height of the board, they are used to draw the board
-    public int getWidthOfBoard(){  return (columns)*(diameterOfDisk +spaceBetweenDisks) + spaceBetweenDisks;}
-    public int getHeightOfBoard(){return (rows)*(diameterOfDisk + spaceBetweenDisks) + spaceBetweenDisks; }
+    public int getWidthOfBoard(){  return (columns)*(diameterOfDisk +spaceBetweenDisks) + spaceBetweenDisks;}// calculates the width of the screen
+    public int getHeightOfBoard(){return (rows)*(diameterOfDisk + spaceBetweenDisks) + spaceBetweenDisks; } // calculates the height of the screen
 
-    public boolean isAnimating(){ return (animatingSlot != ConnectFourModel.Slot.Empty); }
+    //PURPOSE: to tell the controller not to allow any other movements while the program is animating
+    public boolean isAnimating(){ return (animatingSlot != ConnectFourModel.Slot.Empty); } //
+
+    //PURPOSE: this function inserts the disc at the specified location
     public void insertDisc(Point point, ConnectFourModel.Slot type){
-        Timer t = new Timer(100, this);
-        animatingPoint = new Point(point.x, 0);
-        stopAnimationPoint = point;
-        animatingSlot = type;
-        t.start();
-        repaint();
+        Timer t = new Timer(100, this);//creates a new timer this
+
+        //setup the animation variables
+        animatingPoint = new Point(point.x, 0); //start it at the highest row but in the same column as the destination
+        stopAnimationPoint = point; // stop when it reaches the point
+        animatingSlot = type; // store the color of the disc that is falling
+        t.start(); // start the timer
+        repaint(); // draw the updated screen
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    //PURPOSE: this function is called to animate the pieces fall.
+    // it gets called every 100ms, it will simply update the animation variables, (animationPoint, stopAnimationPoint, animationSlot)
+    @Override public void actionPerformed(ActionEvent e) {
         Timer t = (Timer)e.getSource(); // get the timer
         if(animatingPoint.x == stopAnimationPoint.x && animatingPoint.y == stopAnimationPoint.y){
             ConnectFourModel.Slot[][] config = controller.getConfiguration();

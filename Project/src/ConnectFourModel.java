@@ -2,6 +2,12 @@
 import java.util.Arrays;
 import java.util.Random;
 import java.awt.Point;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
+
 /**
  * Created by Created by Ahmed Khan, Saim Malik, Zayan Imtiaz, Aleem Ul Haq, Sergio Agraz.
  */
@@ -27,7 +33,7 @@ public class ConnectFourModel {
     }
     
     enum GameProgress {
-    	tieGame, blueWon, redWon, inProgess;
+    	tieGame, blueWon, redWon, inProgress;
     }
 
     private GameState gameState;
@@ -36,7 +42,6 @@ public class ConnectFourModel {
     private Slot currentTurn;
     private String errorMessage = "";
     private boolean blueWins = false, redWins = false;
-    
     private int rowSize;
 
     public ConnectFourModel(int rows, int columns) {
@@ -216,7 +221,21 @@ public class ConnectFourModel {
 //    public boolean getWinState() {
 //    	return getWinState(this.boardConfiguration);
 //    }
-    
+    public void saveState () {
+        PrintStream out;  //this will make all console output be placed in output.txt instead 
+    	
+		try {				//required exception in case the file is not found (will make it) 
+			out = new PrintStream(new FileOutputStream("data/saveStateData.txt"));
+			System.setOut(out);
+		} catch (FileNotFoundException e1) {
+			
+			e1.printStackTrace();
+		}
+		
+		
+	    System.out.println(Arrays.deepToString(boardConfiguration)); //Prints out the 2D array in the given output file
+    }
+
     /** Returns current state of the Game **/
     public GameProgress getGameProgess() {
     	if (this.getWinState()) {
@@ -227,10 +246,67 @@ public class ConnectFourModel {
     		return GameProgress.tieGame;
     	}
     	else {
-    		return GameProgress.inProgess;
+    		return GameProgress.inProgress;
     	}
     }
-    
+
+    //this method loads the state of the boardConfiguration from the save state file 
+	public  void loadState () {
+		try {
+		
+		
+		 Scanner input	=	new Scanner(new File("data/saveStateData.txt")); //initialize scanner
+		 String line = ""; 	// initialize empty string 
+		 
+		 
+				 int x = 0;  //counters used to help parse the string 
+				 int y = 0;
+				 int z = 0;
+				 int i = 0;  //counters used to loop through all indexes from 0-41, i = rows, j = columns 
+				 int j = 0;
+				 	for (int k = 0; k<42; k++){
+				 		z++;		//increment counters every time the loop is run
+				 		y++;
+				 		x++;
+			 
+			 
+				 		line = input.next();
+				 		if ((z==1)) {
+				 			line =line.substring(1, line.length()); //used to parse first character in the 2D array string (since we have [[ brackets)
+				 
+				 			}
+			 
+			 
+				 		if ((y-1)%6==0){		//used to parse starter brackets before every group of 6 elements  
+				 			line =line.substring(1, line.length());
+				 		}
+				 		if (x%6==0){		//used to parse end brackets after every group of 6 elements
+				 			line =line.substring(0, line.length()-1);}
+				 		line =line.substring(0, line.length()-1);
+			 
+			 
+				 		boardConfiguration [i][j] = Slot.valueOf(line); //update board configuration 
+				 		j++;
+				 		if (j==6) {  //increment row counter to next value if column has reached 6 and reset column
+				 			i++;
+				 			j=0; }
+				 		
+				 		if (i==7)  {  //rest row counter to 0 if row has reached 7
+				 			i=0; }
+				 		
+				 		
+				 		}
+		 
+				  
+				  
+		      
+		
+	}catch(Exception e){ System.out.println("caught error: " + e); }
+	
+
+
+	
+}
     public ConnectFourModel.Slot switchTurn(){
     	return ConnectFourModel.Slot.Blue;
     }

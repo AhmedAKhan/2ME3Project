@@ -33,8 +33,8 @@ public class ConnectFourView extends JFrame {
     public static final String mainPlayButtonImageNamePressed = "./src/images/playButton3.png";
     public static final String gameMainMenuImageName = "./src/images/mainMenuButton1.png";
     public static final String gameMainMenuImageNamePressed ="./src/images/mainMenuButton3.png";
-    public static final String loadSavedState = "./src/images/loadstate1.png";
-    public static final String loadSavedStatePressed = "./src/images/loadstate2.png";
+    public static final String mainLoadSavedStateImageName = "./src/images/loadstate1.png";
+    public static final String mainLoadSavedStateImageNamePressed = "./src/images/loadstate2.png";
     //Game buttons
     public static final String saveStateImage = "./src/images/savestate1.png";
     public static final String saveStateImagePressed = "./src/images/savestate2.png";
@@ -92,7 +92,7 @@ public class ConnectFourView extends JFrame {
         //create the two buttons
         mainMenuCustom = createButton(mainCustomButtonImageName, width/2-buttonWidth/2, height/4*2-buttonHeight/2, buttonWidth, buttonHeight, mainMenu, mainCustomButtonimageNamePressed);
         mainMenuPlay = createButton(mainPlayButtonImageName, width/2-buttonWidth/2, height/4-buttonHeight/2, buttonWidth, buttonHeight, mainMenu, mainPlayButtonImageNamePressed);
-        mainMenuLoad = createButton(loadSavedState, width/2-buttonWidth/2, height/4*3-buttonHeight/2, buttonWidth, buttonHeight, mainMenu, loadSavedStatePressed);
+        mainMenuLoad = createButton(mainLoadSavedStateImageName, width/2-buttonWidth/2, height/4*3-buttonHeight/2, buttonWidth, buttonHeight, mainMenu, mainLoadSavedStateImageNamePressed);
 
         //add the main menu to the screen
         this.add(mainMenu);
@@ -242,6 +242,8 @@ public class ConnectFourView extends JFrame {
         gameRedButton.addActionListener(listenForButton);
 
         customGameCheckState.addActionListener(listenForButton);
+        mainMenuLoad.addActionListener(listenForButton);
+        gameSaveStateButton.addActionListener(listenForButton);
 
         //make the listener for the game buttons
         board.addMouseListener(mouseListener);
@@ -260,16 +262,18 @@ public class ConnectFourView extends JFrame {
             gameBlueButton.setIcon(new ImageIcon(gameBlueButtonImageName));
             gameRedButton.setIcon(new ImageIcon(gameRedButtonImageNameSelected));
         }
-        //in case if we are using this function wrong, inform the client
-        System.out.println("You are trying make the current turn become EMPTY's, next time set it to blue or red");
-    }
+        else {
+            //in case if we are using this function wrong, inform the client
+            System.out.println("You are trying make the current turn become EMPTY's, next time set it to blue or red");
+        }//end else-if block
+    }//end the function
 
     //PURPOSE: displays and message on the screen of the text errorMessage that will be passed in as a parameter
     public void displayMessage(String errorMessage){ JOptionPane.showMessageDialog(this, errorMessage); }
     //this function displays the following error in the error message text field
     public void setError(String error) { errorMessage.setText(error); }
 
-    //all these funtions get passed to the board
+    //all these functions get passed to the board
     //the reason the controller did not directly call the method from the board is that by doing so would remove the abstraction of the view class
     //the controller should not need to know how the view class works to work with it
     public Point getBoardCoordinateOfPoint(Point point){ return board.getBoardCoordinateOfPoint(point); }

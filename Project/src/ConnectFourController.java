@@ -43,10 +43,6 @@ public class ConnectFourController {
         //Purpose: when the user presses the main menu button it will call this function, and it will either go to the game stage or the custom game depending on what is clicked
         @Override
         public void actionPerformed(ActionEvent e) {
-        	
-//        	 if(buttonPressedIconString.equals(ConnectFourView.gameSaveButtonImageName)) model.saveState();
-//        	 if(buttonPressedIconString.equals(ConnectFourView.gameLoadButtonImageName)) model.loadState();
-
             //will get called for the menu buttons stuff
             //check what button is pressed
             String buttonPressedIconString = ((JButton)e.getSource()).getIcon().toString();
@@ -55,12 +51,19 @@ public class ConnectFourController {
                 model.setGameState(ConnectFourModel.GameState.Game);
                 model.resetConfiguration();
                 view.switchScreen(ConnectFourModel.GameState.Game);
-
             }else if(buttonPressedIconString.equals(ConnectFourView.mainCustomButtonImageName)){
                 // the custom game button in the main menu
                 model.setGameState(ConnectFourModel.GameState.CustomGame);
                 model.resetConfiguration();
                 view.switchScreen(ConnectFourModel.GameState.CustomGame);
+            }else if (buttonPressedIconString.equals(ConnectFourView.saveStateImage)) {
+                //Save progress.  If a previous data save exists, ask to overwrite... or don't; it doesn't matter.
+                if(model.checkBoardConfiguration()) model.saveState();
+                else view.displayMessage("Can not save the current state, the current state is not valid");
+            }else if(buttonPressedIconString.equals(ConnectFourView.mainLoadSavedStateImageName)){
+                model.loadState();
+                model.setGameState(ConnectFourModel.GameState.Game);
+                view.switchScreen(ConnectFourModel.GameState.Game);
             }else if(buttonPressedIconString.equals(ConnectFourView.gameMainMenuImageName)){
                 model.setGameState(ConnectFourModel.GameState.MainMenu);
                 view.switchScreen(ConnectFourModel.GameState.MainMenu);
@@ -71,7 +74,6 @@ public class ConnectFourController {
                 model.resetConfiguration();                                                 //added Feb 26, 2015
                 view.setBoard(model.getBoardConfiguration());
                 view.setError("");
-
             }else if(model.getGameState() == ConnectFourModel.GameState.CustomGame){
                 if(buttonPressedIconString.equals(ConnectFourView.gameRedButtonImageName)){
                     model.setTurn(ConnectFourModel.Slot.Red);
@@ -86,10 +88,10 @@ public class ConnectFourController {
                         view.setError("Yay! No errors :D");
                     }
                 }//end of the if else block
-            }else if (buttonPressedIconString.equals(ConnectFourView.saveStateImage)) {
-            	//Save progress.  If a previous data save exists, ask to overwrite... or don't; it doesn't matter.
-
             }
+
+//        	 if(buttonPressedIconString.equals(ConnectFourView.gameSaveButtonImageName)) model.saveState();
+//        	 if(buttonPressedIconString.equals(ConnectFourView.gameLoadButtonImageName)) model.loadState();
         }//end function
         
         public void handleCustomGameState(MouseEvent e){
@@ -138,7 +140,7 @@ public class ConnectFourController {
            //Then convert that to the board position where it will be in a different coordinate system
 
             //make that tile of type the players turn, but if that tile is already there then remove it
-            if (model.getGameProgess() != (ConnectFourModel.GameProgress.inProgess)) return;
+            if (model.getGameProgess() != (ConnectFourModel.GameProgress.inProgress)) return;
 
             //adjust the game and update the switchScreen
             view.insertDisc(model.insertDisk(tilePosition), model.getTurn());
@@ -146,18 +148,12 @@ public class ConnectFourController {
             //if it is not possible then call configurationNotPossible on the view class
         }
 
-        @Override
-        public void mousePressed(MouseEvent e) {} //unused
-        @Override
-        public void mouseReleased(MouseEvent e) {}//unused
-        @Override
-        public void mouseEntered(MouseEvent e) {}//unused
-        @Override
-        public void mouseExited(MouseEvent e) {}//unused
-        @Override
-        public void mouseDragged(MouseEvent e) {}//unused
-        @Override
-        public void mouseMoved(MouseEvent e) {}//unused
+        @Override public void mouseReleased(MouseEvent e) {}//unused
+        @Override public void mousePressed(MouseEvent e) {} //unused
+        @Override public void mouseEntered(MouseEvent e) {}//unused
+        @Override public void mouseExited(MouseEvent e) {}//unused
+        @Override public void mouseDragged(MouseEvent e) {}//unused
+        @Override public void mouseMoved(MouseEvent e) {}//unused
     }//end calculate listener class
 
 
