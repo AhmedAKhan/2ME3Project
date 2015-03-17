@@ -20,7 +20,7 @@ public class ConnectFourView extends JFrame {
     private JButton customGameReset;        // this button resets the board and makes it blank
     //the buttons just in the custom game
     private JButton customGameCheckState;   // this button checks if the current state of the game is valid and then displays the error messages
-    private JLabel errorMessage;            // this is the label that will display the error message in the custom game
+    private JLabel textField;            // this is the label that will display the error message in the custom game
 
     //this is the board that is displayed on the screen
     private Board board;
@@ -112,11 +112,11 @@ public class ConnectFourView extends JFrame {
         //buttons for the custom game
         customGameReset      = createButton(customGameResetImageName, 0,0, smallButton, smallButton, game, customGameResetImageNamePressed);
         customGameCheckState = createButton(customGameCheckStateImageName, 0,0, buttonWidth, buttonHeight, game, customGameCheckStateImageNamePressed);
-        errorMessage = new JLabel("");
-        errorMessage.setOpaque(false);
-        errorMessage.setSize(width- gameSaveStateButton.getWidth(),100);
-        errorMessage.setLocation((width-gameSaveStateButton.getWidth())/2,0);
-        errorMessage.setHorizontalAlignment(JTextField.CENTER);
+        textField = new JLabel("");
+        textField.setOpaque(false);
+        textField.setSize(width - gameSaveStateButton.getWidth(), 110);
+        textField.setLocation((width - gameSaveStateButton.getWidth()) / 2, 0);
+        textField.setHorizontalAlignment(JTextField.CENTER);
         //buttons for the game
 
         board = new Board(boardCols, boardRows); //create the board
@@ -128,7 +128,7 @@ public class ConnectFourView extends JFrame {
                 board.getHeightOfBoard());                          // height
         board.validate();       // make sure the board's state is valid
         board.repaint();        // draw the board on the screen
-        game.add(errorMessage); // add the error message textfield
+        game.add(textField); // add the error message textfield
         game.add(board);        // add the board to the game
 
         this.add(game);         //adds the game to the screen
@@ -146,7 +146,32 @@ public class ConnectFourView extends JFrame {
         game.setVisible(true);      // show the game screen
 
         //show this button if the current state is custom game
-        customGameCheckState.setVisible(gameState.equals(ConnectFourModel.GameState.Game)? false:true);
+        //and reposition the text field depending on its position
+        if(gameState == ConnectFourModel.GameState.Game){
+            textField.setSize(getWidth(), 110);
+            textField.setLocation(0, 0);
+
+
+            Font labelFont = textField.getFont();
+            String labelText = textField.getText();
+            int stringWidth = textField.getFontMetrics(labelFont).stringWidth(labelText);
+            int componentWidth = textField.getWidth();
+            // Find out how much the font can grow in width.
+            double widthRatio = (double)componentWidth / (double)stringWidth;
+            int newFontSize = (int)(labelFont.getSize() * widthRatio);
+            int componentHeight = textField.getHeight();
+            // Pick a new font size so it will not be larger than the height of label.
+            int fontSizeToUse = Math.min(newFontSize, componentHeight);
+            // Set the label's font size to the newly determined size.
+            textField.setFont(new Font(labelFont.getName(), Font.PLAIN, fontSizeToUse));
+
+
+            customGameCheckState.setVisible(false);
+        }else{
+            textField.setSize(getWidth() - gameSaveStateButton.getWidth(), 110);
+            textField.setLocation((getWidth() - gameSaveStateButton.getWidth()) / 2, 0);
+            customGameCheckState.setVisible(true);
+        }
 
     }//end function of the switch screen
 
@@ -268,10 +293,10 @@ public class ConnectFourView extends JFrame {
         }//end else-if block
     }//end the function
 
-    //PURPOSE: displays and message on the screen of the text errorMessage that will be passed in as a parameter
-    public void displayMessageAsPopup(String errorMessage){ JOptionPane.showMessageDialog(this, errorMessage); }
+    //PURPOSE: displays and message on the screen of the text messageToDisplay that will be passed in as a parameter
+    public void displayMessageAsPopup(String messageToDisplay){ JOptionPane.showMessageDialog(this, messageToDisplay); }
     //this function displays the following error in the error message text field
-    public void setMessageText(String error) { errorMessage.setText(error); }
+    public void setMessageText(String error) { textField.setText(error); }
 
     //all these functions get passed to the board
     //the reason the controller did not directly call the method from the board is that by doing so would remove the abstraction of the view class
