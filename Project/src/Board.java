@@ -1,10 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 /**
  * Created by ahmed on 3/6/15.
  */
-public class Board extends JPanel {
+public class Board extends JPanel implements ActionListener {
 
     //this JPanel holds all the data
     private int diameterOfDisk = 30;			//represents the diameter of one disk
@@ -13,12 +16,19 @@ public class Board extends JPanel {
     private int columns;                        //represents the number of columns in the board
     private ConnectFourController controller;
 
+    private Point animatingPoint;
+    private ConnectFourModel.Slot animatingSlot;
+    private Point stopAnimationPoint;
+
     public Board(int rows, int columns){
         super(null, true);//calls the super constructor
 
         //set its rows and columns
         this.rows = rows;
         this.columns = columns;
+        animatingPoint = new Point(-1,-1);
+        animatingSlot = ConnectFourModel.Slot.Empty;
+        stopAnimationPoint = new Point(-1,-1);
 
         //make it not have a layout
         setLayout(null);
@@ -60,7 +70,8 @@ public class Board extends JPanel {
         //draws all the disks on the board
         for(int rowCounter = 0; rowCounter < slotConfiguration.length; rowCounter++){
             for(int colCounter = 0; colCounter < slotConfiguration[0].length; colCounter++){
-                drawTileAtPosition(g, new Point(colCounter, rowCounter), slotConfiguration[rowCounter][colCounter], slotConfiguration.length);
+                if(animatingPoint.x == colCounter && animatingPoint.y == rowCounter) drawTileAtPosition(g, new Point(colCounter, rowCounter), animatingSlot, slotConfiguration.length);
+                else drawTileAtPosition(g, new Point(colCounter, rowCounter), slotConfiguration[rowCounter][colCounter], slotConfiguration.length);
             }//end row counter loop
         }//end col counter loop
     }//end function
@@ -113,8 +124,28 @@ public class Board extends JPanel {
     public int getWidthOfBoard(){  return (columns)*(diameterOfDisk +spaceBetweenDisks) + spaceBetweenDisks;}
     public int getHeightOfBoard(){return (rows)*(diameterOfDisk + spaceBetweenDisks) + spaceBetweenDisks; }
 
-    public void insertDisc(Point point){
-
+    public boolean isAnimating(){ return (animatingSlot != ConnectFourModel.Slot.Empty); }
+    public void insertDisc(Point point, ConnectFourModel.Slot type){
+        Timer t = new Timer(100, this);
+        animatingPoint = new Point(point.x, 0);
+        stopAnimationPoint = point;
+        animatingSlot = type;
+        t.start();
+        repaint();
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Timer t = (Timer)e.getSource(); // get the timer
+        if(animatingPoint.x == stopAnimationPoint.x && animatingPoint.y == stopAnimationPoint.y){
+            ConnectFourModel.Slot[][] config = controller.getConfiguration();
+            config[stopAnimationPoint.y][stopAnimationPoint.x] = animatingSlot;
+            controller.showWinner(animatingSlot);
+            animatingSlot = ConnectFourModel.Slot.Empty;
+            animatingPoint = new Point(-1,-1);
+            stopAnimationPoint = animatingPoint;
+            t.stop();//stop calling this function
+        }else animatingPoint.y++; // make animating point go down
+        repaint();//repaint the entire screen
+    }
 }//end class

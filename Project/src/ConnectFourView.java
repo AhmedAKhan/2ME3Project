@@ -270,5 +270,6 @@ public class ConnectFourView extends JFrame {
 
     public void setError(String error) { errorMessage.setText(error); }
 
-    public void animateDisc(Point point){ board.insertDisc(point); }
+    public void insertDisc(Point point, ConnectFourModel.Slot type){ board.insertDisc(point, type); }
+    public boolean isAnimating(){ return board.isAnimating(); }
 }//end class

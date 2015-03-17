@@ -1,4 +1,5 @@
 
+import java.util.Arrays;
 import java.util.Random;
 import java.awt.Point;
 /**
@@ -182,11 +183,7 @@ public class ConnectFourModel {
 						blueWins = true;
 						return true;// "Red wins";
 					}
-					
-					
 				}
-				
-				
 			}
 		}
     	return false;//"";
@@ -223,17 +220,17 @@ public class ConnectFourModel {
     
     /** Returns current state of the Game **/
     public GameProgress getGameProgess() {
-    	System.out.println("Current turn: " + this.getTurn().toString());
+//    	System.out.println("Current turn: " + this.getTurn().toString());
     	if (this.getWinState()) {
     		if (this.getTurn() == Slot.Blue) return GameProgress.blueWon;
     		else return GameProgress.redWon;
     	}
     	else if ((this.getBlueDiscsCount() + this.getRedDiscsCount()) == (this.getRows() * this.getColumns())) {
-    		System.out.println("Tie Game");
+//    		System.out.println("Tie Game");
     		return GameProgress.tieGame;
     	}
     	else {
-    		System.out.println("In progress");
+//    		System.out.println("In progress");
     		return GameProgress.inProgess;
     	}
     }
@@ -276,14 +273,14 @@ public class ConnectFourModel {
     
     //the user clicks somewhere.  That somewhere will give us a point.  The point has (x,y) coordinates.
     public Point insertDisk(Point p) {
-    	int counter = boardConfiguration.length;
+    	int counter = boardConfiguration.length-1;
     	Point insertHere = new Point(p.x, counter);
     	while (counter >= 0) {
-    		Slot currentSlot = boardConfiguration[p.x][counter];//Point(x,counter);
-    		if ( currentSlot== Slot.Red || currentSlot == Slot.Blue) { //if the slot is full;
+    		Slot currentSlot = boardConfiguration[counter][p.x];//boardConfiguration[p.x][counter];//Point(x,counter);
+            if ( currentSlot != Slot.Empty){//Slot.Red || currentSlot == Slot.Blue) { //if the slot is full;
     			counter--;
     		}else{
-    			return insertHere; //from bottom-to-top, it will return the first EMPTY slot.
+    			return new Point(p.x, counter);//insertHere; //from bottom-to-top, it will return the first EMPTY slot.
     		}
     	}
 	    return null; //This part is only reachable if all slots in this column are full.
