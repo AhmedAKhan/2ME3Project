@@ -24,12 +24,17 @@ public class ConnectFourModel {
     enum GameState {
         MainMenu, CustomGame, Game
     }
+    
+    enum GameProgress {
+    	tieGame, blueWon, redWon, inProgess;
+    }
 
     private GameState gameState;
     private Slot[][] boardConfiguration;
     private int turnCount = 1;
     private Slot currentTurn;
     private String errorMessage = "";
+    private boolean blueWins = false, redWins = false;
     
     private int rowSize;
 
@@ -156,7 +161,10 @@ public class ConnectFourModel {
 					diagRLD = checkRed(i+1,j-1) 
 							&& checkRed(i+2,j-2)
 							&& checkRed(i+3,j-3);
-					if (horizontal || vertical || diagLRD || diagRLD) return true;//"Blue wins";
+					if (horizontal || vertical || diagLRD || diagRLD) {
+						redWins = true;
+						return true;//"Blue wins";
+					}
 				} else if (boardConfiguration[i][j].equals(Slot.Blue)) {
 					vertical = checkBlue(i+1,j) 
 							&& checkBlue(i+2,j)
@@ -170,7 +178,10 @@ public class ConnectFourModel {
 					diagRLD = checkBlue(i+1,j-1) 
 							&& checkBlue(i+2,j-2)
 							&& checkBlue(i+3,j-3);
-					if (horizontal || vertical || diagLRD || diagRLD) return true;// "Red wins";
+					if (horizontal || vertical || diagLRD || diagRLD) {
+						blueWins = true;
+						return true;// "Red wins";
+					}
 					
 					
 				}
@@ -209,6 +220,23 @@ public class ConnectFourModel {
 //    public boolean getWinState() {
 //    	return getWinState(this.boardConfiguration);
 //    }
+    
+    /** Returns current state of the Game **/
+    public GameProgress getGameProgess() {
+    	System.out.println("Current turn: " + this.getTurn().toString());
+    	if (this.getWinState()) {
+    		if (this.getTurn() == Slot.Blue) return GameProgress.blueWon;
+    		else return GameProgress.redWon;
+    	}
+    	else if ((this.getBlueDiscsCount() + this.getRedDiscsCount()) == (this.getRows() * this.getColumns())) {
+    		System.out.println("Tie Game");
+    		return GameProgress.tieGame;
+    	}
+    	else {
+    		System.out.println("In progress");
+    		return GameProgress.inProgess;
+    	}
+    }
     
     public ConnectFourModel.Slot switchTurn(){
     	return ConnectFourModel.Slot.Blue;

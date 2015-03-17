@@ -151,21 +151,21 @@ public class ConnectFourController {
        
             //make that tile of type the players turn, but if that tile is already there then remove it
 
-//            if (model.gameFinished()!= (ConnectFourModel.gameType.InProgress)) return;
+            if (model.getGameProgess() != (ConnectFourModel.GameProgress.inProgess)) return;
 
             if(newBoardConfiguration[tilePosition.y][tilePosition.x] == model.getTurn())newBoardConfiguration[tilePosition.y][tilePosition.x] = ConnectFourModel.Slot.Empty;
             else newBoardConfiguration[tilePosition.y][tilePosition.x] = model.getTurn();
 
             
-//            if (model.gameFinished()== (ConnectFourModel.gameType.BlueWon)) {
-//            	view.displayMessage("Blue Won");
-//                ;}
+            if (model.getGameProgess() == (ConnectFourModel.GameProgress.blueWon)) {
+            	view.displayMessage("Blue Won");
+                ;}
             
-//            if (model.gameFinished()== (ConnectFourModel.gameType.RedWon))
-//            	view.displayMessage("Red Won");
+            if (model.getGameProgess() == (ConnectFourModel.GameProgress.redWon))
+            	view.displayMessage("Red Won");
             	
-//            if (model.gameFinished()== (ConnectFourModel.gameType.boardFilled))
-//            	view.displayMessage("You both lose");
+            if (model.getGameProgess() == (ConnectFourModel.GameProgress.tieGame))
+            	view.displayMessage("You both lose");
             //adjust the game and update the switchScreen
             view.adjustBoard(newBoardConfiguration);
            // view.switchScreen(model.getGameState());
