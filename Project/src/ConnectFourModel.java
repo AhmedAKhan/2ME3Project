@@ -344,7 +344,8 @@ public class ConnectFourModel {
     }
     
     //the user clicks somewhere.  That somewhere will give us a point.  The point has (x,y) coordinates.
-    public Point insertDisk(Point p) {
+    //This method will return the coordinates of the first EMPTY slot available in that column
+    public Point nextAvailableSlot(Point p) {
     	int counter = boardConfiguration.length-1;
     	Point insertHere = new Point(p.x, counter);
     	while (counter >= 0) {

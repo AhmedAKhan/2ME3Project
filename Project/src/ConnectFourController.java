@@ -143,7 +143,7 @@ public class ConnectFourController {
             if (model.getGameProgess() != (ConnectFourModel.GameProgress.inProgress)) return;
 
             //adjust the game and update the switchScreen
-            view.insertDisc(model.insertDisk(tilePosition), model.getTurn());
+            view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
             //update the view if it is possible,
             //if it is not possible then call configurationNotPossible on the view class
         }
