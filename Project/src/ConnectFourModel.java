@@ -39,14 +39,12 @@ public class ConnectFourModel {
 
     private GameState gameState;
     private Slot[][] boardConfiguration;
-    private int turnCount = 1;
     private Slot currentTurn;
     private String errorMessage = "";
-    private boolean blueWins = false, redWins = false;
     private int rowSize;
     private Scanner input;
     private Formatter output;
-    final String PATHTOSAVEDGAME = "data/savedGame.txt";
+    private final String PATHTOSAVEDGAME = "data/savedGame.txt";
 
     public ConnectFourModel(int rows, int columns) {
     	if (rows < 4 || columns < 4) {
