@@ -63,7 +63,7 @@ public class ConnectFourView extends JFrame {
 
     //constructors
     public ConnectFourView(){ this(initialScreenWidth, initialScreenHeight); }
-    public ConnectFourView(int width, int height){ this(width, height, 6,7); }//end constructor
+    public ConnectFourView(int width, int height){ this(width, height, 7,6); }//end constructor
     public ConnectFourView(int width, int height, int boardRows, int boardCols){
         //gets rid of java's default positioning system so we have more control and can manually position everything using absolute positioning
         this.getContentPane().setLayout(null);
