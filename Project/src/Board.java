@@ -138,7 +138,7 @@ public class Board extends JPanel implements ActionListener {
         Timer t = (Timer)e.getSource(); // get the timer
         if(animatingPoint.x == stopAnimationPoint.x && animatingPoint.y == stopAnimationPoint.y){
             ConnectFourModel.Slot[][] config = controller.getConfiguration();
-            config[stopAnimationPoint.y][stopAnimationPoint.x] = animatingSlot;
+            config[stopAnimationPoint.x][stopAnimationPoint.y] = animatingSlot;
             controller.showWinner();
             animatingSlot = ConnectFourModel.Slot.Empty;
             animatingPoint = new Point(-1,-1);

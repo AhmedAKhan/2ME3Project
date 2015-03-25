@@ -166,8 +166,8 @@ public class ConnectFourController {
             //adjust the game and update the switchScreen
             System.out.println("tilePosition: " + tilePosition);
             System.out.println("model.nextAvailableSlot(tilePosition): " + model.nextAvailableSlot(tilePosition));
-            Point p = model.nextAvailableSlot(tilePosition);
-            view.insertDisc(new Point(p.y, p.x), model.getTurn());
+
+            view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
             view.setMessageText("Game Is In Progress...");
         }
 
