@@ -12,12 +12,14 @@ public class ConnectFourView extends JFrame {
     private JButton mainMenuPlay;           // this button is located in the main menu and takes you to the connect four
     private JButton mainMenuCustom;         // this button is located in the main button and takes you to the custom game
     private JButton mainMenuLoad;
+    private JButton mainMenuPlayAgainstComputer; // button to go to the mode where you play against the computer
     //all buttons in the custom game and the game
     private JButton gameMainMenu;           //  this button is located in both the game and the custom game and will take you back to the main menu
     private JButton gameRedButton;          //  this button is located in both the game and the custom game and will make the next players turn red
     private JButton gameBlueButton;         //  this button is located in both the game and the custom game and will make the next players turn blue
     private JButton gameSaveStateButton;    //  this button saves the state of the game
     private JButton customGameReset;        // this button resets the board and makes it blank
+
     //the buttons just in the custom game
     private JButton customGameCheckState;   // this button checks if the current state of the game is valid and then displays the error messages
     private JLabel textField;            // this is the label that will display the error message in the custom game
@@ -27,30 +29,32 @@ public class ConnectFourView extends JFrame {
 
     //the names of all the button images
     //main menu buttons
-    public static final String mainCustomButtonImageName = "./src/images/customGameButton1.png";
-    public static final String mainCustomButtonimageNamePressed = "./src/images/customGameButton3.png";
-    public static final String mainPlayButtonImageName = "./src/images/playButton1.png";
-    public static final String mainPlayButtonImageNamePressed = "./src/images/playButton3.png";
-    public static final String gameMainMenuImageName = "./src/images/mainMenuButton1.png";
-    public static final String gameMainMenuImageNamePressed ="./src/images/mainMenuButton3.png";
-    public static final String mainLoadSavedStateImageName = "./src/images/loadstate1.png";
-    public static final String mainLoadSavedStateImageNamePressed = "./src/images/loadstate2.png";
+    public static final String mainCustomButtonImageName            = "./src/images/customGameButton1.png";
+    public static final String mainCustomButtonimageNamePressed     = "./src/images/customGameButton3.png";
+    public static final String mainPlayButtonImageName              = "./src/images/playButton1.png";
+    public static final String mainPlayButtonImageNamePressed       = "./src/images/playButton3.png";
+    public static final String mainPlayAIButtonImageName            = "";
+    public static final String mainPlayAIButtonImageNamePressed     = "";
+    public static final String gameMainMenuImageName                = "./src/images/mainMenuButton1.png";
+    public static final String gameMainMenuImageNamePressed         = "./src/images/mainMenuButton3.png";
+    public static final String mainLoadSavedStateImageName          = "./src/images/loadstate1.png";
+    public static final String mainLoadSavedStateImageNamePressed   = "./src/images/loadstate2.png";
     //Game buttons
-    public static final String saveStateImage = "./src/images/savestate1.png";
-    public static final String saveStateImagePressed = "./src/images/savestate2.png";
+    public static final String saveStateImage                       = "./src/images/savestate1.png";
+    public static final String saveStateImagePressed                = "./src/images/savestate2.png";
     //all the names of buttons that exist in both the games
-    public static final String gameRedButtonImageName           = "./src/images/red3.png";
-    public static final String gameRedButtonImageNamePressed    = "./src/images/red2.png";
-    public static final String gameRedButtonImageNameSelected   = "./src/images/red1.png";
-    public static final String gameBlueButtonImageName          = "./src/images/blue3.png";
-    public static final String gameBlueButtonImageNamePressed   = "./src/images/blue2.png";
-    public static final String gameBlueButtonImageNameSelected  = "./src/images/blue1.png";
-    public static final String gameSaveButtonImageName          = "./src/images/savestate1.png";
-    public static final String gameSaveButtonImageNamePressed   = "./src/images/savestate2.png";
-    public static final String customGameResetImageName = "./src/images/reset1.png";
-    public static final String customGameResetImageNamePressed = "./src/images/reset2.png";
+    public static final String gameRedButtonImageName               = "./src/images/red3.png";
+    public static final String gameRedButtonImageNamePressed        = "./src/images/red2.png";
+    public static final String gameRedButtonImageNameSelected       = "./src/images/red1.png";
+    public static final String gameBlueButtonImageName              = "./src/images/blue3.png";
+    public static final String gameBlueButtonImageNamePressed       = "./src/images/blue2.png";
+    public static final String gameBlueButtonImageNameSelected      = "./src/images/blue1.png";
+    public static final String gameSaveButtonImageName              = "./src/images/savestate1.png";
+    public static final String gameSaveButtonImageNamePressed       = "./src/images/savestate2.png";
+    public static final String customGameResetImageName             = "./src/images/reset1.png";
+    public static final String customGameResetImageNamePressed      = "./src/images/reset2.png";
     //Custom game only
-    public static final String customGameCheckStateImageName = "./src/images/checkstate1.png";
+    public static final String customGameCheckStateImageName        = "./src/images/checkstate1.png";
     public static final String customGameCheckStateImageNamePressed = "./src/images/checkstate2.png";
 
     //this is the size of the buttons on the screen
@@ -93,6 +97,8 @@ public class ConnectFourView extends JFrame {
         mainMenuCustom = createButton(mainCustomButtonImageName, width/2-buttonWidth/2, height/4*2-buttonHeight/2, buttonWidth, buttonHeight, mainMenu, mainCustomButtonimageNamePressed);
         mainMenuPlay = createButton(mainPlayButtonImageName, width/2-buttonWidth/2, height/4-buttonHeight/2, buttonWidth, buttonHeight, mainMenu, mainPlayButtonImageNamePressed);
         mainMenuLoad = createButton(mainLoadSavedStateImageName, width/2-buttonWidth/2, height/4*3-buttonHeight/2, buttonWidth, buttonHeight, mainMenu, mainLoadSavedStateImageNamePressed);
+
+        mainMenuPlayAgainstComputer = createButton(mainPlayAIButtonImageName, width/2-buttonWidth/2, 0, buttonWidth, buttonHeight, mainMenu, mainPlayAIButtonImageNamePressed);
 
         //add the main menu to the screen
         this.add(mainMenu);
