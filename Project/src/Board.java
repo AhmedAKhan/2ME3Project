@@ -93,7 +93,7 @@ public class Board extends JPanel implements ActionListener {
         return new Point(0,0);//new Point(screenSize.width/2 - getWidthOfBoard()/2 ,screenSize.height/2 + getHeightOfBoard()/2);
     }
 
-    //PURPOSE: converts the position with respect to the array to the position with respect to the game screen
+    //PURPOSE: converts the position with respect to the array to the position with respect to the PvP screen
     public Point getGameCoordinate(Point slotPosition, int numberOfRows){
         //this function will take in the position of the board and return the actual position on the screen
         int sizeOfSlotPlusExtraSpace = diameterOfDisk + spaceBetweenDisks;
@@ -102,7 +102,7 @@ public class Board extends JPanel implements ActionListener {
                 getOriginOfBoard().x + (slotPosition.x) * sizeOfSlotPlusExtraSpace + spaceBetweenDisks,
                 getOriginOfBoard().y + (slotPosition.y) * sizeOfSlotPlusExtraSpace + spaceBetweenDisks);
     }
-    //PURPOSE: converts the position to becoming with respect to the array instead of the game screen
+    //PURPOSE: converts the position to becoming with respect to the array instead of the PvP screen
     public Point getBoardCoordinateOfPoint(Point mousePosition){
         //convert the point mousePosition into a tile position where the x represents the column and y represents the row
         Point tilePosition = new Point((mousePosition.x- getOriginOfBoard().x)/(diameterOfDisk + spaceBetweenDisks),

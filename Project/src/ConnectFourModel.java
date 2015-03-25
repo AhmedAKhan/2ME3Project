@@ -23,10 +23,10 @@ public class ConnectFourModel {
     }
 
     /**
-     * The game state will represent all the possible stages the game can possible be in
+     * The PvP state will represent all the possible stages the PvP can possible be in
      */
     enum GameState {
-        MainMenu, CustomGame, Game
+        MainMenu, CustomGame, PvP, PvCPU
     }
 
     enum GameProgress {
@@ -44,7 +44,7 @@ public class ConnectFourModel {
 
     public ConnectFourModel(int columns, int rows) {
     	if (rows < 4 || columns < 4) {
-            System.out.println("Game board must be at least be of size 4x4. Board "
+            System.out.println("PvP board must be at least be of size 4x4. Board "
                     + " created with default values.");
             rows = 4;
             columns = 4;
@@ -140,7 +140,7 @@ public class ConnectFourModel {
     	return red;
     }
     
-    /** PRIVATE: Check if the game is in a winning state **/
+    /** PRIVATE: Check if the PvP is in a winning state **/
     public boolean getWinState() {
     	boolean horizontal=false, vertical=false, diagLRD=false, diagRLD=false;
     	for (int i = 0; i < boardConfiguration.length; i++) {
@@ -232,7 +232,7 @@ public class ConnectFourModel {
 		
 	private void closeOutputFile() { output.close(); }
     
-	/** Saves the current state of the game into a text file **/
+	/** Saves the current state of the PvP into a text file **/
     public void saveState () {
     	openOutputFile(PATHTOSAVEDGAME);
     	
@@ -249,7 +249,7 @@ public class ConnectFourModel {
     	closeOutputFile();
     }
 
-    /** Loads the saved state of the game from the text file **/
+    /** Loads the saved state of the PvP from the text file **/
     public void loadState() {
     	openInputFile(PATHTOSAVEDGAME);
     	
@@ -267,7 +267,7 @@ public class ConnectFourModel {
     	closeInputFile();
     }
 	
-	/** Returns current state of the Game **/
+	/** Returns current state of the PvP **/
     public GameProgress getGameProgess() {
     	if (this.getWinState()) {
     		if (this.getTurn() == Slot.Blue) return GameProgress.blueWon;

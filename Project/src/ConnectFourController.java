@@ -31,7 +31,7 @@ public class ConnectFourController {
         else if (model.getGameProgess() == (ConnectFourModel.GameProgress.tieGame)){ view.setMessageText("You Both Lose");  view.displayMessageAsPopup("You both lose"); }
     }
 
-    //PURPOSE: switches the current turn of the game
+    //PURPOSE: switches the current turn of the PvP
     public void switchTurn(){
         //if its blue makes it red, if its red it makes it the blue players turn
         //calls the model and the view to inform them about the change
@@ -54,7 +54,7 @@ public class ConnectFourController {
     class Listener implements ActionListener, MouseInputListener {
         public Listener(){}//empty constructor
 
-        //Purpose: when the user presses the main menu button it will call this function, and it will either go to the game stage or the custom game depending on what is clicked
+        //Purpose: when the user presses the main menu button it will call this function, and it will either go to the PvP stage or the custom PvP depending on what is clicked
         @Override
         public void actionPerformed(ActionEvent e) {
             //will get called for the menu buttons stuff
@@ -62,34 +62,35 @@ public class ConnectFourController {
             String buttonPressedIconString = ((JButton) e.getSource()).getIcon().toString();//gets the image name of the buttons
             if (buttonPressedIconString.equals(ConnectFourView.mainPlayButtonImageName)) {
                 //the play button in the main menu
-                model.setGameState(ConnectFourModel.GameState.Game);    // updates the game state
+                model.setGameState(ConnectFourModel.GameState.PvP);    // updates the PvP state
                 model.resetConfiguration();                             // resets the board
-                view.switchScreen(ConnectFourModel.GameState.Game);     // tells the view to switch the screen to game screen
+                view.switchScreen(ConnectFourModel.GameState.PvP);     // tells the view to switch the screen to PvP screen
                 view.setTurn(model.getRandomTurn());                    // gives the view a random turn
-                view.setMessageText("Game Is In Progress");             // displays the message game is in progress in the text field
+                view.setMessageText("PvP game is in progress");             // displays the message PvP is in progress in the text field
             }else if(buttonPressedIconString.equals(ConnectFourView.mainPlayAIButtonImageName)){
-                model.setGameState(ConnectFourModel.GameState.Game);    // updates the game state
+                model.setGameState(ConnectFourModel.GameState.PvCPU);    // updates the PvP state
                 model.resetConfiguration();                             // resets the board
-                view.switchScreen(ConnectFourModel.GameState.Game);     // tells the view to switch the screen to game screen
+                view.switchScreen(ConnectFourModel.GameState.PvCPU);     // tells the view to switch the screen to PvP screen
                 view.setTurn(model.getRandomTurn());                    // gives the view a random turn
-                view.setMessageText("Game Is In Progress");             // displays the message game is in progress in the text field
+                view.setMessageText("PvCPU game is in progress");             // displays the message PvCPU is in progress in the text field
             } else if (buttonPressedIconString.equals(ConnectFourView.mainCustomButtonImageName)) {
-                // the custom game button in the main menu
-                model.setGameState(ConnectFourModel.GameState.CustomGame);      // updates the game state
+                // the custom PvP button in the main menu
+            	model.resetConfiguration();
+                model.setGameState(ConnectFourModel.GameState.CustomGame);      // updates the PvP state
                 model.resetConfiguration();                                     // resets the board
-                view.switchScreen(ConnectFourModel.GameState.CustomGame);       // tells the view to switch the screen to game screen
+                view.switchScreen(ConnectFourModel.GameState.CustomGame);       // tells the view to switch the screen to PvP screen
                 view.setTurn(model.getRandomTurn());                            // gives the view a random turn
 
             }else if (buttonPressedIconString.equals(ConnectFourView.saveStateImage)) {
                 //Save progress.
                 if(model.checkBoardConfiguration()) { //if the board is not valid then it does not store the board configuration
-                	model.saveState();                                      // saves the game state
-                	view.displayMessageAsPopup("The game has been saved");  // displays the message as a popup
+                	model.saveState();                                      // saves the PvP state
+                	view.displayMessageAsPopup("The PvP has been saved");  // displays the message as a popup
                 } else view.displayMessageAsPopup("Can not save the current state, the current state is not valid");    // the current state is not possible so tells the user that it is not going to save
             }else if(buttonPressedIconString.equals(ConnectFourView.mainLoadSavedStateImageName)){
                 model.loadState();                                      // loads the state from model
-                model.setGameState(ConnectFourModel.GameState.Game);    // sets the current state to the game
-                view.switchScreen(ConnectFourModel.GameState.Game);     // switches the game screen to the game
+                model.setGameState(ConnectFourModel.GameState.PvP);    // sets the current state to the PvP
+                view.switchScreen(ConnectFourModel.GameState.PvP);     // switches the PvP screen to the PvP
                 view.setTurn(model.getTurn());                          // shows the correct image on the view class
             }else if(buttonPressedIconString.equals(ConnectFourView.gameMainMenuImageName)){
                 model.setGameState(ConnectFourModel.GameState.MainMenu);        // sets the state to main menu
@@ -100,7 +101,7 @@ public class ConnectFourController {
                 view.setBoard(model.getBoardConfiguration());   // resets the board
                 view.setMessageText("");                        // removes any error message that was displayed in the text field
             }else if(model.getGameState() == ConnectFourModel.GameState.CustomGame) {
-                //if it is in the custom game then it handles these buttons or else it does not, this is because things like the red and blue button should not be working in the game
+                //if it is in the custom PvP then it handles these buttons or else it does not, this is because things like the red and blue button should not be working in the PvP
                 if (buttonPressedIconString.equals(ConnectFourView.gameRedButtonImageName)) {
                     model.setTurn(ConnectFourModel.Slot.Red);   // shows the current turn red
                     view.setTurn(model.getTurn());              // tells the model the current turn
@@ -111,7 +112,7 @@ public class ConnectFourController {
                     //if the current state is valid then it says Yay no error or else it will display the error messages that have occured
                     if (!model.checkBoardConfiguration()) view.setMessageText(model.getErrorMessage());
                     else view.setMessageText("Yay! No errors :D");
-                }//end of the if else block inside the custom game
+                }//end of the if else block inside the custom PvP
             }//end of the if else block
         }//end function
 
@@ -142,18 +143,18 @@ public class ConnectFourController {
         @Override
         public void mouseClicked(MouseEvent e) {
 
-            if(model.getTurn() == ConnectFourModel.Slot.Blue){
-                Point tilePosition = model.doTurn();
-                view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
-                view.setMessageText("Game Is In Progress...");
-                return;
-            }
-
         	//if its in the main menu stop running the rest of the code
             if(model.getGameState() == ConnectFourModel.GameState.MainMenu) return;
             if(model.getGameState() == ConnectFourModel.GameState.CustomGame) { handleCustomGameState (e); return;}
             if(view.isAnimating()) return;
 
+            if(model.getGameState() == ConnectFourModel.GameState.PvCPU && model.getTurn() == ConnectFourModel.Slot.Blue){
+                Point tilePosition = model.doTurn();
+                view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
+                view.setMessageText("vs CPU game is in progress...");
+                return;
+            }
+            
             Point mousePosition = new Point(e.getX(), e.getY());
             Point tilePosition = view.getBoardCoordinateOfPoint(mousePosition);
             //if the click is outside the board just end the function
@@ -163,12 +164,16 @@ public class ConnectFourController {
 
             //make that tile of type the players turn, but if that tile is already there then remove it
             if (model.getGameProgess() != (ConnectFourModel.GameProgress.inProgress)) return;
-            //adjust the game and update the switchScreen
+            //adjust the PvP and update the switchScreen
             System.out.println("tilePosition: " + tilePosition);
             System.out.println("model.nextAvailableSlot(tilePosition): " + model.nextAvailableSlot(tilePosition));
 
             view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
-            view.setMessageText("Game Is In Progress...");
+            if (model.getGameState() == ConnectFourModel.GameState.PvCPU) {
+            	view.setMessageText("vs CPU game is in progress...");
+            } else {
+            	view.setMessageText("Game is in progress...");
+            }
         }
 
         //all these functions were mandatory because if we do not have them then this class would be implementing an interface it does not have functions to
