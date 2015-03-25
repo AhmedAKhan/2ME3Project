@@ -265,6 +265,7 @@ public class ConnectFourView extends JFrame {
         //make the listener for the main menu buttons
         mainMenuCustom.addActionListener(listenForButton);
         mainMenuPlay.addActionListener(listenForButton);
+        mainMenuPlayAgainstComputer.addActionListener(listenForButton);
 
         gameMainMenu.addActionListener(listenForButton);
         customGameReset.addActionListener(listenForButton);

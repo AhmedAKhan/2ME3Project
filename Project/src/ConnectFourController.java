@@ -59,20 +59,27 @@ public class ConnectFourController {
         public void actionPerformed(ActionEvent e) {
             //will get called for the menu buttons stuff
             //check what button is pressed
-            String buttonPressedIconString = ((JButton)e.getSource()).getIcon().toString();//gets the image name of the buttons
-            if(buttonPressedIconString.equals(ConnectFourView.mainPlayButtonImageName)){
+            String buttonPressedIconString = ((JButton) e.getSource()).getIcon().toString();//gets the image name of the buttons
+            if (buttonPressedIconString.equals(ConnectFourView.mainPlayButtonImageName)) {
                 //the play button in the main menu
                 model.setGameState(ConnectFourModel.GameState.Game);    // updates the game state
                 model.resetConfiguration();                             // resets the board
                 view.switchScreen(ConnectFourModel.GameState.Game);     // tells the view to switch the screen to game screen
                 view.setTurn(model.getRandomTurn());                    // gives the view a random turn
                 view.setMessageText("Game Is In Progress");             // displays the message game is in progress in the text field
-            }else if(buttonPressedIconString.equals(ConnectFourView.mainCustomButtonImageName)){
+            }else if(buttonPressedIconString.equals(ConnectFourView.mainPlayAIButtonImageName)){
+                model.setGameState(ConnectFourModel.GameState.Game);    // updates the game state
+                model.resetConfiguration();                             // resets the board
+                view.switchScreen(ConnectFourModel.GameState.Game);     // tells the view to switch the screen to game screen
+                view.setTurn(model.getRandomTurn());                    // gives the view a random turn
+                view.setMessageText("Game Is In Progress");             // displays the message game is in progress in the text field
+            } else if (buttonPressedIconString.equals(ConnectFourView.mainCustomButtonImageName)) {
                 // the custom game button in the main menu
                 model.setGameState(ConnectFourModel.GameState.CustomGame);      // updates the game state
                 model.resetConfiguration();                                     // resets the board
                 view.switchScreen(ConnectFourModel.GameState.CustomGame);       // tells the view to switch the screen to game screen
                 view.setTurn(model.getRandomTurn());                            // gives the view a random turn
+
             }else if (buttonPressedIconString.equals(ConnectFourView.saveStateImage)) {
                 //Save progress.
                 if(model.checkBoardConfiguration()) { //if the board is not valid then it does not store the board configuration
@@ -92,17 +99,17 @@ public class ConnectFourController {
                 model.resetConfiguration();                     // resets the configuration of the board
                 view.setBoard(model.getBoardConfiguration());   // resets the board
                 view.setMessageText("");                        // removes any error message that was displayed in the text field
-            }else if(model.getGameState() == ConnectFourModel.GameState.CustomGame){
+            }else if(model.getGameState() == ConnectFourModel.GameState.CustomGame) {
                 //if it is in the custom game then it handles these buttons or else it does not, this is because things like the red and blue button should not be working in the game
-                if(buttonPressedIconString.equals(ConnectFourView.gameRedButtonImageName)){
+                if (buttonPressedIconString.equals(ConnectFourView.gameRedButtonImageName)) {
                     model.setTurn(ConnectFourModel.Slot.Red);   // shows the current turn red
                     view.setTurn(model.getTurn());              // tells the model the current turn
-                }else if(buttonPressedIconString.equals(ConnectFourView.gameBlueButtonImageName)) {
+                } else if (buttonPressedIconString.equals(ConnectFourView.gameBlueButtonImageName)) {
                     model.setTurn(ConnectFourModel.Slot.Blue);  // shows the current turn
                     view.setTurn(model.getTurn());              // tells the model the current turn
-                }else if(buttonPressedIconString.equals(ConnectFourView.customGameCheckStateImageName)){
+                } else if (buttonPressedIconString.equals(ConnectFourView.customGameCheckStateImageName)) {
                     //if the current state is valid then it says Yay no error or else it will display the error messages that have occured
-                    if(!model.checkBoardConfiguration()) view.setMessageText(model.getErrorMessage());
+                    if (!model.checkBoardConfiguration()) view.setMessageText(model.getErrorMessage());
                     else view.setMessageText("Yay! No errors :D");
                 }//end of the if else block inside the custom game
             }//end of the if else block
@@ -134,9 +141,17 @@ public class ConnectFourController {
         //Purpose: this function will be called when the user presses a button, it will be responsible for handling the outcome of the button press.
         @Override
         public void mouseClicked(MouseEvent e) {
+
+            if(model.getTurn() == ConnectFourModel.Slot.Blue){
+                Point tilePosition = model.doTurn();
+                view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
+                view.setMessageText("Game Is In Progress...");
+                return;
+            }
+
         	//if its in the main menu stop running the rest of the code
             if(model.getGameState() == ConnectFourModel.GameState.MainMenu) return;
-            if (model.getGameState() == ConnectFourModel.GameState.CustomGame) { handleCustomGameState (e); return;}
+            if(model.getGameState() == ConnectFourModel.GameState.CustomGame) { handleCustomGameState (e); return;}
             if(view.isAnimating()) return;
 
             Point mousePosition = new Point(e.getX(), e.getY());
