@@ -375,17 +375,26 @@ public class ConnectFourModel {
             }
             col++;
         }
-
         //now return this point
         return point;
     }
 
     private int calculateScoreForTileAt(Point point){
+        int score = 0;
+        for(Point vector : new Point[]{new Point(0,1), new Point(1,0), new Point(1,1), new Point(1,-2)}){
+            int scoreOfCurrentDirection = findSequenceLength(vector.x, vector.y);
+
+            if(scoreOfCurrentDirection > score){
+                score = scoreOfCurrentDirection;
+            }
+
+        }
+//        (0,1), (1,0), (1,1), (1,-1)
+        return score;
 
     }
-
-    private int findSequence(int xIncrementor, int yIncrementor){
-
+    private int findSequenceLength(int xIncrementor, int yIncrementor){
+        
     }
 
 
