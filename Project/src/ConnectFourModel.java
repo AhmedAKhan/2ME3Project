@@ -382,21 +382,57 @@ public class ConnectFourModel {
     private int calculateScoreForTileAt(Point point){
         int score = 0;
         for(Point vector : new Point[]{new Point(0,1), new Point(1,0), new Point(1,1), new Point(1,-2)}){
-            int scoreOfCurrentDirection = findSequenceLength(vector.x, vector.y);
-
+            int scoreOfCurrentDirection = findScoreAtDirection(vector.x, vector.y, point);
             if(scoreOfCurrentDirection > score){
                 score = scoreOfCurrentDirection;
             }
-
         }
 //        (0,1), (1,0), (1,1), (1,-1)
         return score;
 
     }
-    private int findSequenceLength(int xIncrementor, int yIncrementor){
-        
-    }
 
+    /// point = (col, row)
+    private int findScoreAtDirection(int rowIncrementor, int colIncrementor, Point point){
+
+        int currentLength = 1; // it starts of at one because if you put a piece down here it will have a sequence of itself
+        int oponentLength = 0;
+        Slot previousColor = currentTurn;
+
+        //check the left side
+        for(int discFromPoint =1; true; discFromPoint++){
+            Point currentPoint = new Point(point.x + colIncrementor*discFromPoint, point.y+rowIncrementor*discFromPoint);//get position of points
+            Slot color = boardConfiguration[currentPoint.x][currentPoint.y]; // get the color
+            if(previousColor == color){
+                if(color==currentTurn) currentLength++;
+                else oponentLength++;
+            }else
+                break;
+
+            previousColor = color;
+        }
+
+        //check the right side
+        previousColor = currentTurn;
+        for(int discFromPoint = 1; true; discFromPoint++){
+            Point currentPoint = new Point(point.x - colIncrementor * discFromPoint, point.y - rowIncrementor * discFromPoint);
+            Slot color = boardConfiguration[currentPoint.x][currentPoint.y];
+            if(previousColor == color){
+                if(color == currentTurn) currentLength++;
+                else oponentLength++;
+            }else
+                break;
+
+            previousColor = color;
+        }
+
+        //convert the lengths into scores
+        //make sure that the lengths does not exceed 4 or else it will break the concept of the g score
+        currentLength = Math.max(currentLength, 4);
+        oponentLength = Math.max(oponentLength, 4);
+
+        return (int)Math.pow(2, currentLength) + (int)Math.pow(2, oponentLength);
+    }//end function
 
     private int getBoardWidth(){ return boardConfiguration.length; }
     //// ---------- end of AI Code ----------
