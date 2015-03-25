@@ -164,7 +164,10 @@ public class ConnectFourController {
             //make that tile of type the players turn, but if that tile is already there then remove it
             if (model.getGameProgess() != (ConnectFourModel.GameProgress.inProgress)) return;
             //adjust the game and update the switchScreen
-            view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
+            System.out.println("tilePosition: " + tilePosition);
+            System.out.println("model.nextAvailableSlot(tilePosition): " + model.nextAvailableSlot(tilePosition));
+            Point p = model.nextAvailableSlot(tilePosition);
+            view.insertDisc(new Point(p.y, p.x), model.getTurn());
             view.setMessageText("Game Is In Progress...");
         }
 

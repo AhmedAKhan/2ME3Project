@@ -42,7 +42,7 @@ public class ConnectFourModel {
     private Formatter output;
     private final String PATHTOSAVEDGAME = "data/savedGame.txt";
 
-    public ConnectFourModel(int rows, int columns) {
+    public ConnectFourModel(int columns, int rows) {
     	if (rows < 4 || columns < 4) {
             System.out.println("Game board must be at least be of size 4x4. Board "
                     + " created with default values.");
@@ -53,7 +53,7 @@ public class ConnectFourModel {
         gameState = GameState.MainMenu;
         Random rand = new Random();
         currentTurn = (rand.nextFloat() < 0.5) ? Slot.Red : Slot.Blue;
-        this.boardConfiguration = new Slot[rows][columns];
+        this.boardConfiguration = new Slot[columns][rows];
         this.resetConfiguration();
     }//end constructor
     
@@ -333,10 +333,9 @@ public class ConnectFourModel {
     // returns point as Point(col, row)
     public Point nextAvailableSlot(int row, int col){ return nextAvailableSlot(new Point(row,col)); }
     public Point nextAvailableSlot(Point p) {
-    	int counter = boardConfiguration.length-1;
-    	Point insertHere = new Point(p.x, counter);
+    	int counter = boardConfiguration[0].length-1;
     	while (counter >= 0) {
-    		Slot currentSlot = boardConfiguration[counter][p.x];//boardConfiguration[p.x][counter];//Point(x,counter);
+    		Slot currentSlot = boardConfiguration[p.x][counter];//boardConfiguration[counter][p.x];
             if ( currentSlot != Slot.Empty){//Slot.Red || currentSlot == Slot.Blue) { //if the slot is full;
     			counter--;
     		}else{
@@ -370,6 +369,7 @@ public class ConnectFourModel {
         Point point = null;
         while (col < getBoardWidth()){
             Point currentPoint = nextAvailableSlot(col, 0); //new Point(col, 0);
+            System.out.println("currentPoint: " + currentPoint);
             int currentValue = calculateScoreForTileAt(currentPoint);
             if(currentValue > maxValue){
                 maxValue = currentValue;
@@ -405,8 +405,7 @@ public class ConnectFourModel {
         Slot previousColor;
         if(isInBounds(firstPoint)) {
             previousColor = boardConfiguration[firstPoint.x][firstPoint.y];
-            if(previousColor == Slot.Empty) {
-
+            if(previousColor != Slot.Empty) {
                 //check the left side
                 for (int discFromPoint = 1; true; discFromPoint++) {
                     Point currentPoint = new Point(point.x + colIncrementor * discFromPoint, point.y + rowIncrementor * discFromPoint);//get position of points
@@ -417,7 +416,6 @@ public class ConnectFourModel {
                         else oponentLength++;
                     } else
                         break;
-
 //               previousColor = color;
                 }
             }
@@ -427,7 +425,7 @@ public class ConnectFourModel {
         firstPoint = new Point(point.x - colIncrementor, point.y - rowIncrementor);//get position of points
         if(isInBounds(firstPoint)) {
             previousColor = boardConfiguration[firstPoint.x][firstPoint.y];
-            if(previousColor == Slot.Empty) {
+            if(previousColor != Slot.Empty) {
 
                 for (int discFromPoint = 1; true; discFromPoint++) {
                     Point currentPoint = new Point(point.x - colIncrementor * discFromPoint, point.y - rowIncrementor * discFromPoint);
@@ -461,6 +459,29 @@ public class ConnectFourModel {
     //// ---------- end of AI Code ----------
 
 
+    public static void main(String[] args){
+        ConnectFourModel m = new ConnectFourModel(7,6);
+        m.resetConfiguration();
+        m.boardConfiguration[2][5] = Slot.Red;
 
+        System.out.println("nextAvailableSlot(2,5): " + m.nextAvailableSlot(2,5));
+        System.out.println("nextAvailableSlot: " + m.nextAvailableSlot(1,1));
+        System.out.println("nextAvailableSlot: " + m.nextAvailableSlot(2,2));
+        System.out.println("nextAvailableSlot: " + m.nextAvailableSlot(3,3));
+        System.out.println("nextAvailableSlot: " + m.nextAvailableSlot(4,4));
+        System.out.println("nextAvailableSlot: " + m.nextAvailableSlot(5,5));
+        System.out.println("nextAvailableSlot: " + m.nextAvailableSlot(6,6));
+
+        System.out.println("the score for position (0,5) is: " + m.calculateScoreForTileAt(new Point(0,5)));
+        System.out.println("the score for position (1,5) is: " + m.calculateScoreForTileAt(new Point(1,5)));
+        System.out.println("the score for position (2,5) is: " + m.calculateScoreForTileAt(new Point(2,4)));
+        System.out.println("the score for position (3,5) is: " + m.calculateScoreForTileAt(new Point(3,5)));
+        System.out.println("the score for position (4,5) is: " + m.calculateScoreForTileAt(new Point(4,5)));
+        System.out.println("the score for position (5,5) is: " + m.calculateScoreForTileAt(new Point(5,5)));
+        System.out.println("the score for position (6,5) is: " + m.calculateScoreForTileAt(new Point(6,5)));
+
+        System.out.println("\n\n");
+        System.out.println("the next piece should be placed at : " + m.doTurn().toString());
+    }
 
 }//end class
