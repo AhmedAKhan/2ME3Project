@@ -1,12 +1,8 @@
 
-import java.util.Arrays;
 import java.util.Formatter;
 import java.util.Random;
 import java.awt.Point;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
@@ -334,6 +330,8 @@ public class ConnectFourModel {
     
     //the user clicks somewhere.  That somewhere will give us a point.  The point has (x,y) coordinates.
     //This method will return the coordinates of the first EMPTY slot available in that column
+    // returns point as Point(col, row)
+    public Point nextAvailableSlot(int row, int col){ return nextAvailableSlot(new Point(row,col)); }
     public Point nextAvailableSlot(Point p) {
     	int counter = boardConfiguration.length-1;
     	Point insertHere = new Point(p.x, counter);
@@ -347,7 +345,7 @@ public class ConnectFourModel {
     	}
 	    return null; //This part is only reachable if all slots in this column are full.
     }
-    
+
 //    public static void main(String[] args) {
 //    	ConnectFourModel model = new ConnectFourModel(5,5);
 //    	
@@ -360,6 +358,41 @@ public class ConnectFourModel {
 //    	show(slot);
 //    	model.setBoardConfiguration(slot);
 //    }
+
+    //// --------- start of AI Code ----------
+
+    public Point doTurn(){
+        //find the score at all the column values
+        //absolute of the highest value
+
+        int maxValue = 0;
+        int col = 0;
+        Point point = nextAvailableSlot(0,col);
+        while (col < getBoardWidth()){
+            int currentValue = calculateScoreForTileAt(point);
+            if(currentValue > maxValue){
+                maxValue = currentValue;
+            }
+            col++;
+        }
+
+        //now return this point
+        return point;
+    }
+
+    private int calculateScoreForTileAt(Point point){
+
+    }
+
+    private int findSequence(int xIncrementor, int yIncrementor){
+
+    }
+
+
+    private int getBoardWidth(){ return boardConfiguration.length; }
+    //// ---------- end of AI Code ----------
+
+
 
 
 }//end class
