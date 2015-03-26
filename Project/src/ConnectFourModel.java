@@ -476,7 +476,7 @@ public class ConnectFourModel {
     //just gets the width of the board
     //I used this function to get the width of the board because it
     //made it abstract
-    private int getBoardWidth(){ return boardConfiguration.length; }
+    private int getBoardWidth(){ return boardConfiguration[0].length; }
     //// ---------- end of AI Code ----------
 
 
