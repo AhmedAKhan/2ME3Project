@@ -105,17 +105,17 @@ public class ConnectFourView extends JFrame {
     }//end setup board
     private void setupGame(int width, int height, int boardRows, int boardCols) {
         PvP = new JPanel();            // makes an empty panel
-        PvP.setSize(width, height);    // sets the size of the PvP
+        PvP.setSize(width, height);    // sets the size of the game
         PvP.setLocation(0,0);          // sets the location of the panel
         PvP.setLayout(null);           // removes the default layout
 
-        //adding all the buttons that are in both the PvP and the PvP screen
+        //adding all the buttons that are in both the game and the game screen
         gameMainMenu         = createButton(gameMainMenuImageName, 0,0, buttonWidth, buttonHeight, PvP, gameMainMenuImageNamePressed);
         gameRedButton        = createButton(gameRedButtonImageName, 0,0, smallButton, smallButton, PvP, gameRedButtonImageNamePressed);
         gameBlueButton       = createButton(gameBlueButtonImageName, 0,0, smallButton, smallButton, PvP, gameBlueButtonImageNamePressed);
         gameSaveStateButton  = createButton(gameSaveButtonImageName, 0,0, buttonWidth, smallButton, PvP, gameSaveButtonImageNamePressed);
 
-        //buttons for the custom PvP
+        //buttons for the custom game
         customGameReset      = createButton(customGameResetImageName, 0,0, smallButton, smallButton, PvP, customGameResetImageNamePressed);
         customGameCheckState = createButton(customGameCheckStateImageName, 0,0, buttonWidth, buttonHeight, PvP, customGameCheckStateImageNamePressed);
         textField = new JLabel("");
@@ -123,7 +123,7 @@ public class ConnectFourView extends JFrame {
         textField.setSize(width - gameSaveStateButton.getWidth(), 110);
         textField.setLocation((width - gameSaveStateButton.getWidth()) / 2, 0);
         textField.setHorizontalAlignment(JTextField.CENTER);
-        //buttons for the PvP
+        //buttons for the game
 
         board = new Board(boardCols, boardRows); //create the board
 
@@ -135,23 +135,23 @@ public class ConnectFourView extends JFrame {
         board.validate();       // make sure the board's state is valid
         board.repaint();        // draw the board on the screen
         PvP.add(textField); // add the error message textfield
-        PvP.add(board);        // add the board to the PvP
+        PvP.add(board);        // add the board to the game
 
-        this.add(PvP);         //adds the PvP to the screen
-        PvP.setVisible(false); // makes the PvP panel invisible so that we can not see it when the PvP starts up
+        this.add(PvP);         //adds the game to the screen
+        PvP.setVisible(false); // makes the game panel invisible so that we can not see it when the PvP starts up
     }
 
     public void switchScreen(ConnectFourModel.GameState gameState){
         if(gameState == ConnectFourModel.GameState.MainMenu){
-            PvP.setVisible(false);     // make the PvP panel invisible
+            PvP.setVisible(false);     // make the game panel invisible
             mainMenu.setVisible(true);  // make the main menu invisible
             return;                     // end the function
         }
 
         mainMenu.setVisible(false); // make the main menu invisible
-        PvP.setVisible(true);      // show the PvP screen
+        PvP.setVisible(true);      // show the game screen
 
-        //show this button if the current state is custom PvP
+        //show this button if the current state is custom game
         //and reposition the text field depending on its position
         if(gameState == ConnectFourModel.GameState.PvP ||  gameState == ConnectFourModel.GameState.PvCPU){
             textField.setSize(getWidth(), 110);
@@ -187,8 +187,8 @@ public class ConnectFourView extends JFrame {
 
         //since this function gets called when the screen is resized we need to adjust the position and size of all the panels or else resizing would not work
         //the board might have been moved or resized so we need to resize and reposition all the buttons
-        mainMenu.setSize(this.getSize());   //updates thes size of the PvP
-        PvP.setSize(this.getSize());       //updates the size of the PvP
+        mainMenu.setSize(this.getSize());   //updates thes size of the game
+        PvP.setSize(this.getSize());       //updates the size of the game
         //all the buttons are with respect to the scale variable. what this does is that it allows
         // each component to resize depending on this size variable, And if we make this variable adjust
         // its size based on the screen size the entire screen should scale accordingly, But currently the image on the buttons
