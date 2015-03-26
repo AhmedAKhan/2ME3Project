@@ -142,13 +142,6 @@ public class ConnectFourController {
         @Override
         public void mouseClicked(MouseEvent e) {
 
-            if(model.getTurn() == ConnectFourModel.Slot.Blue){
-                Point tilePosition = model.doTurn();
-                view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
-                view.setMessageText("Game is in progress...");
-                return;
-            }
-
         	//if its in the main menu stop running the rest of the code
             if(model.getGameState() == ConnectFourModel.GameState.MainMenu) return;
             if(model.getGameState() == ConnectFourModel.GameState.CustomGame) { handleCustomGameState (e); return;}
