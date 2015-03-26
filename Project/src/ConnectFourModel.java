@@ -23,7 +23,7 @@ public class ConnectFourModel {
     }
 
     /**
-     * The PvP state will represent all the possible stages the PvP can possible be in
+     * The game state will represent all the possible stages the game can possible be in
      */
     enum GameState {
         MainMenu, CustomGame, PvP, PvCPU
@@ -42,9 +42,9 @@ public class ConnectFourModel {
     private Formatter output;
     private final String PATHTOSAVEDGAME = "data/savedGame.txt";
 
-    public ConnectFourModel(int columns, int rows) {
+    public ConnectFourModel(int rows, int columns) {
     	if (rows < 4 || columns < 4) {
-            System.out.println("PvP board must be at least be of size 4x4. Board "
+            System.out.println("Game board must be at least be of size 4x4. Board "
                     + " created with default values.");
             rows = 4;
             columns = 4;
@@ -53,7 +53,7 @@ public class ConnectFourModel {
         gameState = GameState.MainMenu;
         Random rand = new Random();
         currentTurn = (rand.nextFloat() < 0.5) ? Slot.Red : Slot.Blue;
-        this.boardConfiguration = new Slot[columns][rows];
+        this.boardConfiguration = new Slot[rows][columns];
         this.resetConfiguration();
     }//end constructor
     
@@ -140,7 +140,7 @@ public class ConnectFourModel {
     	return red;
     }
     
-    /** PRIVATE: Check if the PvP is in a winning state **/
+    /** PRIVATE: Check if the game is in a winning state **/
     public boolean getWinState() {
     	boolean horizontal=false, vertical=false, diagLRD=false, diagRLD=false;
     	for (int i = 0; i < boardConfiguration.length; i++) {
@@ -232,7 +232,7 @@ public class ConnectFourModel {
 		
 	private void closeOutputFile() { output.close(); }
     
-	/** Saves the current state of the PvP into a text file **/
+	/** Saves the current state of the game into a text file **/
     public void saveState () {
     	openOutputFile(PATHTOSAVEDGAME);
     	
@@ -249,7 +249,7 @@ public class ConnectFourModel {
     	closeOutputFile();
     }
 
-    /** Loads the saved state of the PvP from the text file **/
+    /** Loads the saved state of the game from the text file **/
     public void loadState() {
     	openInputFile(PATHTOSAVEDGAME);
     	
@@ -267,7 +267,7 @@ public class ConnectFourModel {
     	closeInputFile();
     }
 	
-	/** Returns current state of the PvP **/
+	/** Returns current state of the Game **/
     public GameProgress getGameProgess() {
     	if (this.getWinState()) {
     		if (this.getTurn() == Slot.Blue) return GameProgress.blueWon;
@@ -333,9 +333,10 @@ public class ConnectFourModel {
     // returns point as Point(col, row)
     public Point nextAvailableSlot(int row, int col){ return nextAvailableSlot(new Point(row,col)); }
     public Point nextAvailableSlot(Point p) {
-    	int counter = boardConfiguration[0].length-1;
+    	int counter = boardConfiguration.length-1;
+    	Point insertHere = new Point(p.x, counter);
     	while (counter >= 0) {
-    		Slot currentSlot = boardConfiguration[p.x][counter];//boardConfiguration[counter][p.x];
+    		Slot currentSlot = boardConfiguration[counter][p.x];//boardConfiguration[p.x][counter];//Point(x,counter);
             if ( currentSlot != Slot.Empty){//Slot.Red || currentSlot == Slot.Blue) { //if the slot is full;
     			counter--;
     		}else{
@@ -360,6 +361,7 @@ public class ConnectFourModel {
 
     //// --------- start of AI Code ----------
 
+    //// this function returns the position where the AI will place their piece
     public Point doTurn(){
         //find the score at all the column values
         //absolute of the highest value
@@ -369,6 +371,7 @@ public class ConnectFourModel {
         Point point = null;
         while (col < getBoardWidth()){
             Point currentPoint = nextAvailableSlot(col, 0); //new Point(col, 0);
+            if(currentPoint == null){ col++; continue; }
             System.out.println("currentPoint: " + currentPoint);
             int currentValue = calculateScoreForTileAt(currentPoint);
             if(currentValue > maxValue){
@@ -378,9 +381,14 @@ public class ConnectFourModel {
             col++;
         }
         //now return this point
+        //point = new Point(point.y, point.x);
         return point;
     }
 
+    // how the AI works is that it finds the score at all the possible moves and puts the piece on the position with the highest value
+    // this function is used to calculate the score of each position
+    // Arugments
+    //  point = the position that you want the score of
     private int calculateScoreForTileAt(Point point){
         int score = 0;
         for(Point vector : new Point[]{new Point(0,1), new Point(1,0), new Point(1,1), new Point(1,-1)}){
@@ -389,34 +397,42 @@ public class ConnectFourModel {
                 score = scoreOfCurrentDirection;
             }
         }
-//        (0,1), (1,0), (1,1), (1,-1)
         return score;
 
     }
 
-    /// point = (col, row)
+
+    //// the computer finds the score
+    //// this function is used to calculate the score of a single position with a certain direction
+    //// Arugments
+    ////  point = the position that you want the score of.
+    ////          convention of point used= (col, row)
+    ////  rowIncrementor and colIncrementor = determines the direction.
+    ////      For example if (rowIncrementor, colIncrementor) = (0,1) would mean the direction a horizontal line
+    ////                     (1,0) would mean a vertical line
+    ////                    (1,1) would mean a diagonal line face up as x increases -> /
+    ////                    (1,-1) would mean a diagonal line facing down as x increases -> \
     private int findScoreAtDirection(int rowIncrementor, int colIncrementor, Point point){
 
-        int currentLength = 1; // it starts of at one because if you put a piece down here it will have a sequence of itself
+        int currentLength = 0; // it starts of at one because if you put a piece down here it will have a sequence of itself
         int oponentLength = 0;
 
         //Slot previousColor = currentTurn;
         Point firstPoint = new Point(point.x + colIncrementor, point.y+rowIncrementor);//get position of points
         Slot previousColor;
         if(isInBounds(firstPoint)) {
-            previousColor = boardConfiguration[firstPoint.x][firstPoint.y];
+            previousColor = boardConfiguration[firstPoint.y][firstPoint.x];
             if(previousColor != Slot.Empty) {
                 //check the left side
                 for (int discFromPoint = 1; true; discFromPoint++) {
                     Point currentPoint = new Point(point.x + colIncrementor * discFromPoint, point.y + rowIncrementor * discFromPoint);//get position of points
                     if (!isInBounds(currentPoint)) break;
-                    Slot color = boardConfiguration[currentPoint.x][currentPoint.y]; // get the color
+                    Slot color = boardConfiguration[currentPoint.y][currentPoint.x]; // get the color
                     if (previousColor == color) {
                         if (color == currentTurn) currentLength++;
                         else oponentLength++;
                     } else
                         break;
-//               previousColor = color;
                 }
             }
         }
@@ -424,13 +440,13 @@ public class ConnectFourModel {
 //        previousColor = currentTurn;
         firstPoint = new Point(point.x - colIncrementor, point.y - rowIncrementor);//get position of points
         if(isInBounds(firstPoint)) {
-            previousColor = boardConfiguration[firstPoint.x][firstPoint.y];
+            previousColor = boardConfiguration[firstPoint.y][firstPoint.x];
             if(previousColor != Slot.Empty) {
 
                 for (int discFromPoint = 1; true; discFromPoint++) {
                     Point currentPoint = new Point(point.x - colIncrementor * discFromPoint, point.y - rowIncrementor * discFromPoint);
                     if (!isInBounds(currentPoint)) break;
-                    Slot color = boardConfiguration[currentPoint.x][currentPoint.y];
+                    Slot color = boardConfiguration[currentPoint.y][currentPoint.x];
                     if (previousColor == color) {
                         if (color == currentTurn) currentLength++;
                         else oponentLength++;
@@ -441,28 +457,36 @@ public class ConnectFourModel {
                 }
             }
         }
-
         //convert the lengths into scores
         //make sure that the lengths does not exceed 4 or else it will break the concept of the g score
         currentLength = Math.min(currentLength, 4);
         oponentLength = Math.min(oponentLength, 4);
 
+        if(currentLength+oponentLength <= 1) return currentLength+oponentLength;
         return (int)Math.pow(2, currentLength) + (int)Math.pow(2, oponentLength);
     }//end function
+
+    //this function checks if the point that is passed in is inside the board or not
     private boolean isInBounds(Point point){
         if(point.x < 0 || point.y < 0) return false;
-        if(point.x >= boardConfiguration.length || point.y >= boardConfiguration[0].length) return false;
+        if(point.x >= boardConfiguration[0].length || point.y >= boardConfiguration.length) return false;
         return true;
     }
 
+    //just gets the width of the board
+    //I used this function to get the width of the board because it
+    //made it abstract
     private int getBoardWidth(){ return boardConfiguration.length; }
     //// ---------- end of AI Code ----------
 
 
     public static void main(String[] args){
-        ConnectFourModel m = new ConnectFourModel(7,6);
+        //this code is for testing the AI
+        //we will keep this code here because later if we want to change the AI we can still test it using the same code
+        ConnectFourModel m = new ConnectFourModel(6,7);
         m.resetConfiguration();
-        m.boardConfiguration[2][5] = Slot.Red;
+        m.boardConfiguration[5][2] = Slot.Red;
+        m.boardConfiguration[5][3] = Slot.Red;
 
         System.out.println("nextAvailableSlot(2,5): " + m.nextAvailableSlot(2,5));
         System.out.println("nextAvailableSlot: " + m.nextAvailableSlot(1,1));
@@ -479,6 +503,13 @@ public class ConnectFourModel {
         System.out.println("the score for position (4,5) is: " + m.calculateScoreForTileAt(new Point(4,5)));
         System.out.println("the score for position (5,5) is: " + m.calculateScoreForTileAt(new Point(5,5)));
         System.out.println("the score for position (6,5) is: " + m.calculateScoreForTileAt(new Point(6,5)));
+
+        System.out.println("the direction stuff for (0,5)");
+        Point point = new Point(0,5);
+        for(Point vector : new Point[]{new Point(0,1), new Point(1,0), new Point(1,1), new Point(1,-1)}) {
+            int scoreOfCurrentDirection = m.findScoreAtDirection(vector.x, vector.y, point);
+            System.out.println("for vx: " + vector.x + " vy: " + vector.y + " point: " + point + " score: " + scoreOfCurrentDirection);
+        }
 
         System.out.println("\n\n");
         System.out.println("the next piece should be placed at : " + m.doTurn().toString());

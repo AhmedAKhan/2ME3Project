@@ -59,10 +59,10 @@ public class Board extends JPanel implements ActionListener {
 
         //call the drawTileAtPosition an n number of time if it is not empty
         //draws all the disks on the board
-        for(int rowCounter = 0; rowCounter < slotConfiguration[0].length; rowCounter++){
-            for(int colCounter = 0; colCounter < slotConfiguration.length; colCounter++){
+        for(int rowCounter = 0; rowCounter < slotConfiguration.length; rowCounter++){
+            for(int colCounter = 0; colCounter < slotConfiguration[0].length; colCounter++){
                 if(animatingPoint.x == colCounter && animatingPoint.y == rowCounter) drawTileAtPosition(g, new Point(colCounter, rowCounter), animatingSlot, slotConfiguration.length);
-                else drawTileAtPosition(g, new Point(colCounter, rowCounter), slotConfiguration[colCounter][rowCounter], slotConfiguration.length);
+                else drawTileAtPosition(g, new Point(colCounter, rowCounter), slotConfiguration[rowCounter][colCounter], slotConfiguration.length);
             }//end row counter loop
         }//end col counter loop
     }//end function
@@ -93,16 +93,15 @@ public class Board extends JPanel implements ActionListener {
         return new Point(0,0);//new Point(screenSize.width/2 - getWidthOfBoard()/2 ,screenSize.height/2 + getHeightOfBoard()/2);
     }
 
-    //PURPOSE: converts the position with respect to the array to the position with respect to the PvP screen
+    //PURPOSE: converts the position with respect to the array to the position with respect to the game screen
     public Point getGameCoordinate(Point slotPosition, int numberOfRows){
         //this function will take in the position of the board and return the actual position on the screen
         int sizeOfSlotPlusExtraSpace = diameterOfDisk + spaceBetweenDisks;
-
         return new Point(
-                getOriginOfBoard().x + (slotPosition.x) * sizeOfSlotPlusExtraSpace + spaceBetweenDisks,
-                getOriginOfBoard().y + (slotPosition.y) * sizeOfSlotPlusExtraSpace + spaceBetweenDisks);
+                getOriginOfBoard().x + slotPosition.x*sizeOfSlotPlusExtraSpace + spaceBetweenDisks,
+                getOriginOfBoard().y + (slotPosition.y)*sizeOfSlotPlusExtraSpace + spaceBetweenDisks);
     }
-    //PURPOSE: converts the position to becoming with respect to the array instead of the PvP screen
+    //PURPOSE: converts the position to becoming with respect to the array instead of the game screen
     public Point getBoardCoordinateOfPoint(Point mousePosition){
         //convert the point mousePosition into a tile position where the x represents the column and y represents the row
         Point tilePosition = new Point((mousePosition.x- getOriginOfBoard().x)/(diameterOfDisk + spaceBetweenDisks),
@@ -123,7 +122,7 @@ public class Board extends JPanel implements ActionListener {
     	if(point == null) {
     		return;}
     	Timer t = new Timer(100, this);//creates a new timer this
-        System.out.println("point: " + point);
+
         //setup the animation variables
         animatingPoint = new Point(point.x, 0); //start it at the highest row but in the same column as the destination
         stopAnimationPoint = point; // stop when it reaches the point
@@ -138,7 +137,7 @@ public class Board extends JPanel implements ActionListener {
         Timer t = (Timer)e.getSource(); // get the timer
         if(animatingPoint.x == stopAnimationPoint.x && animatingPoint.y == stopAnimationPoint.y){
             ConnectFourModel.Slot[][] config = controller.getConfiguration();
-            config[stopAnimationPoint.x][stopAnimationPoint.y] = animatingSlot;
+            config[stopAnimationPoint.y][stopAnimationPoint.x] = animatingSlot;
             controller.showWinner();
             animatingSlot = ConnectFourModel.Slot.Empty;
             animatingPoint = new Point(-1,-1);

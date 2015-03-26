@@ -5,24 +5,24 @@ import java.awt.event.ActionListener;
 
 public class ConnectFourView extends JFrame {
 
-    private JPanel mainMenu;                // this is the panel that will be displayed while the PvP is in the main menu
-    private JPanel PvP;                    // this is the panel that will be displayed while the PvP is in either the actual PvP or the custom PvP
+    private JPanel mainMenu;                // this is the panel that will be displayed while the game is in the main menu
+    private JPanel PvP;                    // this is the panel that will be displayed while the game is in either the actual game or the custom game
 
     //all the main menu buttons
     private JButton mainMenuPvP;           // this button is located in the main menu and takes you to the connect four
-    private JButton mainMenuCustom;         // this button is located in the main button and takes you to the custom PvP
+    private JButton mainMenuCustom;         // this button is located in the main button and takes you to the custom game
     private JButton mainMenuLoad;
     private JButton mainMenuPvCPU; // button to go to the mode where you play against the computer
-    //all buttons in the custom PvP and the PvP
-    private JButton gameMainMenu;           //  this button is located in both the PvP and the custom PvP and will take you back to the main menu
-    private JButton gameRedButton;          //  this button is located in both the PvP and the custom PvP and will make the next players turn red
-    private JButton gameBlueButton;         //  this button is located in both the PvP and the custom PvP and will make the next players turn blue
-    private JButton gameSaveStateButton;    //  this button saves the state of the PvP
+    //all buttons in the custom game and the game
+    private JButton gameMainMenu;           //  this button is located in both the game and the custom game and will take you back to the main menu
+    private JButton gameRedButton;          //  this button is located in both the game and the custom game and will make the next players turn red
+    private JButton gameBlueButton;         //  this button is located in both the game and the custom game and will make the next players turn blue
+    private JButton gameSaveStateButton;    //  this button saves the state of the game
     private JButton customGameReset;        // this button resets the board and makes it blank
 
-    //the buttons just in the custom PvP
-    private JButton customGameCheckState;   // this button checks if the current state of the PvP is valid and then displays the error messages
-    private JLabel textField;            // this is the label that will display the error message in the custom PvP
+    //the buttons just in the custom game
+    private JButton customGameCheckState;   // this button checks if the current state of the game is valid and then displays the error messages
+    private JLabel textField;            // this is the label that will display the error message in the custom game
 
     //this is the board that is displayed on the screen
     private Board board;
@@ -74,9 +74,9 @@ public class ConnectFourView extends JFrame {
         this.setLayout(null);
 
         setupMainMenu(width, height);                   //sets up the main menu panel
-        setupGame(width, height, boardRows, boardCols); //sets up the PvP panel
+        setupGame(width, height, boardRows, boardCols); //sets up the game panel
 
-        PvP.setVisible(false);     // makes the PvP invisible
+        PvP.setVisible(false);     // makes the game invisible
         mainMenu.setVisible(true);  // shows the main menu
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//sets the default close operation
@@ -138,7 +138,7 @@ public class ConnectFourView extends JFrame {
         PvP.add(board);        // add the board to the game
 
         this.add(PvP);         //adds the game to the screen
-        PvP.setVisible(false); // makes the game panel invisible so that we can not see it when the PvP starts up
+        PvP.setVisible(false); // makes the game panel invisible so that we can not see it when the game starts up
     }
 
     public void switchScreen(ConnectFourModel.GameState gameState){
@@ -217,6 +217,7 @@ public class ConnectFourView extends JFrame {
         
         mainMenuCustom.setLocation(this.getWidth()/2, this.getHeight()/2);//bottom
         mainMenuLoad.setLocation(this.getWidth()/2, this.getHeight()/8);
+
         gameMainMenu.setLocation(boundary, this.getHeight()-gameMainMenu.getHeight()-20 - boundary);//bottom left
         gameSaveStateButton.setLocation(this.getWidth() - gameSaveStateButton.getWidth() - boundary, this.getHeight() - gameSaveStateButton.getHeight() - 20 - boundary);
         int freeSpaceSides  = this.getWidth()/2 - board.getWidth();//this variable represents the amount of free space between the board and the end of the screen
@@ -234,6 +235,7 @@ public class ConnectFourView extends JFrame {
 
         board.repaint();// repaints the board
     }
+    //asdasdf
 
     // this class creates a button and positions it at the location (x,y) with the width and height of the input. adds the button to the parent and sets its image to the filename equal to name in the images folder
     public JButton createButton(String name, int x, int y, JPanel parent, String pressedName){ return createButton(name, x,y, buttonWidth, buttonHeight, parent, pressedName); }
@@ -279,7 +281,7 @@ public class ConnectFourView extends JFrame {
         mainMenuLoad.addActionListener(listenForButton);
         gameSaveStateButton.addActionListener(listenForButton);
 
-        //make the listener for the PvP buttons
+        //make the listener for the game buttons
         board.addMouseListener(mouseListener);
 
     }//end calculate listener
