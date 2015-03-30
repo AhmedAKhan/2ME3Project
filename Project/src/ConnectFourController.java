@@ -43,6 +43,14 @@ public class ConnectFourController {
             model.setTurn(ConnectFourModel.Slot.Blue);
             view.setTurn(ConnectFourModel.Slot.Blue);
         }
+
+        if(model.getGameState() == ConnectFourModel.GameState.PvCPU && model.getTurn() == ConnectFourModel.Slot.Blue){
+            Point tilePosition = model.doTurn();
+            view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
+            view.setMessageText("vs CPU game is in progress...");
+            return;
+        }
+
     }
 
     //PURPOSE: this function needs to return the current configuration of the board
@@ -146,13 +154,6 @@ public class ConnectFourController {
             if(model.getGameState() == ConnectFourModel.GameState.MainMenu) return;
             if(model.getGameState() == ConnectFourModel.GameState.CustomGame) { handleCustomGameState (e); return;}
             if(view.isAnimating()) return;
-
-            if(model.getGameState() == ConnectFourModel.GameState.PvCPU && model.getTurn() == ConnectFourModel.Slot.Blue){
-                Point tilePosition = model.doTurn();
-                view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
-                view.setMessageText("vs CPU game is in progress...");
-                return;
-            }
 
             Point mousePosition = new Point(e.getX(), e.getY());
             Point tilePosition = view.getBoardCoordinateOfPoint(mousePosition);

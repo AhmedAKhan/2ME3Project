@@ -485,8 +485,9 @@ public class ConnectFourModel {
         //we will keep this code here because later if we want to change the AI we can still test it using the same code
         ConnectFourModel m = new ConnectFourModel(6,7);
         m.resetConfiguration();
+        m.boardConfiguration[5][0] = Slot.Blue;
+        m.boardConfiguration[5][1] = Slot.Blue;
         m.boardConfiguration[5][2] = Slot.Red;
-        m.boardConfiguration[5][3] = Slot.Red;
 
         System.out.println("nextAvailableSlot(2,5): " + m.nextAvailableSlot(2,5));
         System.out.println("nextAvailableSlot: " + m.nextAvailableSlot(1,1));
