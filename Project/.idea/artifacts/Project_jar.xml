@@ -1,34 +1,12 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="Project:jar">
-    <output-path>$PROJECT_DIR$</output-path>
+    <output-path>$PROJECT_DIR$/..</output-path>
     <root id="archive" name="Project.jar">
-      <element id="module-output" name="Project" />
-      <element id="directory" name="images">
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/blue1.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/blue2.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/blue3.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/buttons.fla" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/checkstate1.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/checkstate2.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/customGameButton1.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/customGameButton2.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/loadstate1.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/loadstate2.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/mainMenuButton1.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/mainMenuButton2.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/PvCPU1.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/PvCPU2.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/PvP1.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/PvP2.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/red1.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/red2.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/red3.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/reset1.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/reset2.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/savestate1.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/savestate2.png" />
-        <element id="file-copy" path="$PROJECT_DIR$/src/images/template.png" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/../META-INF/MANIFEST.MF" />
       </element>
+      <element id="module-output" name="Project" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src" />
     </root>
   </artifact>
 </component>

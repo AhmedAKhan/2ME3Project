@@ -29,33 +29,33 @@ public class ConnectFourView extends JFrame {
 
     //the names of all the button images
     //main menu buttons
-    public static final String mainCustomButtonImageName            = "./src/images/customGameButton1.png";
-    public static final String mainCustomButtonimageNamePressed     = "./src/images/customGameButton2.png";
-    public static final String mainPlayButtonImageName              = "./src/images/PvP1.png";
-    public static final String mainPlayButtonImageNamePressed       = "./src/images/PvP2.png";
-    public static final String mainPlayAIButtonImageName            = "./src/images/PvCPU1.png";
-    public static final String mainPlayAIButtonImageNamePressed     = "./src/images/PvCPU2.png";
-    public static final String gameMainMenuImageName                = "./src/images/mainMenuButton1.png";
-    public static final String gameMainMenuImageNamePressed         = "./src/images/mainMenuButton2.png";
-    public static final String mainLoadSavedStateImageName          = "./src/images/loadstate1.png";
-    public static final String mainLoadSavedStateImageNamePressed   = "./src/images/loadstate2.png";
+    public static final String mainCustomButtonImageName            = "customGameButton1.png";
+    public static final String mainCustomButtonimageNamePressed     = "customGameButton2.png";
+    public static final String mainPlayButtonImageName              = "PvP1.png";
+    public static final String mainPlayButtonImageNamePressed       = "PvP2.png";
+    public static final String mainPlayAIButtonImageName            = "PvCPU1.png";
+    public static final String mainPlayAIButtonImageNamePressed     = "PvCPU2.png";
+    public static final String gameMainMenuImageName                = "mainMenuButton1.png";
+    public static final String gameMainMenuImageNamePressed         = "mainMenuButton2.png";
+    public static final String mainLoadSavedStateImageName          = "loadstate1.png";
+    public static final String mainLoadSavedStateImageNamePressed   = "loadstate2.png";
     //PvP buttons
-    public static final String saveStateImage                       = "./src/images/savestate1.png";
-    public static final String saveStateImagePressed                = "./src/images/savestate2.png";
+    public static final String saveStateImage                       = "savestate1.png";
+    public static final String saveStateImagePressed                = "savestate2.png";
     //all the names of buttons that exist in both the games
-    public static final String gameRedButtonImageName               = "./src/images/red3.png";
-    public static final String gameRedButtonImageNamePressed        = "./src/images/red2.png";
-    public static final String gameRedButtonImageNameSelected       = "./src/images/red1.png";
-    public static final String gameBlueButtonImageName              = "./src/images/blue3.png";
-    public static final String gameBlueButtonImageNamePressed       = "./src/images/blue2.png";
-    public static final String gameBlueButtonImageNameSelected      = "./src/images/blue1.png";
-    public static final String gameSaveButtonImageName              = "./src/images/savestate1.png";
-    public static final String gameSaveButtonImageNamePressed       = "./src/images/savestate2.png";
-    public static final String customGameResetImageName             = "./src/images/reset1.png";
-    public static final String customGameResetImageNamePressed      = "./src/images/reset2.png";
+    public static final String gameRedButtonImageName               = "red3.png";
+    public static final String gameRedButtonImageNamePressed        = "red2.png";
+    public static final String gameRedButtonImageNameSelected       = "red1.png";
+    public static final String gameBlueButtonImageName              = "blue3.png";
+    public static final String gameBlueButtonImageNamePressed       = "blue2.png";
+    public static final String gameBlueButtonImageNameSelected      = "blue1.png";
+    public static final String gameSaveButtonImageName              = "savestate1.png";
+    public static final String gameSaveButtonImageNamePressed       = "savestate2.png";
+    public static final String customGameResetImageName             = "reset1.png";
+    public static final String customGameResetImageNamePressed      = "reset2.png";
     //Custom PvP only
-    public static final String customGameCheckStateImageName        = "./src/images/checkstate1.png";
-    public static final String customGameCheckStateImageNamePressed = "./src/images/checkstate2.png";
+    public static final String customGameCheckStateImageName        = "checkstate1.png";
+    public static final String customGameCheckStateImageNamePressed = "checkstate2.png";
 
     //this is the size of the buttons on the screen
     private static final int buttonWidth = 289;     //stores the width of all the buttons
@@ -240,9 +240,8 @@ public class ConnectFourView extends JFrame {
     // this class creates a button and positions it at the location (x,y) with the width and height of the input. adds the button to the parent and sets its image to the filename equal to name in the images folder
     public JButton createButton(String name, int x, int y, JPanel parent, String pressedName){ return createButton(name, x,y, buttonWidth, buttonHeight, parent, pressedName); }
     public JButton createButton(String name, int x, int y, int width, int height, JPanel parent, String pressedName) {
-        JButton newButton = new JButton(new ImageIcon(name)); // creates the button, with the image name that is given
-        newButton.setPressedIcon(new ImageIcon(pressedName)); // makes a new button
-
+        JButton newButton = new JButton(new ImageIcon(getClass().getResource("/images/"+name))); // creates the button, with the image name that is given
+        newButton.setPressedIcon(new ImageIcon(getClass().getResource("/images/"+name))); // makes a new button
         //if the image name that you have given does not exist then use the default image,
         // if the image given exists then remove the default button graphics
         if(newButton.getIcon().toString().length() > 2){

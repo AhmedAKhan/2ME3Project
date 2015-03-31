@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TeamNOOB:jar">
+    <output-path>$PROJECT_DIR$/..</output-path>
+    <root id="archive" name="teamNOOB.jar">
+      <element id="module-output" name="Project" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src/images" />
+    </root>
+  </artifact>
+</component>

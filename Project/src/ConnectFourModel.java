@@ -372,7 +372,7 @@ public class ConnectFourModel {
         while (col < getBoardWidth()){
             Point currentPoint = nextAvailableSlot(col, 0); //new Point(col, 0);
             if(currentPoint == null){ col++; continue; }
-            System.out.println("currentPoint: " + currentPoint);
+//            System.out.println("currentPoint: " + currentPoint);
             int currentValue = calculateScoreForTileAt(currentPoint);
             if(currentValue > maxValue){
                 maxValue = currentValue;

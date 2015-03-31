@@ -45,6 +45,7 @@ public class ConnectFourController {
         }
 
         if(model.getGameState() == ConnectFourModel.GameState.PvCPU && model.getTurn() == ConnectFourModel.Slot.Blue){
+            if(model.getGameProgess() != ConnectFourModel.GameProgress.inProgress) return;
             Point tilePosition = model.doTurn();
             view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
             view.setMessageText("vs CPU game is in progress...");
@@ -68,54 +69,54 @@ public class ConnectFourController {
             //will get called for the menu buttons stuff
             //check what button is pressed
             String buttonPressedIconString = ((JButton) e.getSource()).getIcon().toString();//gets the image name of the buttons
-            if (buttonPressedIconString.equals(ConnectFourView.mainPlayButtonImageName)) {
+            if (buttonPressedIconString.contains(ConnectFourView.mainPlayButtonImageName)) {
                 //the play button in the main menu
                 model.setGameState(ConnectFourModel.GameState.PvP);    // updates the game state
                 model.resetConfiguration();                             // resets the board
                 view.switchScreen(ConnectFourModel.GameState.PvP);     // tells the view to switch the screen to game screen
                 view.setTurn(model.getRandomTurn());                    // gives the view a random turn
                 view.setMessageText("PvP game is in progress");             // displays the message game is in progress in the text field
-            }else if(buttonPressedIconString.equals(ConnectFourView.mainPlayAIButtonImageName)){
+            }else if(buttonPressedIconString.contains(ConnectFourView.mainPlayAIButtonImageName)){
                 model.setGameState(ConnectFourModel.GameState.PvCPU);    // updates the game state
                 model.resetConfiguration();                             // resets the board
                 view.switchScreen(ConnectFourModel.GameState.PvCPU);     // tells the view to switch the screen to game screen
                 view.setTurn(model.getRandomTurn());                    // gives the view a random turn
                 view.setMessageText("vs CPU game is in progress");             // displays the message game is in progress in the text field
-            } else if (buttonPressedIconString.equals(ConnectFourView.mainCustomButtonImageName)) {
+            } else if (buttonPressedIconString.contains(ConnectFourView.mainCustomButtonImageName)) {
                 // the custom game button in the main menu
                 model.setGameState(ConnectFourModel.GameState.CustomGame);      // updates the game state
                 model.resetConfiguration();                                     // resets the board
                 view.switchScreen(ConnectFourModel.GameState.CustomGame);       // tells the view to switch the screen to game screen
                 view.setTurn(model.getRandomTurn());                            // gives the view a random turn
 
-            }else if (buttonPressedIconString.equals(ConnectFourView.saveStateImage)) {
+            }else if (buttonPressedIconString.contains(ConnectFourView.saveStateImage)) {
                 //Save progress.
                 if(model.checkBoardConfiguration()) { //if the board is not valid then it does not store the board configuration
                 	model.saveState();                                      // saves the game state
                 	view.displayMessageAsPopup("The game has been saved");  // displays the message as a popup
                 } else view.displayMessageAsPopup("Can not save the current state, the current state is not valid");    // the current state is not possible so tells the user that it is not going to save
-            }else if(buttonPressedIconString.equals(ConnectFourView.mainLoadSavedStateImageName)){
+            }else if(buttonPressedIconString.contains(ConnectFourView.mainLoadSavedStateImageName)){
                 model.loadState();                                      // loads the state from model
                 model.setGameState(ConnectFourModel.GameState.PvP);    // sets the current state to the game
                 view.switchScreen(ConnectFourModel.GameState.PvP);     // switches the game screen to the game
                 view.setTurn(model.getTurn());                          // shows the correct image on the view class
-            }else if(buttonPressedIconString.equals(ConnectFourView.gameMainMenuImageName)){
+            }else if(buttonPressedIconString.contains(ConnectFourView.gameMainMenuImageName)){
                 model.setGameState(ConnectFourModel.GameState.MainMenu);        // sets the state to main menu
                 view.switchScreen(ConnectFourModel.GameState.MainMenu);         // switches the screen to that state
                 view.setMessageText("");                                        // removes any previous message in the text field
-            }else if(buttonPressedIconString.equals(ConnectFourView.customGameResetImageName)){
+            }else if(buttonPressedIconString.contains(ConnectFourView.customGameResetImageName)){
                 model.resetConfiguration();                     // resets the configuration of the board
                 view.setBoard(model.getBoardConfiguration());   // resets the board
                 view.setMessageText("");                        // removes any error message that was displayed in the text field
             }else if(model.getGameState() == ConnectFourModel.GameState.CustomGame) {
                 //if it is in the custom game then it handles these buttons or else it does not, this is because things like the red and blue button should not be working in the game
-                if (buttonPressedIconString.equals(ConnectFourView.gameRedButtonImageName)) {
+                if (buttonPressedIconString.contains(ConnectFourView.gameRedButtonImageName)) {
                     model.setTurn(ConnectFourModel.Slot.Red);   // shows the current turn red
                     view.setTurn(model.getTurn());              // tells the model the current turn
-                } else if (buttonPressedIconString.equals(ConnectFourView.gameBlueButtonImageName)) {
+                } else if (buttonPressedIconString.contains(ConnectFourView.gameBlueButtonImageName)) {
                     model.setTurn(ConnectFourModel.Slot.Blue);  // shows the current turn
                     view.setTurn(model.getTurn());              // tells the model the current turn
-                } else if (buttonPressedIconString.equals(ConnectFourView.customGameCheckStateImageName)) {
+                } else if (buttonPressedIconString.contains(ConnectFourView.customGameCheckStateImageName)) {
                     //if the current state is valid then it says Yay no error or else it will display the error messages that have occured
                     if (!model.checkBoardConfiguration()) view.setMessageText(model.getErrorMessage());
                     else view.setMessageText("Yay! No errors :D");
