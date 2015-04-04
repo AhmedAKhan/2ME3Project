@@ -235,14 +235,15 @@ public class ConnectFourView extends JFrame {
 
         board.repaint();// repaints the board
     }
-    //asdasdf
 
     // this class creates a button and positions it at the location (x,y) with the width and height of the input. adds the button to the parent and sets its image to the filename equal to name in the images folder
     public JButton createButton(String name, int x, int y, JPanel parent, String pressedName){ return createButton(name, x,y, buttonWidth, buttonHeight, parent, pressedName); }
     public JButton createButton(String name, int x, int y, int width, int height, JPanel parent, String pressedName) {
-        JButton newButton = new JButton(new ImageIcon(getClass().getResource("/images/"+name))); // creates the button, with the image name that is given
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/images/"+name));
+        JButton newButton = new JButton(imageIcon); // creates the button, with the image name that is given
         newButton.setPressedIcon(new ImageIcon(getClass().getResource("/images/"+name))); // makes a new button
         //if the image name that you have given does not exist then use the default image,
+
         // if the image given exists then remove the default button graphics
         if(newButton.getIcon().toString().length() > 2){
             //removes the default button graphics
@@ -259,6 +260,16 @@ public class ConnectFourView extends JFrame {
         // this sets the buttons size and location on the screen
         newButton.setSize(width,height);
         newButton.setLocation(x, y);
+
+        if(name.equals(gameRedButtonImageName)){
+            System.out.println("name: " + name);
+            System.out.println("gameRedButtonImageName: " + gameRedButtonImageName);
+            System.out.println(imageIcon.getImage());
+
+//            newButton.setSize(200,20);
+        }
+
+        newButton.setVisible(true);
 
         parent.add(newButton);//this adds the button to the parent
         return newButton;//returns the newly created button
@@ -286,16 +297,16 @@ public class ConnectFourView extends JFrame {
     }//end calculate listener
 
     // this function adjusts the images of the buttons so they change to their correct version to show the current button highlighted
-    public void setTurn(ConnectFourModel.Slot currentTurn){
+    public void setTurn(ConnectFourModel.Slot currentTurn) {
         //this function gets called to set the turn
         if(currentTurn == ConnectFourModel.Slot.Blue){
             //update button images
-            gameBlueButton.setIcon(new ImageIcon(gameBlueButtonImageNameSelected));
-            gameRedButton.setIcon(new ImageIcon(gameRedButtonImageName));
+            gameBlueButton.setIcon(new ImageIcon(getClass().getResource("/images/"+gameBlueButtonImageNameSelected)));
+            gameRedButton.setIcon(new ImageIcon(getClass().getResource("/images/"+gameRedButtonImageName)));
         }else if(currentTurn == ConnectFourModel.Slot.Red){
+            gameBlueButton.setIcon(new ImageIcon(getClass().getResource("/images/"+gameBlueButtonImageName)));
+            gameRedButton.setIcon(new ImageIcon(getClass().getResource("/images/"+gameRedButtonImageNameSelected)));
             //update button images
-            gameBlueButton.setIcon(new ImageIcon(gameBlueButtonImageName));
-            gameRedButton.setIcon(new ImageIcon(gameRedButtonImageNameSelected));
         }
         else {
             //in case if we are using this function wrong, inform the client
