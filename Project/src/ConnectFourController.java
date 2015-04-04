@@ -80,8 +80,11 @@ public class ConnectFourController {
                 model.setGameState(ConnectFourModel.GameState.PvCPU);    // updates the game state
                 model.resetConfiguration();                             // resets the board
                 view.switchScreen(ConnectFourModel.GameState.PvCPU);     // tells the view to switch the screen to game screen
-                view.setTurn(model.getRandomTurn());                    // gives the view a random turn
+                view.setTurn(model.getRandomTurn()); // gives the view a random turn
                 view.setMessageText("vs CPU game is in progress");             // displays the message game is in progress in the text field
+                
+                Point tilePosition = model.doTurn();
+                view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
             } else if (buttonPressedIconString.contains(ConnectFourView.mainCustomButtonImageName)) {
                 // the custom game button in the main menu
                 model.setGameState(ConnectFourModel.GameState.CustomGame);      // updates the game state
@@ -108,6 +111,7 @@ public class ConnectFourController {
                 model.resetConfiguration();                     // resets the configuration of the board
                 view.setBoard(model.getBoardConfiguration());   // resets the board
                 view.setMessageText("");                        // removes any error message that was displayed in the text field
+                view.setTurn(model.getRandomTurn());
             }else if(model.getGameState() == ConnectFourModel.GameState.CustomGame) {
                 //if it is in the custom game then it handles these buttons or else it does not, this is because things like the red and blue button should not be working in the game
                 if (buttonPressedIconString.contains(ConnectFourView.gameRedButtonImageName)) {
