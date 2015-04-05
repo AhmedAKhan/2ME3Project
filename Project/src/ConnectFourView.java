@@ -261,14 +261,6 @@ public class ConnectFourView extends JFrame {
         newButton.setSize(width,height);
         newButton.setLocation(x, y);
 
-        if(name.equals(gameRedButtonImageName)){
-            System.out.println("name: " + name);
-            System.out.println("gameRedButtonImageName: " + gameRedButtonImageName);
-            System.out.println(imageIcon.getImage());
-
-//            newButton.setSize(200,20);
-        }
-
         newButton.setVisible(true);
 
         parent.add(newButton);//this adds the button to the parent

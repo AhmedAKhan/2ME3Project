@@ -82,9 +82,11 @@ public class ConnectFourController {
                 view.switchScreen(ConnectFourModel.GameState.PvCPU);     // tells the view to switch the screen to game screen
                 view.setTurn(model.getRandomTurn()); // gives the view a random turn
                 view.setMessageText("vs CPU game is in progress");             // displays the message game is in progress in the text field
-                
-                Point tilePosition = model.doTurn();
-                view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
+
+                if(model.getTurn() == ConnectFourModel.Slot.Blue) {
+                    Point tilePosition = model.doTurn();
+                    view.insertDisc(model.nextAvailableSlot(tilePosition), model.getTurn());
+                }
             } else if (buttonPressedIconString.contains(ConnectFourView.mainCustomButtonImageName)) {
                 // the custom game button in the main menu
                 model.setGameState(ConnectFourModel.GameState.CustomGame);      // updates the game state
