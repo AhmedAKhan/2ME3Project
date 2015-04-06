@@ -40,7 +40,7 @@ public class ConnectFourModel {
     private int rowSize;
     private Scanner input;
     private Formatter output;
-    private final String PATHTOSAVEDGAME = "data/savedGame.txt";
+    private final String PATHTOSAVEDGAME = "Project/data/savedGame.txt";
 
     public ConnectFourModel(int rows, int columns) {
     	if (rows < 4 || columns < 4) {
