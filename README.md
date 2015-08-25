@@ -1,4 +1,4 @@
-# 2ME3Project
+# Connect Four
 this is our 2me3 project
 
 This is a connect four game built with swing with an AI. 
